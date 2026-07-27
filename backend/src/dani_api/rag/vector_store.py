@@ -27,6 +27,33 @@ class VectorStore:
         self.client.get_collections()
         return True
 
+    def search(
+        self,
+        query_vector: list[float],
+        limit: int = 5,
+        score_threshold: float | None = None,
+    ) -> list[models.ScoredPoint]:
+        """Search for the points most similar to a query vector."""
+        if limit <= 0:
+            raise ValueError("limit must be greater than zero.")
+
+        if len(query_vector) != self.vector_size:
+            raise ValueError(
+                f"Query vector has {len(query_vector)} dimensions; "
+                f"expected {self.vector_size}."
+            )
+
+        response = self.client.query_points(
+            collection_name=self.collection_name,
+            query=query_vector,
+            limit=limit,
+            score_threshold=score_threshold,
+            with_payload=True,
+            with_vectors=False,
+        )
+
+        return response.points
+
     def ensure_collection(self) -> bool:
         """
         Create the Qdrant collection if it does not already exists.
