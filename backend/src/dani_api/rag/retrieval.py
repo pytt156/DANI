@@ -111,7 +111,7 @@ class KnowledgeRetriever:
 
 
 def build_argument_parser() -> argparse.ArgumentParser:
-    """Create the comman-line argument parser."""
+    """Create the command-line argument parser."""
     parser = argparse.ArgumentParser(description="Search the DANI knowledge base")
     parser.add_argument("query", help="Question or search text.")
     parser.add_argument(
