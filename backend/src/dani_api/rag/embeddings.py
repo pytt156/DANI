@@ -1,6 +1,6 @@
-from dani_api.config import settings
 from collections.abc import Sequence
 
+from dani_api.config import settings
 from openai import OpenAI
 
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
