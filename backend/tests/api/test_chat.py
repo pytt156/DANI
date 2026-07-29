@@ -150,3 +150,12 @@ def test_chat_returns_503_for_unexpected_error() -> None:
         }
     finally:
         app.dependency_overrides.clear()
+
+
+def test_health_check() -> None:
+    client = TestClient(app)
+
+    response = client.get("/health")
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
