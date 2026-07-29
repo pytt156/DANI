@@ -1,10 +1,11 @@
 from unittest.mock import Mock
 
+from fastapi.testclient import TestClient
+
 from dani_api.api.dependencies import get_rag_service
 from dani_api.main import app
 from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagAnswer
-from fastapi.testclient import TestClient
 
 
 def test_chat_returns() -> None:
