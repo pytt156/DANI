@@ -68,7 +68,7 @@ class RagService:
         request_started_at = perf_counter()
 
         logger.info(
-            "raq_request_started",
+            "rag_request_started",
             question_length=len(normalized_question),
             result_limit=limit,
             score_threshold=score_threshold,
@@ -120,7 +120,7 @@ class RagService:
 
         logger.info(
             "rag_request_completed",
-            score_count=len(sources),
+            source_count=len(sources),
             top_score=max(source.score for source in sources),
             retrieval_duration_ms=retrieval_duration_ms,
             llm_duration_ms=llm_duration_ms,
