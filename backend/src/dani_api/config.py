@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Literal
 
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -9,6 +10,10 @@ ENV_FILE = PROJECT_ROOT / ".env"
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables and .env."""
+
+    environment: Literal["development", "production", "test"] = "development"
+    log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
+    log_json: bool | None = None
 
     openai_api_key: SecretStr | None = None
     openai_embedding_model: str = "text-embedding-3-small"
@@ -22,6 +27,14 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore",
     )
+
+    @property
+    def use_json_logs(self) -> bool:
+        """Return wheter logs should be rendered as JSON."""
+        if self.log_json is not None:
+            return self.log_json
+
+        return self.environment == "production"
 
 
 settings = Settings()

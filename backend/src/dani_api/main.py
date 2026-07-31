@@ -1,12 +1,19 @@
 from fastapi import FastAPI
 
 from dani_api.api.chat import router as chat_router
+from dani_api.config import settings
+from dani_api.logging_config import configure_logging
+from dani_api.middleware.request_logging import request_logging_middleware
+
+configure_logging(settings)
 
 app = FastAPI(
     title="DANI API",
     description="AI-powered portfolio interface for Daniela.",
     version="0.1.0",
 )
+
+app.middleware("http")(request_logging_middleware)
 
 app.include_router(chat_router)
 
