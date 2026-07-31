@@ -1,5 +1,8 @@
 import argparse
 from dataclasses import dataclass
+from time import perf_counter
+
+import structlog
 
 from dani_api.llm import LanguageModel
 from dani_api.rag.retrieval import (
@@ -7,6 +10,8 @@ from dani_api.rag.retrieval import (
     KnowledgeRetriever,
     RetrievalResult,
 )
+
+logger = structlog.get_logger(__name__)
 
 
 @dataclass(frozen=True)
@@ -60,13 +65,38 @@ class RagService:
         if not normalized_question:
             raise ValueError("Question cannot be empty.")
 
+        request_started_at = perf_counter()
+
+        logger.info(
+            "raq_request_started",
+            question_length=len(normalized_question),
+            result_limit=limit,
+            score_threshold=score_threshold,
+        )
+
+        retrieval_started_at = perf_counter()
+
         sources = self.retriever.retrieve(
             query=normalized_question,
             limit=limit,
             score_threshold=score_threshold,
         )
 
+        retrieval_duration_ms = round(
+            (perf_counter() - retrieval_started_at) * 1000,
+            2,
+        )
+
         if not sources:
+            total_duration_ms = round((perf_counter() - request_started_at) * 1000, 2)
+
+            logger.warning(
+                "retrieval_empty",
+                result_count=0,
+                retrieval_duration_ms=retrieval_duration_ms,
+                duration_ms=total_duration_ms,
+            )
+
             return RagAnswer(
                 answer=(
                     "I could not find enough relevant information "
@@ -77,9 +107,25 @@ class RagService:
 
         context = build_context(sources)
 
+        llm_started_at = perf_counter()
+
         generated_answer = self.language_model.generate_answer(
             question=normalized_question,
             context=context,
+        )
+
+        llm_duration_ms = round((perf_counter() - llm_started_at) * 1000, 2)
+
+        total_duration_ms = round((perf_counter() - request_started_at) * 1000, 2)
+
+        logger.info(
+            "rag_request_completed",
+            score_count=len(sources),
+            top_score=max(source.score for source in sources),
+            retrieval_duration_ms=retrieval_duration_ms,
+            llm_duration_ms=llm_duration_ms,
+            duration_ms=total_duration_ms,
+            answer_length=len(generated_answer),
         )
 
         return RagAnswer(
