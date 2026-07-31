@@ -1,0 +1,272 @@
+.page {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 72px 0;
+}
+
+.intro {
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: clamp(48px, 9vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.intro-text {
+  max-width: 650px;
+  margin-top: 24px;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.chat-panel {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.panel-header {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-header h2 {
+  margin: 8px 0 0;
+  font-size: 24px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #36c477;
+  box-shadow: 0 0 0 4px rgb(54 196 119 / 12%);
+}
+
+.chat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px;
+}
+
+.chat-form label {
+  color: var(--text-heading);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chat-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 128px;
+  resize: vertical;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  outline: none;
+  color: var(--text-heading);
+  background: var(--input-bg);
+  font: inherit;
+  line-height: 1.5;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.chat-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.chat-form textarea:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+button {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 999px;
+  color: #ffffff;
+  background: var(--accent);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    opacity 150ms ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--accent-soft);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.error-message {
+  margin: 0 32px 32px;
+  padding: 16px 18px;
+  border: 1px solid #e4a1a1;
+  border-radius: 12px;
+  color: #8f2727;
+  background: #fff2f2;
+}
+
+.response {
+  padding: 32px;
+  border-top: 1px solid var(--border);
+  background: var(--response-bg);
+}
+
+.response-label {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.answer {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: 17px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.sources {
+  margin-top: 28px;
+}
+
+.sources h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+
+.sources ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.source-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.source-card div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.source-card strong {
+  overflow: hidden;
+  color: var(--text-heading);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-card span {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.source-card .score {
+  flex-shrink: 0;
+  font-family: var(--mono);
+}
+
+@media (max-width: 640px) {
+  .page {
+    width: min(100% - 20px, 960px);
+    padding: 40px 0;
+  }
+
+  .intro {
+    margin-bottom: 28px;
+  }
+
+  .intro-text {
+    font-size: 16px;
+  }
+
+  .panel-header,
+  .chat-form,
+  .response {
+    padding: 22px;
+  }
+
+  .form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .error-message {
+    margin: 0 22px 22px;
+  }
+}
