@@ -9,5 +9,37 @@ services:
       - qdrant_data:/qdrant/storage
     restart: unless-stopped
 
+  backend:
+    build:
+      context: ./backend
+    container_name: dani-backend
+    environment:
+      ENVIRONMENT: production
+      LOG_LEVEL: INFO
+      LOG_JSON: "true"
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_COLLECTION: dani_knowledge
+      CORS_ORIGINS: '["http://localhost:5173","http://localhost:8080"]'
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-5-mini}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - qdrant
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ""
+    container_name: dani-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
 volumes:
   qdrant_data:
