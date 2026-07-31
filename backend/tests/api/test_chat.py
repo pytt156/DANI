@@ -1,5 +1,7 @@
+from collections.abc import Generator
 from unittest.mock import Mock
 
+import pytest
 from fastapi.testclient import TestClient
 
 from dani_api.api.dependencies import get_rag_service
@@ -8,7 +10,13 @@ from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagAnswer
 
 
-def test_chat_returns() -> None:
+@pytest.fixture
+def client() -> Generator[TestClient, None, None]:
+    with TestClient(app) as test_client:
+        yield test_client
+
+
+def test_chat_returns(client: TestClient) -> None:
     rag_service = Mock()
 
     source = RetrievalResult(
@@ -21,14 +29,13 @@ def test_chat_returns() -> None:
     )
 
     rag_service.answer.return_value = RagAnswer(
-        answer="Generated answer.", sources=[source]
+        answer="Generated answer.",
+        sources=[source],
     )
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
 
     try:
-        client = TestClient(app)
-
         response = client.post(
             "/api/chat",
             json={"message": "What technologies does the example project use?"},
@@ -55,32 +62,29 @@ def test_chat_returns() -> None:
         app.dependency_overrides.clear()
 
 
-def test_chat_rejects_missing_message() -> None:
+def test_chat_rejects_missing_message(client: TestClient) -> None:
     rag_service = Mock()
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
 
     try:
-        client = TestClient(app)
-
         response = client.post(
             "/api/chat",
             json={},
         )
+
         assert response.status_code == 422
         rag_service.answer.assert_not_called()
     finally:
         app.dependency_overrides.clear()
 
 
-def test_chat_rejects_empty_message() -> None:
+def test_chat_rejects_empty_message(client: TestClient) -> None:
     rag_service = Mock()
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
 
     try:
-        client = TestClient(app)
-
         response = client.post(
             "/api/chat",
             json={"message": ""},
@@ -92,14 +96,12 @@ def test_chat_rejects_empty_message() -> None:
         app.dependency_overrides.clear()
 
 
-def test_chat_rejects_message_that_is_too_long() -> None:
+def test_chat_rejects_message_that_is_too_long(client: TestClient) -> None:
     rag_service = Mock()
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
 
     try:
-        client = TestClient(app)
-
         response = client.post(
             "/api/chat",
             json={"message": "x" * 2001},
@@ -111,15 +113,13 @@ def test_chat_rejects_message_that_is_too_long() -> None:
         app.dependency_overrides.clear()
 
 
-def test_chat_returns_400_for_value_error() -> None:
+def test_chat_returns_400_for_value_error(client: TestClient) -> None:
     rag_service = Mock()
     rag_service.answer.side_effect = ValueError("Question cannot be empty.")
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
 
     try:
-        client = TestClient(app)
-
         response = client.post(
             "/api/chat",
             json={"message": "   "},
@@ -131,15 +131,13 @@ def test_chat_returns_400_for_value_error() -> None:
         app.dependency_overrides.clear()
 
 
-def test_chat_returns_503_for_unexpected_error() -> None:
+def test_chat_returns_503_for_unexpected_error(client: TestClient) -> None:
     rag_service = Mock()
     rag_service.answer.side_effect = RuntimeError("Service unavailable.")
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
 
     try:
-        client = TestClient(app)
-
         response = client.post(
             "/api/chat",
             json={"message": "Example question"},
@@ -153,10 +151,27 @@ def test_chat_returns_503_for_unexpected_error() -> None:
         app.dependency_overrides.clear()
 
 
-def test_health_check() -> None:
-    client = TestClient(app)
-
+def test_health_check(client: TestClient) -> None:
     response = client.get("/health")
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+
+
+def test_response_contains_request_id(client: TestClient) -> None:
+    response = client.get("/health")
+
+    assert response.status_code == 200
+    assert response.headers["x-request-id"]
+
+
+def test_existing_request_id_is_reused(client: TestClient) -> None:
+    request_id = "test-request-123"
+
+    response = client.get(
+        "/health",
+        headers={"X-Request-ID": request_id},
+    )
+
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] == request_id
