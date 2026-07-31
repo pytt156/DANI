@@ -22,6 +22,8 @@ class Settings(BaseSettings):
     qdrant_url: str = "http://localhost:6333"
     qdrant_collection: str = "dani_knowledge"
 
+    cors_origins: list[str] = ["http://localhost:5173"]
+
     model_config = SettingsConfigDict(
         env_file=ENV_FILE,
         env_file_encoding="utf-8",
