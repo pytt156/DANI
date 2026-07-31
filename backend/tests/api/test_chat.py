@@ -11,7 +11,7 @@ from dani_api.rag.service import RagAnswer
 
 
 @pytest.fixture
-def client() -> Generator[TestClient, None, None]:
+def client() -> Generator[TestClient]:
     with TestClient(app) as test_client:
         yield test_client
 
