@@ -26,17 +26,5 @@ services:
       - qdrant
     restart: unless-stopped
 
-  frontend:
-    build:
-      context: ./frontend
-      args:
-        VITE_API_URL: ""
-    container_name: dani-frontend
-    ports:
-      - "127.0.0.1:8080:80"
-    depends_on:
-      - backend
-    restart: unless-stopped
-
 volumes:
   qdrant_data:
