@@ -18,26 +18,30 @@ type ChatResponse = {
 const API_URL =
   import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000'
 
+const suggestions = [
+  'What has Daniela built?',
+  'Why should we hire Daniela?',
+  'What does Daniela know about MLOps?',
+]
+
 function App() {
   const [message, setMessage] = useState('')
+  const [submittedMessage, setSubmittedMessage] = useState('')
   const [answer, setAnswer] = useState('')
   const [sources, setSources] = useState<Source[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
-    event.preventDefault()
+  async function sendMessage(question: string) {
+    const trimmedMessage = question.trim()
 
-    const trimmedMessage = message.trim()
+    if (!trimmedMessage || isLoading) return
 
-    if (!trimmedMessage || isLoading) {
-      return
-    }
-
-    setIsLoading(true)
-    setError('')
+    setSubmittedMessage(trimmedMessage)
     setAnswer('')
     setSources([])
+    setError('')
+    setIsLoading(true)
 
     try {
       const response = await fetch(`${API_URL}/api/chat`, {
@@ -51,107 +55,191 @@ function App() {
       })
 
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`)
+        throw new Error(`API request failed: ${response.status}`)
       }
 
       const data = (await response.json()) as ChatResponse
 
       setAnswer(data.answer)
       setSources(data.sources)
+      setMessage('')
     } catch (requestError) {
       console.error(requestError)
-      setError(
-        'DANI kunde inte nå servern. Kontrollera att backend körs och försök igen.',
-      )
+      setError('DANI is unavailable right now.')
     } finally {
       setIsLoading(false)
     }
   }
 
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+    event.preventDefault()
+    await sendMessage(message)
+  }
+
   return (
-    <main className="page">
-      <section className="intro">
-        <p className="eyebrow">Daniela’s AI Navigation Interface</p>
-        <h1>Talk with DANI</h1>
-        <p className="intro-text">
-          Ask about Daniela’s projects, technical skills, experience and what
-          she has learned while becoming an AI and MLOps engineer.
-        </p>
-      </section>
+    <div className="site">
+      <header className="site-header">
+        <div className="header-top">
+          <a href="/" className="name">
+            Daniela Algerydh
+          </a>
 
-      <section className="chat-panel" aria-labelledby="chat-heading">
-        <div className="panel-header">
-          <div>
-            <p className="status">
-              <span className="status-dot" aria-hidden="true" />
-              Knowledge base online
-            </p>
-            <h2 id="chat-heading">What would you like to know?</h2>
-          </div>
+          <span className="page-name">DANI</span>
         </div>
+      </header>
 
-        <form className="chat-form" onSubmit={handleSubmit}>
-          <label htmlFor="message">Your question</label>
+      <section className="hero-collage" aria-label="Daniela and photography">
+        <div className="hero-main">
+          <img
+            src="/images/daniela-1.jpg"
+            alt=""
+          />
+        </div>
+        <div className="hero-side">
 
-          <textarea
-            id="message"
-            name="message"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            placeholder="Which projects use FastAPI?"
-            rows={4}
-            disabled={isLoading}
+          <img
+            src="/images/nature-3.jpg"
+            alt=""
           />
 
-          <div className="form-footer">
-            <span className="hint">
-              Try asking about projects, technologies or experience.
-            </span>
+          <img
+            src="/images/nature-2.jpg"
+            alt=""
+          />
 
-            <button type="submit" disabled={!message.trim() || isLoading}>
-              {isLoading ? 'Thinking…' : 'Ask DANI'}
-            </button>
-          </div>
-        </form>
+        </div>
 
-        {error && (
-          <div className="error-message" role="alert">
-            {error}
-          </div>
-        )}
+      </section>
+      <nav className="nav">
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Blog</a>
+        <a href="#">CV</a>
+      </nav>
 
-        {answer && (
-          <section className="response" aria-live="polite">
-            <p className="response-label">DANI</p>
-            <p className="answer">{answer}</p>
+      <main className="content-layout">
+        <div className="main">
+          <section className="intro">
+            <h1>Ask DANI.</h1>
 
-            {sources.length > 0 && (
-              <div className="sources">
-                <h3>Sources</h3>
+            <p>
+              A conversation about Daniela&apos;s work, projects and experience.
+            </p>
 
-                <ul>
-                  {sources.map((source) => (
-                    <li
-                      key={`${source.source}-${source.chunk_index}`}
-                      className="source-card"
-                    >
-                      <div>
-                        <strong>{source.title}</strong>
-                        <span>{source.section}</span>
-                      </div>
-
-                      <span className="score">
-                        {Math.round(source.score * 100)}%
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+            {!submittedMessage && (
+              <div className="prompts">
+                {suggestions.map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    onClick={() => void sendMessage(suggestion)}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
               </div>
             )}
           </section>
-        )}
-      </section>
-    </main>
+
+          {(submittedMessage || isLoading || answer) && (
+            <section className="conversation">
+              {submittedMessage && (
+                <div className="message">
+                  <span className="speaker">You</span>
+                  <p>{submittedMessage}</p>
+                </div>
+              )}
+
+              {isLoading && (
+                <div className="message">
+                  <span className="speaker">DANI</span>
+                  <p className="thinking">Thinking…</p>
+                </div>
+              )}
+
+              {answer && !isLoading && (
+                <div className="message">
+                  <span className="speaker">DANI</span>
+
+                  <p className="answer">{answer}</p>
+
+                  {sources.length > 0 && (
+                    <p className="sources">
+                      Sources:{' '}
+                      {sources.map((source, index) => (
+                        <span key={`${source.source}-${source.chunk_index}`}>
+                          {source.title}
+                          {index < sources.length - 1 ? ' · ' : ''}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {error && <p className="error">{error}</p>}
+            </section>
+          )}
+
+          <form className="composer" onSubmit={handleSubmit}>
+            <textarea
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              placeholder="Ask something about Daniela..."
+              rows={1}
+              disabled={isLoading}
+              aria-label="Ask DANI"
+            />
+
+            <button
+              type="submit"
+              disabled={!message.trim() || isLoading}
+            >
+              Send
+            </button>
+          </form>
+        </div>
+
+        <aside className="sidebar">
+          <section className="sidebar-section">
+            <p className="sidebar-label">Latest writing</p>
+
+            <a className="sidebar-title" href="#">
+              Building DANI
+            </a>
+
+            <p className="sidebar-meta">August 2026</p>
+
+            <a className="sidebar-link" href="#">
+              Read ↗
+            </a>
+          </section>
+
+          <section className="sidebar-section">
+            <p className="sidebar-label">CV</p>
+
+            <p className="sidebar-copy">
+              Education, projects, technical skills and experience.
+            </p>
+
+            <a className="sidebar-link" href="#">
+              View résumé ↗
+            </a>
+          </section>
+
+          <section className="sidebar-section sidebar-photo">
+            <p className="sidebar-label">Photography</p>
+
+            <img
+              src="/images/nature-1.jpg"
+              alt="Frost-covered plant photographed by Daniela"
+            />
+
+            <p className="sidebar-meta">Shot by Daniela</p>
+          </section>
+        </aside>
+      </main>
+    </div>
   )
 }
 
