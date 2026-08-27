@@ -1,5 +1,6 @@
 from openai import OpenAI
 
+from dani_api.access import AccessTier
 from dani_api.config import settings
 
 SYSTEM_INSTRUCTIONS = """
@@ -20,19 +21,60 @@ Rules:
 
 
 class LanguageModel:
-    """Generates grounded answers using the OpenAI Responses API."""
+    """Generates grounded answers using OpenAI or OpenRouter."""
 
     def __init__(
         self,
+        tier: AccessTier = AccessTier.FREE,
         model: str | None = None,
         client: OpenAI | None = None,
     ) -> None:
-        if settings.openai_api_key is None:
-            raise ValueError("OPENAI_API_KEY is not configured.")
+        self.tier = tier
 
-        self.model = model or settings.openai_chat_model
-        self.client = client or OpenAI(
-            api_key=settings.openai_api_key.get_secret_value()
+        if client is not None:
+            self.client = client
+            self.model = model or self._default_model()
+            return
+
+        self.client, self.model = self._create_client_and_model(model)
+
+    def _default_model(self) -> str:
+        """Return the default model for the selected access tier."""
+        if self.tier is AccessTier.PREMIUM:
+            return settings.openai_chat_model
+
+        return settings.openrouter_chat_model
+
+    def _create_client_and_model(
+        self,
+        model: str | None,
+    ) -> tuple[OpenAI, str]:
+        """Create the API client and model for the selected access tier."""
+        if self.tier is AccessTier.PREMIUM:
+            if settings.openai_api_key is None:
+                raise ValueError("OPENAI_API_KEY is not configured.")
+
+            return (
+                OpenAI(
+                    api_key=settings.openai_api_key.get_secret_value(),
+                ),
+                model or settings.openai_chat_model,
+            )
+
+        if settings.openrouter_api_key is None:
+            raise ValueError("OPENROUTER_API_KEY is not configured.")
+
+        openrouter_model = model or settings.openrouter_chat_model
+
+        if not openrouter_model:
+            raise ValueError("OPENROUTER_CHAT_MODEL is not configured.")
+
+        return (
+            OpenAI(
+                api_key=settings.openrouter_api_key.get_secret_value(),
+                base_url=settings.openrouter_base_url,
+            ),
+            openrouter_model,
         )
 
     def generate_answer(

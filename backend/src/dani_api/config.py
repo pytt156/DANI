@@ -18,6 +18,11 @@ class Settings(BaseSettings):
     openai_api_key: SecretStr | None = None
     openai_embedding_model: str = "text-embedding-3-small"
     openai_chat_model: str = "gpt-5-mini"
+
+    openrouter_api_key: SecretStr | None = None
+    openrouter_chat_model: str = ""
+    openrouter_base_url: str = "https://openrouter.ai/api/v1"
+
     premium_access_key_hashes: str = ""
 
     qdrant_url: str = "http://localhost:6333"
@@ -32,14 +37,6 @@ class Settings(BaseSettings):
     )
 
     @property
-    def use_json_logs(self) -> bool:
-        """Return wheter logs should be rendered as JSON."""
-        if self.log_json is not None:
-            return self.log_json
-
-        return self.environment == "production"
-
-    @property
     def premium_access_key_hash_set(self) -> set[str]:
         """Return configured premium access-key hashes."""
         return {
@@ -47,6 +44,14 @@ class Settings(BaseSettings):
             for value in self.premium_access_key_hashes.split(",")
             if value.strip()
         }
+
+    @property
+    def use_json_logs(self) -> bool:
+        """Return whether logs should be rendered as JSON."""
+        if self.log_json is not None:
+            return self.log_json
+
+        return self.environment == "production"
 
 
 settings = Settings()

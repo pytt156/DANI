@@ -2,11 +2,13 @@ from collections.abc import Generator
 from unittest.mock import Mock
 
 import pytest
+from fastapi.testclient import TestClient
+
+from dani_api.access import AccessTier
 from dani_api.api.dependencies import get_rag_service
 from dani_api.main import app
 from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagAnswer
-from fastapi.testclient import TestClient
 
 
 @pytest.fixture
@@ -41,6 +43,7 @@ def test_chat_returns(client: TestClient) -> None:
         )
 
         assert response.status_code == 200
+
         assert response.json() == {
             "answer": "Generated answer.",
             "sources": [
@@ -56,7 +59,8 @@ def test_chat_returns(client: TestClient) -> None:
         }
 
         rag_service.answer.assert_called_once_with(
-            "What technologies does the example project use?"
+            "What technologies does the example project use?",
+            tier=AccessTier.FREE,
         )
     finally:
         app.dependency_overrides.clear()

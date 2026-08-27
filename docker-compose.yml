@@ -14,17 +14,28 @@ services:
       ENVIRONMENT: production
       LOG_LEVEL: INFO
       LOG_JSON: "true"
+
       QDRANT_URL: http://qdrant:6333
       QDRANT_COLLECTION: dani_knowledge
+
       CORS_ORIGINS: '["http://localhost:5173","https://daniela.algerydh.com"]'
+
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-5-mini}
       OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      OPENROUTER_CHAT_MODEL: ${OPENROUTER_CHAT_MODEL}
+      OPENROUTER_BASE_URL: ${OPENROUTER_BASE_URL:-https://openrouter.ai/api/v1}
+
       PREMIUM_ACCESS_KEY_HASHES: ${PREMIUM_ACCESS_KEY_HASHES:-}
+
     ports:
       - "127.0.0.1:8000:8000"
+
     depends_on:
       - qdrant
+
     restart: unless-stopped
 
 volumes:

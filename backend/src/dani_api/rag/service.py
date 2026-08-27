@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from time import perf_counter
 
 import structlog
+
+from dani_api.access import AccessTier
 from dani_api.llm import LanguageModel
 from dani_api.rag.retrieval import (
     DEFAULT_RESULT_LIMIT,
@@ -50,11 +52,12 @@ class RagService:
         language_model: LanguageModel | None = None,
     ) -> None:
         self.retriever = retriever or KnowledgeRetriever()
-        self.language_model = language_model or LanguageModel()
+        self.language_model = language_model
 
     def answer(
         self,
         question: str,
+        tier: AccessTier = AccessTier.FREE,
         limit: int = DEFAULT_RESULT_LIMIT,
         score_threshold: float | None = None,
     ) -> RagAnswer:
@@ -69,6 +72,7 @@ class RagService:
         logger.info(
             "rag_request_started",
             question_length=len(normalized_question),
+            access_tier=tier.value,
             result_limit=limit,
             score_threshold=score_threshold,
         )
@@ -87,10 +91,14 @@ class RagService:
         )
 
         if not sources:
-            total_duration_ms = round((perf_counter() - request_started_at) * 1000, 2)
+            total_duration_ms = round(
+                (perf_counter() - request_started_at) * 1000,
+                2,
+            )
 
             logger.warning(
                 "retrieval_empty",
+                access_tier=tier.value,
                 result_count=0,
                 retrieval_duration_ms=retrieval_duration_ms,
                 duration_ms=total_duration_ms,
@@ -106,19 +114,28 @@ class RagService:
 
         context = build_context(sources)
 
+        language_model = self.language_model or LanguageModel(tier=tier)
+
         llm_started_at = perf_counter()
 
-        generated_answer = self.language_model.generate_answer(
+        generated_answer = language_model.generate_answer(
             question=normalized_question,
             context=context,
         )
 
-        llm_duration_ms = round((perf_counter() - llm_started_at) * 1000, 2)
+        llm_duration_ms = round(
+            (perf_counter() - llm_started_at) * 1000,
+            2,
+        )
 
-        total_duration_ms = round((perf_counter() - request_started_at) * 1000, 2)
+        total_duration_ms = round(
+            (perf_counter() - request_started_at) * 1000,
+            2,
+        )
 
         logger.info(
             "rag_request_completed",
+            access_tier=tier.value,
             source_count=len(sources),
             top_score=max(source.score for source in sources),
             retrieval_duration_ms=retrieval_duration_ms,
