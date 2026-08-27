@@ -1,23 +1,12 @@
+import mlflow
+from mlflow.genai import load_prompt
 from openai import OpenAI
 
 from dani_api.access import AccessTier
 from dani_api.config import settings
 
-SYSTEM_INSTRUCTIONS = """
-You are DANI, an AI interface representing Daniela professionally.
-
-Answer the user's question using only the supplied knowledge context.
-
-Rules:
-- Do not invent information.
-- Do not use outside knowledge about Daniela.
-- If the context does not contain enough information, say so clearly.
-- Answer in the same language as the user's question.
-- Write naturally and professionally.
-- Refer to Daniela in the third person.
-- Do not mention that you are reading chunks, embeddings or a vector database.
-- When useful, cite supporting context using markers such as [Source 1].
-""".strip()
+PROMPT_NAME = "dani-system-prompt"
+PROMPT_ALIAS = "production"
 
 
 class LanguageModel:
@@ -85,6 +74,19 @@ class LanguageModel:
             openrouter_model,
         )
 
+    def _load_system_prompt(self) -> str:
+        """Load the production DANI system prompt from MLflow."""
+        mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
+
+        prompt = load_prompt(
+            f"prompts:/{PROMPT_NAME}@{PROMPT_ALIAS}",
+        )
+
+        if not isinstance(prompt.template, str):
+            raise TypeError("DANI system prompt must be registered as a text prompt.")
+
+        return prompt.template.strip()
+
     def generate_answer(
         self,
         question: str,
@@ -100,9 +102,11 @@ class LanguageModel:
         if not normalized_context:
             raise ValueError("Context cannot be empty.")
 
+        system_instructions = self._load_system_prompt()
+
         response = self.client.responses.create(
             model=self.model,
-            instructions=SYSTEM_INSTRUCTIONS,
+            instructions=system_instructions,
             input=(
                 "Knowledge context:\n\n"
                 f"{normalized_context}\n\n"
