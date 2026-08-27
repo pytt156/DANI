@@ -20,11 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug OIDC claims
-        uses: github/actions-oidc-debugger@main
-        with:
-          audience: sts.amazonaws.com
-              
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v5
         with:
@@ -33,8 +28,12 @@ jobs:
 
       - name: Deploy via SSM
         id: deploy
+        shell: bash
         run: |
+          set -euo pipefail
+
           COMMAND_ID=$(aws ssm send-command \
+            --region eu-north-1 \
             --instance-ids "i-04c75d24d81397ce9" \
             --document-name "AWS-RunShellScript" \
             --comment "Deploy DANI from GitHub Actions" \
@@ -53,12 +52,20 @@ jobs:
           echo "command_id=$COMMAND_ID" >> "$GITHUB_OUTPUT"
 
           aws ssm wait command-executed \
+            --region eu-north-1 \
             --command-id "$COMMAND_ID" \
             --instance-id "i-04c75d24d81397ce9"
 
       - name: Show deploy result
-        if: always()
+        if: ${{ steps.deploy.outputs.command_id != '' }}
+        shell: bash
         run: |
           aws ssm get-command-invocation \
+            --region eu-north-1 \
             --command-id "${{ steps.deploy.outputs.command_id }}" \
-            --instance-id "i-04c75d24d81397ce9"
+            --instance-id "i-04c75d24d81397ce9" \
+            --query '{
+              Status:Status,
+              StandardOutputContent:StandardOutputContent,
+              StandardErrorContent:StandardErrorContent
+            }'
