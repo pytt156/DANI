@@ -1,8 +1,7 @@
 from collections.abc import Sequence
 
-from qdrant_client import QdrantClient, models
-
 from dani_api.config import settings
+from qdrant_client import QdrantClient, models
 
 DEFAULT_VECTOR_SIZE = 1536
 DEFAULT_UPSERT_BATCH_SIZE = 100

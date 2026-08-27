@@ -1,5 +1,4 @@
 import pytest
-
 from dani_api.rag.retrieval import (
     payload_integer,
     payload_optional_string,

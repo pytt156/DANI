@@ -1,6 +1,5 @@
-from fastapi.testclient import TestClient
-
 from dani_api.main import app
+from fastapi.testclient import TestClient
 
 
 def test_cors_preflight_allows_configured_origin() -> None:

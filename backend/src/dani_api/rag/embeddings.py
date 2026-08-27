@@ -1,8 +1,7 @@
 from collections.abc import Sequence
 
-from openai import OpenAI
-
 from dani_api.config import settings
+from openai import OpenAI
 
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
 DEFAULT_VECTOR_SIZE = 1536

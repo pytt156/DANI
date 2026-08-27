@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from time import perf_counter
 
 import structlog
-
 from dani_api.llm import LanguageModel
 from dani_api.rag.retrieval import (
     DEFAULT_RESULT_LIMIT,
