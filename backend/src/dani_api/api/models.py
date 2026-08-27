@@ -1,3 +1,4 @@
+from dani_api.access import AccessTier
 from pydantic import BaseModel, Field
 
 
@@ -26,3 +27,4 @@ class ChatResponse(BaseModel):
 
     answer: str
     sources: list[SourceResponse]
+    access_tier: AccessTier

@@ -1,10 +1,10 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
-
+from dani_api.access import resolve_access_tier
 from dani_api.api.dependencies import get_rag_service
 from dani_api.api.models import ChatRequest, ChatResponse, SourceResponse
 from dani_api.rag.service import RagService
+from fastapi import APIRouter, Depends, Header, HTTPException, status
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
 
@@ -19,13 +19,17 @@ RagServiceDependency = Annotated[RagService, Depends(get_rag_service)]
 def chat(
     request: ChatRequest,
     rag_service: RagServiceDependency,
+    access_key: Annotated[str | None, Header(alias="X-DANI-Access-Key")] = None,
 ) -> ChatResponse:
     """Answer a question using knowledge base."""
+    access_tier = resolve_access_tier(access_key)
+
     try:
         result = rag_service.answer(request.message)
     except ValueError as error:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=str(error)
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(error),
         ) from error
     except Exception as error:
         raise HTTPException(
@@ -45,4 +49,5 @@ def chat(
             )
             for source in result.sources
         ],
+        access_tier=access_tier,
     )

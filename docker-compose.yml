@@ -20,6 +20,7 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-5-mini}
       OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      PREMIUM_ACCESS_KEY_HASHES: ${PREMIUM_ACCESS_KEY_HASHES:-}
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:

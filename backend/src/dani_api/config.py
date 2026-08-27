@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     openai_api_key: SecretStr | None = None
     openai_embedding_model: str = "text-embedding-3-small"
     openai_chat_model: str = "gpt-5-mini"
+    premium_access_key_hashes: str = ""
 
     qdrant_url: str = "http://localhost:6333"
     qdrant_collection: str = "dani_knowledge"
@@ -37,6 +38,15 @@ class Settings(BaseSettings):
             return self.log_json
 
         return self.environment == "production"
+
+    @property
+    def premium_access_key_hash_set(self) -> set[str]:
+        """Return configured premium access-key hashes."""
+        return {
+            value.strip()
+            for value in self.premium_access_key_hashes.split(",")
+            if value.strip()
+        }
 
 
 settings = Settings()
