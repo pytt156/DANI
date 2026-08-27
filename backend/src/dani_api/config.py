@@ -25,6 +25,10 @@ class Settings(BaseSettings):
 
     premium_access_key_hashes: str = ""
 
+    mlflow_tracking_uri: str = "http://127.0.0.1:5000"
+    mlflow_experiment_name: str = "dani"
+    mlflow_enabled: bool = False
+
     qdrant_url: str = "http://localhost:6333"
     qdrant_collection: str = "dani_knowledge"
 

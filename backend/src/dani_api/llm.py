@@ -30,6 +30,7 @@ class LanguageModel:
         client: OpenAI | None = None,
     ) -> None:
         self.tier = tier
+        self.provider = self._provider_for_tier()
 
         if client is not None:
             self.client = client
@@ -37,6 +38,13 @@ class LanguageModel:
             return
 
         self.client, self.model = self._create_client_and_model(model)
+
+    def _provider_for_tier(self) -> str:
+        """Return the provider used by the selected access tier."""
+        if self.tier is AccessTier.PREMIUM:
+            return "openai"
+
+        return "openrouter"
 
     def _default_model(self) -> str:
         """Return the default model for the selected access tier."""

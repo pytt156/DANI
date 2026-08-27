@@ -5,6 +5,7 @@ from time import perf_counter
 import structlog
 from dani_api.access import AccessTier
 from dani_api.llm import LanguageModel
+from dani_api.mlflow_tracking import log_rag_metrics, start_rag_run
 from dani_api.rag.retrieval import (
     DEFAULT_RESULT_LIMIT,
     KnowledgeRetriever,
@@ -115,26 +116,45 @@ class RagService:
 
         language_model = self.language_model or LanguageModel(tier=tier)
 
-        llm_started_at = perf_counter()
+        with start_rag_run(
+            access_tier=tier.value,
+            provider=language_model.provider,
+            model=language_model.model,
+            retrieval_limit=limit,
+            score_threshold=score_threshold,
+        ):
+            llm_started_at = perf_counter()
 
-        generated_answer = language_model.generate_answer(
-            question=normalized_question,
-            context=context,
-        )
+            generated_answer = language_model.generate_answer(
+                question=normalized_question,
+                context=context,
+            )
 
-        llm_duration_ms = round(
-            (perf_counter() - llm_started_at) * 1000,
-            2,
-        )
+            llm_duration_ms = round(
+                (perf_counter() - llm_started_at) * 1000,
+                2,
+            )
 
-        total_duration_ms = round(
-            (perf_counter() - request_started_at) * 1000,
-            2,
-        )
+            total_duration_ms = round(
+                (perf_counter() - request_started_at) * 1000,
+                2,
+            )
+
+            log_rag_metrics(
+                question_length=len(normalized_question),
+                source_count=len(sources),
+                top_score=max(source.score for source in sources),
+                retrieval_duration_ms=retrieval_duration_ms,
+                llm_duration_ms=llm_duration_ms,
+                total_duration_ms=total_duration_ms,
+                answer_length=len(generated_answer),
+            )
 
         logger.info(
             "rag_request_completed",
             access_tier=tier.value,
+            provider=language_model.provider,
+            model=language_model.model,
             source_count=len(sources),
             top_score=max(source.score for source in sources),
             retrieval_duration_ms=retrieval_duration_ms,
