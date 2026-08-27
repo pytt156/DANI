@@ -1,7 +1,6 @@
 from unittest.mock import Mock, patch
 
 import pytest
-
 from dani_api.access import AccessTier
 from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagService
