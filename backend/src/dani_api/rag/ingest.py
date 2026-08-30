@@ -6,7 +6,36 @@ from dani_api.rag.embeddings import EmbeddingService
 from dani_api.rag.loader import load_markdown_documents
 from dani_api.rag.vector_store import VectorStore
 
+from time import sleep
+
+
 POINT_ID_NAMESPACE = uuid.UUID("3a62bf14-f732-4a79-9c43-70fa8162a488")
+QDRANT_READY_ATTEMPTS = 10
+QDRANT_READY_DELAY_SECONDS = 1.0
+
+
+def wait_for_vector_store(
+    vector_store: VectorStore,
+    attempts: int = QDRANT_READY_ATTEMPTS,
+    delay_seconds: float = QDRANT_READY_DELAY_SECONDS,
+) -> None:
+    """Wait until Qdrant is reachable."""
+
+    last_error: Exception | None = None
+
+    for attempt in range(1, attempts + 1):
+        try:
+            vector_store.health_check()
+            return
+        except Exception as error:
+            last_error = error
+
+            if attempt < attempts:
+                sleep(delay_seconds)
+
+    raise RuntimeError(
+        f"Qdrant did not become ready after {attempts} attempts."
+    ) from last_error
 
 
 def create_point_id(chunk: KnowledgeChunk) -> str:
@@ -79,7 +108,7 @@ def ingest_knowledge_base() -> int:
         raise RuntimeError("Duplicate Qdrant point IDs were generated.")
 
     vector_store = VectorStore()
-    vector_store.health_check()
+    wait_for_vector_store(vector_store)
 
     print(f"Replacing collection '{vector_store.collection_name}'...")
     vector_store.reset_collection()

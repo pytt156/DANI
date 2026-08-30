@@ -27,6 +27,10 @@ class VectorStore:
         self.client.get_collections()
         return True
 
+    def collection_exists(self) -> bool:
+        """Return whether the configured collection exists."""
+        return self.client.collection_exists(self.collection_name)
+
     def search(
         self,
         query_vector: list[float],
