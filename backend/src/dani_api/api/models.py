@@ -1,5 +1,18 @@
+from typing import Literal
+
 from dani_api.access import AccessTier
 from pydantic import BaseModel, Field
+
+
+class ChatHistoryMessage(BaseModel):
+    """A previous message supplied as conversational context."""
+
+    role: Literal["user", "assistant"]
+
+    content: str = Field(
+        min_length=1,
+        max_length=4000,
+    )
 
 
 class ChatRequest(BaseModel):
@@ -9,6 +22,11 @@ class ChatRequest(BaseModel):
         min_length=1,
         max_length=2000,
         examples=["Which projects has Daniela worked on?"],
+    )
+
+    history: list[ChatHistoryMessage] = Field(
+        default_factory=list,
+        max_length=8,
     )
 
 

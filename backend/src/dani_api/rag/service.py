@@ -1,10 +1,12 @@
 import argparse
+from collections.abc import Sequence
 from dataclasses import dataclass
 from time import perf_counter
 
 import structlog
 from dani_api.access import AccessTier
 from dani_api.config import settings
+from dani_api.conversation import ConversationMessage
 from dani_api.llm import LanguageModel
 from dani_api.mlflow_tracking import log_rag_metrics, start_rag_run
 from dani_api.prompts import NO_ANSWER_PREFIX
@@ -25,8 +27,11 @@ class RagAnswer:
     sources: list[RetrievalResult]
 
 
-def build_context(results: list[RetrievalResult]) -> str:
+def build_context(
+    results: list[RetrievalResult],
+) -> str:
     """Build model context from retrieved chunks."""
+
     sections: list[str] = []
 
     for index, result in enumerate(results, start=1):
@@ -43,6 +48,24 @@ def build_context(results: list[RetrievalResult]) -> str:
         )
 
     return "\n\n".join(sections)
+
+
+def build_retrieval_query(
+    question: str,
+    history: Sequence[ConversationMessage],
+) -> str:
+    """Build a retrieval query with recent conversational context."""
+
+    if not history:
+        return question
+
+    recent_history = history[-4:]
+
+    parts = [f"{message.role}: {message.content}" for message in recent_history]
+
+    parts.append(f"user: {question}")
+
+    return "\n".join(parts)
 
 
 class RagService:
@@ -62,8 +85,10 @@ class RagService:
         tier: AccessTier = AccessTier.FREE,
         limit: int = DEFAULT_RESULT_LIMIT,
         score_threshold: float | None = None,
+        history: Sequence[ConversationMessage] = (),
     ) -> RagAnswer:
         """Retrieve relevant context and generate a grounded answer."""
+
         normalized_question = question.strip()
 
         if not normalized_question:
@@ -75,11 +100,17 @@ class RagService:
             else score_threshold
         )
 
+        retrieval_query = build_retrieval_query(
+            normalized_question,
+            history,
+        )
+
         request_started_at = perf_counter()
 
         logger.info(
             "rag_request_started",
             question_length=len(normalized_question),
+            history_count=len(history),
             access_tier=tier.value,
             result_limit=limit,
             score_threshold=effective_score_threshold,
@@ -88,7 +119,7 @@ class RagService:
         retrieval_started_at = perf_counter()
 
         sources = self.retriever.retrieve(
-            query=normalized_question,
+            query=retrieval_query,
             limit=limit,
             score_threshold=effective_score_threshold,
         )
@@ -108,6 +139,7 @@ class RagService:
                 "retrieval_empty",
                 access_tier=tier.value,
                 result_count=0,
+                history_count=len(history),
                 retrieval_duration_ms=retrieval_duration_ms,
                 duration_ms=total_duration_ms,
                 score_threshold=effective_score_threshold,
@@ -123,7 +155,6 @@ class RagService:
 
         context = build_context(sources)
 
-        # Keep retrieval metadata before sources may be hidden from the response.
         retrieved_source_count = len(sources)
         top_score = max(source.score for source in sources)
 
@@ -141,6 +172,7 @@ class RagService:
             generated_answer = language_model.generate_answer(
                 question=normalized_question,
                 context=context,
+                history=history,
             )
 
             llm_duration_ms = round(
@@ -156,7 +188,8 @@ class RagService:
                 if not unsupported_answer:
                     unsupported_answer = (
                         "I could not find enough relevant information "
-                        "in Daniela's knowledge base to answer that question."
+                        "in Daniela's knowledge base to answer that "
+                        "question."
                     )
 
                 generated_answer = unsupported_answer
@@ -184,6 +217,7 @@ class RagService:
             model=language_model.model,
             source_count=retrieved_source_count,
             returned_source_count=len(sources),
+            history_count=len(history),
             top_score=top_score,
             retrieval_duration_ms=retrieval_duration_ms,
             llm_duration_ms=llm_duration_ms,
@@ -199,6 +233,7 @@ class RagService:
 
 def build_argument_parser() -> argparse.ArgumentParser:
     """Create the command-line argument parser."""
+
     parser = argparse.ArgumentParser(
         description="Ask a question using the DANI knowledge base."
     )
@@ -230,6 +265,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
 
 if __name__ == "__main__":
     arguments = build_argument_parser().parse_args()
+
     rag_service = RagService()
 
     try:
@@ -238,6 +274,7 @@ if __name__ == "__main__":
             limit=arguments.limit,
             score_threshold=arguments.score_threshold,
         )
+
     except Exception as error:
         raise SystemExit(f"RAG answer generation failed: {error}") from error
 
@@ -248,8 +285,12 @@ if __name__ == "__main__":
 
     if not result.sources:
         print("No sources.")
+
     else:
-        for index, source in enumerate(result.sources, start=1):
+        for index, source in enumerate(
+            result.sources,
+            start=1,
+        ):
             print(
                 f"{index}. {source.title} — "
                 f"{source.section or 'Unknown section'} "

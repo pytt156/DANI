@@ -3,6 +3,7 @@ from unittest.mock import Mock, patch
 import pytest
 from dani_api.access import AccessTier
 from dani_api.config import settings
+from dani_api.conversation import ConversationMessage
 from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagService
 
@@ -21,6 +22,70 @@ def test_answer_rejects_empty_question() -> None:
 
     retriever.retrieve.assert_not_called()
     language_model.generate_answer.assert_not_called()
+
+
+def test_answer_uses_history_for_retrieval_and_generation() -> None:
+    source = RetrievalResult(
+        content="DANI uses Docker.",
+        source="projects/dani.md",
+        title="DANI",
+        section="Technology",
+        chunk_index=0,
+        score=0.88,
+    )
+
+    retriever = Mock()
+    retriever.retrieve.return_value = [source]
+
+    language_model = Mock()
+    language_model.generate_answer.return_value = "DANI used Docker."
+
+    service = RagService(
+        retriever=retriever,
+        language_model=language_model,
+    )
+
+    history = [
+        ConversationMessage(
+            role="user",
+            content="What has Daniela built?",
+        ),
+        ConversationMessage(
+            role="assistant",
+            content="Daniela has built DANI and other MLOps projects.",
+        ),
+    ]
+
+    result = service.answer(
+        "Which of those used Docker?",
+        tier=AccessTier.FREE,
+        history=history,
+    )
+
+    assert result.answer == "DANI used Docker."
+    assert result.sources == [source]
+
+    retriever.retrieve.assert_called_once_with(
+        query=(
+            "user: What has Daniela built?\n"
+            "assistant: Daniela has built DANI and other MLOps projects.\n"
+            "user: Which of those used Docker?"
+        ),
+        limit=5,
+        score_threshold=settings.retrieval_score_threshold,
+    )
+
+    language_model.generate_answer.assert_called_once_with(
+        question="Which of those used Docker?",
+        context=(
+            "[Source 1]\n"
+            "Title: DANI\n"
+            "File: projects/dani.md\n"
+            "Section: Technology\n"
+            "DANI uses Docker."
+        ),
+        history=history,
+    )
 
 
 def test_answer_returns_generated_answer_and_sources() -> None:
@@ -67,6 +132,7 @@ def test_answer_returns_generated_answer_and_sources() -> None:
             "Section: Technology\n"
             "Example project uses FastAPI."
         ),
+        history=(),
     )
 
 

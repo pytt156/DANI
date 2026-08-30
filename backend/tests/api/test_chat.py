@@ -4,6 +4,7 @@ from unittest.mock import Mock
 import pytest
 from dani_api.access import AccessTier
 from dani_api.api.dependencies import get_rag_service
+from dani_api.conversation import ConversationMessage
 from dani_api.main import app
 from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagAnswer
@@ -60,6 +61,7 @@ def test_chat_returns(client: TestClient) -> None:
         rag_service.answer.assert_called_once_with(
             "What technologies does the example project use?",
             tier=AccessTier.FREE,
+            history=[],
         )
     finally:
         app.dependency_overrides.clear()
@@ -95,6 +97,57 @@ def test_chat_rejects_empty_message(client: TestClient) -> None:
 
         assert response.status_code == 422
         rag_service.answer.assert_not_called()
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_chat_passes_history_to_rag_service(
+    client: TestClient,
+) -> None:
+    rag_service = Mock()
+
+    rag_service.answer.return_value = RagAnswer(
+        answer="DANI used Docker.",
+        sources=[],
+    )
+
+    app.dependency_overrides[get_rag_service] = lambda: rag_service
+
+    try:
+        response = client.post(
+            "/api/chat",
+            json={
+                "message": "Which of those used Docker?",
+                "history": [
+                    {
+                        "role": "user",
+                        "content": "What has Daniela built?",
+                    },
+                    {
+                        "role": "assistant",
+                        "content": ("Daniela has built DANI and other MLOps projects."),
+                    },
+                ],
+            },
+        )
+
+        assert response.status_code == 200
+
+        rag_service.answer.assert_called_once_with(
+            "Which of those used Docker?",
+            tier=AccessTier.FREE,
+            history=[
+                ConversationMessage(
+                    role="user",
+                    content="What has Daniela built?",
+                ),
+                ConversationMessage(
+                    role="assistant",
+                    content=("Daniela has built DANI and other MLOps projects."),
+                ),
+            ],
+        )
+
     finally:
         app.dependency_overrides.clear()
 

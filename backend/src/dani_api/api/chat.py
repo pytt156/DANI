@@ -3,12 +3,16 @@ from typing import Annotated
 from dani_api.access import resolve_access_tier
 from dani_api.api.dependencies import get_rag_service
 from dani_api.api.models import ChatRequest, ChatResponse, SourceResponse
+from dani_api.conversation import ConversationMessage
 from dani_api.rag.service import RagService
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
 
-RagServiceDependency = Annotated[RagService, Depends(get_rag_service)]
+RagServiceDependency = Annotated[
+    RagService,
+    Depends(get_rag_service),
+]
 
 
 @router.post(
@@ -24,19 +28,32 @@ def chat(
         Header(alias="X-DANI-Access-Key"),
     ] = None,
 ) -> ChatResponse:
-    """Answer a question using knowledge base."""
+    """Answer a question using the knowledge base."""
+
     access_tier = resolve_access_tier(access_key)
+
+    history = [
+        ConversationMessage(
+            role=message.role,
+            content=message.content.strip(),
+        )
+        for message in request.history
+        if message.content.strip()
+    ]
 
     try:
         result = rag_service.answer(
             request.message,
             tier=access_tier,
+            history=history,
         )
+
     except ValueError as error:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(error),
         ) from error
+
     except Exception as error:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,

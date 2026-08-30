@@ -1,3 +1,4 @@
+from collections.abc import Sequence
 from functools import lru_cache
 
 import mlflow
@@ -7,6 +8,7 @@ from openai import OpenAI
 
 from dani_api.access import AccessTier
 from dani_api.config import settings
+from dani_api.conversation import ConversationMessage
 from dani_api.prompts import DEFAULT_SYSTEM_PROMPT, GROUNDING_GUARD
 
 PROMPT_NAME = "dani-system-prompt"
@@ -70,6 +72,7 @@ class LanguageModel:
 
     def _provider_for_tier(self) -> str:
         """Return the provider used by the selected access tier."""
+
         if self.tier is AccessTier.PREMIUM:
             return "openai"
 
@@ -77,6 +80,7 @@ class LanguageModel:
 
     def _default_model(self) -> str:
         """Return the default model for the selected access tier."""
+
         if self.tier is AccessTier.PREMIUM:
             return settings.openai_chat_model
 
@@ -87,6 +91,7 @@ class LanguageModel:
         model: str | None,
     ) -> tuple[OpenAI, str]:
         """Create the API client and model for the selected access tier."""
+
         if self.tier is AccessTier.PREMIUM:
             if settings.openai_api_key is None:
                 raise ValueError("OPENAI_API_KEY is not configured.")
@@ -116,14 +121,17 @@ class LanguageModel:
 
     def _load_system_prompt(self) -> str:
         """Return the configured DANI system prompt."""
+
         return load_system_prompt()
 
     def generate_answer(
         self,
         question: str,
         context: str,
+        history: Sequence[ConversationMessage] = (),
     ) -> str:
         """Generate an answer grounded in supplied context."""
+
         normalized_question = question.strip()
         normalized_context = context.strip()
 
@@ -133,16 +141,25 @@ class LanguageModel:
         if not normalized_context:
             raise ValueError("Context cannot be empty.")
 
-        system_instructions = f"{self._load_system_prompt()}{GROUNDING_GUARD}"
+        system_instructions = f"{self._load_system_prompt()}\n\n{GROUNDING_GUARD}"
+
+        history_text = "\n".join(
+            f"{message.role.capitalize()}: {message.content.strip()}"
+            for message in history
+            if message.content.strip()
+        )
+
+        input_text = f"Knowledge context:\n\n{normalized_context}\n\n"
+
+        if history_text:
+            input_text += f"Conversation history:\n\n{history_text}\n\n"
+
+        input_text += f"Current user question:\n{normalized_question}"
+
         response = self.client.responses.create(
             model=self.model,
             instructions=system_instructions,
-            input=(
-                "Knowledge context:\n\n"
-                f"{normalized_context}\n\n"
-                "User question:\n"
-                f"{normalized_question}"
-            ),
+            input=input_text,
             store=False,
         )
 
