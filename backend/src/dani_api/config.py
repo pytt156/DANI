@@ -41,6 +41,18 @@ class Settings(BaseSettings):
     mlflow_experiment_name: str = "dani"
     mlflow_enabled: bool = False
 
+    mlflow_http_request_timeout: float = Field(
+        default=2.0,
+        gt=0,
+        le=30,
+    )
+
+    mlflow_http_request_max_retries: int = Field(
+        default=0,
+        ge=0,
+        le=3,
+    )
+
     qdrant_url: str = "http://localhost:6333"
     qdrant_collection: str = "dani_knowledge"
     retrieval_score_threshold: float = Field(

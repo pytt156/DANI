@@ -1,5 +1,9 @@
-from collections.abc import Iterator
+import os
+import socket
+from collections.abc import Generator
 from contextlib import contextmanager
+from functools import lru_cache
+from urllib.parse import urlparse
 
 import mlflow
 import structlog
@@ -8,14 +12,81 @@ from dani_api.config import settings
 
 logger = structlog.get_logger(__name__)
 
+MLFLOW_CONNECT_TIMEOUT_SECONDS = 0.5
 
-def configure_mlflow() -> None:
-    """Configure MLflow tracking for DANI."""
+
+def configure_mlflow_client() -> None:
+    """Configure MLflow HTTP behavior for best-effort tracking."""
+
+    os.environ["MLFLOW_HTTP_REQUEST_TIMEOUT"] = str(
+        settings.mlflow_http_request_timeout
+    )
+    os.environ["MLFLOW_HTTP_REQUEST_MAX_RETRIES"] = str(
+        settings.mlflow_http_request_max_retries
+    )
+
+
+@lru_cache(maxsize=1)
+def mlflow_server_available() -> bool:
+    """Return whether the configured MLflow server is reachable."""
+
     if not settings.mlflow_enabled:
-        return
+        return False
+
+    parsed_uri = urlparse(settings.mlflow_tracking_uri)
+
+    if parsed_uri.scheme not in {"http", "https"}:
+        return True
+
+    if parsed_uri.hostname is None:
+        logger.warning(
+            "mlflow_tracking_uri_invalid",
+            tracking_uri=settings.mlflow_tracking_uri,
+        )
+        return False
+
+    port = parsed_uri.port
+
+    if port is None:
+        port = 443 if parsed_uri.scheme == "https" else 80
+
+    try:
+        with socket.create_connection(
+            (parsed_uri.hostname, port),
+            timeout=MLFLOW_CONNECT_TIMEOUT_SECONDS,
+        ):
+            return True
+
+    except OSError:
+        logger.warning(
+            "mlflow_server_unavailable",
+            host=parsed_uri.hostname,
+            port=port,
+        )
+        return False
+
+
+def configure_mlflow() -> bool:
+    """Configure MLflow when its tracking server is reachable."""
+
+    if not mlflow_server_available():
+        return False
+
+    configure_mlflow_client()
 
     mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
-    mlflow.set_experiment(settings.mlflow_experiment_name)
+
+    try:
+        mlflow.set_experiment(settings.mlflow_experiment_name)
+
+    except Exception as error:  # noqa: BLE001
+        logger.warning(
+            "mlflow_configuration_failed",
+            error_type=type(error).__name__,
+        )
+        return False
+
+    return True
 
 
 @contextmanager
@@ -26,18 +97,16 @@ def start_rag_run(
     model: str,
     retrieval_limit: int,
     score_threshold: float | None,
-) -> Iterator[mlflow.ActiveRun | None]:
+) -> Generator[mlflow.ActiveRun | None, None, None]:
     """Start an optional MLflow run for one DANI RAG request."""
 
-    if not settings.mlflow_enabled:
+    if not configure_mlflow():
         yield None
         return
 
     run: mlflow.ActiveRun | None = None
 
     try:
-        configure_mlflow()
-
         run = mlflow.start_run()
 
         mlflow.log_params(

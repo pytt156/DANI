@@ -9,6 +9,10 @@ from openai import OpenAI
 from dani_api.access import AccessTier
 from dani_api.config import settings
 from dani_api.conversation import ConversationMessage
+from dani_api.mlflow_tracking import (
+    configure_mlflow_client,
+    mlflow_server_available,
+)
 from dani_api.prompts import DEFAULT_SYSTEM_PROMPT, GROUNDING_GUARD
 
 PROMPT_NAME = "dani-system-prompt"
@@ -24,13 +28,17 @@ def load_system_prompt() -> str:
     if not settings.mlflow_enabled:
         return DEFAULT_SYSTEM_PROMPT
 
+    if not mlflow_server_available():
+        return DEFAULT_SYSTEM_PROMPT
+
     try:
+        configure_mlflow_client()
+
         mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
 
         prompt = load_prompt(
             f"prompts:/{PROMPT_NAME}@{PROMPT_ALIAS}",
         )
-
         if not isinstance(prompt.template, str):
             raise TypeError("DANI system prompt must be registered as a text prompt.")
 
