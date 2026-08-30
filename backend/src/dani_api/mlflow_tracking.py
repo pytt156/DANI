@@ -97,7 +97,7 @@ def start_rag_run(
     model: str,
     retrieval_limit: int,
     score_threshold: float | None,
-) -> Generator[mlflow.ActiveRun | None, None, None]:
+) -> Generator[mlflow.ActiveRun | None]:
     """Start an optional MLflow run for one DANI RAG request."""
 
     if not configure_mlflow():

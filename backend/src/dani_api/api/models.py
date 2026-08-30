@@ -1,7 +1,8 @@
 from typing import Literal
 
-from dani_api.access import AccessTier
 from pydantic import BaseModel, Field, field_validator
+
+from dani_api.access import AccessTier
 
 
 class ChatHistoryMessage(BaseModel):

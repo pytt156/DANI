@@ -1,12 +1,13 @@
 from typing import Annotated
 
 import structlog
+from fastapi import APIRouter, Depends, Header, HTTPException, status
+
 from dani_api.access import resolve_access_tier
 from dani_api.api.dependencies import get_rag_service
 from dani_api.api.models import ChatRequest, ChatResponse, SourceResponse
 from dani_api.conversation import ConversationMessage
 from dani_api.rag.service import RagService
-from fastapi import APIRouter, Depends, Header, HTTPException, status
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
 

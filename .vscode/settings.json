@@ -1,0 +1,5 @@
+{
+    "ruff.configuration": "${workspaceFolder}/backend/pyproject.toml",
+    "python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv/bin/python",
+    "ruff.configurationPreference": "filesystemFirst"
+}

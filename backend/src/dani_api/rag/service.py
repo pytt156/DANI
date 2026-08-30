@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from time import perf_counter
 
 import structlog
+
 from dani_api.access import AccessTier
 from dani_api.config import settings
 from dani_api.conversation import ConversationMessage

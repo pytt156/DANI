@@ -2,13 +2,14 @@ from collections.abc import Generator
 from unittest.mock import Mock
 
 import pytest
+from fastapi.testclient import TestClient
+
 from dani_api.access import AccessTier
 from dani_api.api.dependencies import get_rag_service
 from dani_api.conversation import ConversationMessage
 from dani_api.main import app
 from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagAnswer
-from fastapi.testclient import TestClient
 
 
 @pytest.fixture

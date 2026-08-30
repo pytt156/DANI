@@ -33,3 +33,9 @@ dev = [
     "pytest-cov>=7.1.0",
     "ruff>=0.16.0",
 ]
+
+[tool.ruff]
+src = ["src"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["dani_api"]
