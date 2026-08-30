@@ -20,6 +20,8 @@ services:
       QDRANT_URL: http://qdrant:6333
       QDRANT_COLLECTION: dani_knowledge
 
+      RETRIEVAL_SCORE_THRESHOLD: ${RETRIEVAL_SCORE_THRESHOLD:-0.30}
+
       CORS_ORIGINS: '["http://localhost:5173","https://daniela.algerydh.com"]'
 
       OPENAI_API_KEY: ${OPENAI_API_KEY}

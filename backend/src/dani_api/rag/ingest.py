@@ -1,13 +1,11 @@
 import hashlib
 import uuid
+from time import sleep
 
 from dani_api.rag.chunker import KnowledgeChunk, chunk_documents
 from dani_api.rag.embeddings import EmbeddingService
 from dani_api.rag.loader import load_markdown_documents
 from dani_api.rag.vector_store import VectorStore
-
-from time import sleep
-
 
 POINT_ID_NAMESPACE = uuid.UUID("3a62bf14-f732-4a79-9c43-70fa8162a488")
 QDRANT_READY_ATTEMPTS = 10
@@ -27,7 +25,7 @@ def wait_for_vector_store(
         try:
             vector_store.health_check()
             return
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001
             last_error = error
 
             if attempt < attempts:

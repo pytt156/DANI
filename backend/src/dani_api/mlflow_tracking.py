@@ -2,8 +2,11 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 
 import mlflow
+import structlog
 
 from dani_api.config import settings
+
+logger = structlog.get_logger(__name__)
 
 
 def configure_mlflow() -> None:
@@ -24,14 +27,19 @@ def start_rag_run(
     retrieval_limit: int,
     score_threshold: float | None,
 ) -> Iterator[mlflow.ActiveRun | None]:
-    """Start an MLflow run for one DANI RAG request."""
+    """Start an optional MLflow run for one DANI RAG request."""
+
     if not settings.mlflow_enabled:
         yield None
         return
 
-    configure_mlflow()
+    run: mlflow.ActiveRun | None = None
 
-    with mlflow.start_run() as run:
+    try:
+        configure_mlflow()
+
+        run = mlflow.start_run()
+
         mlflow.log_params(
             {
                 "access_tier": access_tier,
@@ -52,7 +60,32 @@ def start_rag_run(
             }
         )
 
+    except Exception as error:  # noqa: BLE001
+        logger.warning(
+            "mlflow_run_start_failed",
+            error_type=type(error).__name__,
+        )
+
+        if run is not None:
+            try:
+                mlflow.end_run(status="FAILED")
+            except Exception:  # noqa: BLE001
+                logger.warning("mlflow_run_cleanup_failed")
+
+        yield None
+        return
+
+    try:
         yield run
+
+    finally:
+        try:
+            mlflow.end_run()
+        except Exception as error:  # noqa: BLE001
+            logger.warning(
+                "mlflow_run_end_failed",
+                error_type=type(error).__name__,
+            )
 
 
 def log_rag_metrics(
@@ -65,8 +98,12 @@ def log_rag_metrics(
     total_duration_ms: float,
     answer_length: int,
 ) -> None:
-    """Log RAG request metrics to the active MLflow run."""
+    """Log RAG request metrics when an MLflow run is available."""
+
     if not settings.mlflow_enabled:
+        return
+
+    if mlflow.active_run() is None:
         return
 
     metrics: dict[str, float] = {
@@ -81,4 +118,11 @@ def log_rag_metrics(
     if top_score is not None:
         metrics["top_score"] = top_score
 
-    mlflow.log_metrics(metrics)
+    try:
+        mlflow.log_metrics(metrics)
+
+    except Exception as error:  # noqa: BLE001
+        logger.warning(
+            "mlflow_metrics_log_failed",
+            error_type=type(error).__name__,
+        )

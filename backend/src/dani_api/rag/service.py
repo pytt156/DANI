@@ -4,8 +4,10 @@ from time import perf_counter
 
 import structlog
 from dani_api.access import AccessTier
+from dani_api.config import settings
 from dani_api.llm import LanguageModel
 from dani_api.mlflow_tracking import log_rag_metrics, start_rag_run
+from dani_api.prompts import NO_ANSWER_PREFIX
 from dani_api.rag.retrieval import (
     DEFAULT_RESULT_LIMIT,
     KnowledgeRetriever,
@@ -67,6 +69,12 @@ class RagService:
         if not normalized_question:
             raise ValueError("Question cannot be empty.")
 
+        effective_score_threshold = (
+            settings.retrieval_score_threshold
+            if score_threshold is None
+            else score_threshold
+        )
+
         request_started_at = perf_counter()
 
         logger.info(
@@ -74,7 +82,7 @@ class RagService:
             question_length=len(normalized_question),
             access_tier=tier.value,
             result_limit=limit,
-            score_threshold=score_threshold,
+            score_threshold=effective_score_threshold,
         )
 
         retrieval_started_at = perf_counter()
@@ -82,7 +90,7 @@ class RagService:
         sources = self.retriever.retrieve(
             query=normalized_question,
             limit=limit,
-            score_threshold=score_threshold,
+            score_threshold=effective_score_threshold,
         )
 
         retrieval_duration_ms = round(
@@ -102,6 +110,7 @@ class RagService:
                 result_count=0,
                 retrieval_duration_ms=retrieval_duration_ms,
                 duration_ms=total_duration_ms,
+                score_threshold=effective_score_threshold,
             )
 
             return RagAnswer(
@@ -114,6 +123,10 @@ class RagService:
 
         context = build_context(sources)
 
+        # Keep retrieval metadata before sources may be hidden from the response.
+        retrieved_source_count = len(sources)
+        top_score = max(source.score for source in sources)
+
         language_model = self.language_model or LanguageModel(tier=tier)
 
         with start_rag_run(
@@ -121,7 +134,7 @@ class RagService:
             provider=language_model.provider,
             model=language_model.model,
             retrieval_limit=limit,
-            score_threshold=score_threshold,
+            score_threshold=effective_score_threshold,
         ):
             llm_started_at = perf_counter()
 
@@ -135,6 +148,20 @@ class RagService:
                 2,
             )
 
+            if generated_answer.startswith(NO_ANSWER_PREFIX):
+                unsupported_answer = generated_answer.removeprefix(
+                    NO_ANSWER_PREFIX
+                ).strip()
+
+                if not unsupported_answer:
+                    unsupported_answer = (
+                        "I could not find enough relevant information "
+                        "in Daniela's knowledge base to answer that question."
+                    )
+
+                generated_answer = unsupported_answer
+                sources = []
+
             total_duration_ms = round(
                 (perf_counter() - request_started_at) * 1000,
                 2,
@@ -142,8 +169,8 @@ class RagService:
 
             log_rag_metrics(
                 question_length=len(normalized_question),
-                source_count=len(sources),
-                top_score=max(source.score for source in sources),
+                source_count=retrieved_source_count,
+                top_score=top_score,
                 retrieval_duration_ms=retrieval_duration_ms,
                 llm_duration_ms=llm_duration_ms,
                 total_duration_ms=total_duration_ms,
@@ -155,8 +182,9 @@ class RagService:
             access_tier=tier.value,
             provider=language_model.provider,
             model=language_model.model,
-            source_count=len(sources),
-            top_score=max(source.score for source in sources),
+            source_count=retrieved_source_count,
+            returned_source_count=len(sources),
+            top_score=top_score,
             retrieval_duration_ms=retrieval_duration_ms,
             llm_duration_ms=llm_duration_ms,
             duration_ms=total_duration_ms,
@@ -174,21 +202,27 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Ask a question using the DANI knowledge base."
     )
+
     parser.add_argument(
         "question",
         help="Question to answer.",
     )
+
     parser.add_argument(
         "--limit",
         type=int,
         default=DEFAULT_RESULT_LIMIT,
         help="Maximum number of retrieved knowledge chunks.",
     )
+
     parser.add_argument(
         "--score-threshold",
         type=float,
         default=None,
-        help="Optional minimum retrieval score.",
+        help=(
+            "Optional minimum retrieval score. "
+            "Uses the configured default when omitted."
+        ),
     )
 
     return parser

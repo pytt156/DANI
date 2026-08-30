@@ -2,6 +2,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 from dani_api.access import AccessTier
+from dani_api.config import settings
 from dani_api.rag.retrieval import RetrievalResult
 from dani_api.rag.service import RagService
 
@@ -54,7 +55,7 @@ def test_answer_returns_generated_answer_and_sources() -> None:
     retriever.retrieve.assert_called_once_with(
         query="What technologies does the example project use?",
         limit=5,
-        score_threshold=None,
+        score_threshold=settings.retrieval_score_threshold,
     )
 
     language_model.generate_answer.assert_called_once_with(

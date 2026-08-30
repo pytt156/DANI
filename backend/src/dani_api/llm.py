@@ -7,7 +7,7 @@ from openai import OpenAI
 
 from dani_api.access import AccessTier
 from dani_api.config import settings
-from dani_api.prompts import DEFAULT_SYSTEM_PROMPT
+from dani_api.prompts import DEFAULT_SYSTEM_PROMPT, GROUNDING_GUARD
 
 PROMPT_NAME = "dani-system-prompt"
 PROMPT_ALIAS = "production"
@@ -133,8 +133,7 @@ class LanguageModel:
         if not normalized_context:
             raise ValueError("Context cannot be empty.")
 
-        system_instructions = self._load_system_prompt()
-
+        system_instructions = f"{self._load_system_prompt()}{GROUNDING_GUARD}"
         response = self.client.responses.create(
             model=self.model,
             instructions=system_instructions,

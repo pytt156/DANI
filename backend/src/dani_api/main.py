@@ -85,7 +85,7 @@ def readiness_check(
         if point_count <= 0:
             raise RuntimeError("Knowledge collection is empty.")
 
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001
         response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
 
         logger.warning(

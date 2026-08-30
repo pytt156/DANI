@@ -2,6 +2,7 @@ import argparse
 from dataclasses import dataclass
 from typing import Any
 
+from dani_api.config import settings
 from dani_api.rag.embeddings import EmbeddingService
 from dani_api.rag.vector_store import VectorStore
 
@@ -49,7 +50,10 @@ def payload_optional_string(
     return value
 
 
-def payload_integer(payload: dict[str, Any], key: str) -> int:
+def payload_integer(
+    payload: dict[str, Any],
+    key: str,
+) -> int:
     """Read a required integer value from a Qdrant payload."""
     value = payload.get(key)
 
@@ -85,7 +89,9 @@ class KnowledgeRetriever:
         query_vector = self.embedding_service.embed_text(normalized_query)
 
         scored_points = self.vector_store.search(
-            query_vector=query_vector, limit=limit, score_threshold=score_threshold
+            query_vector=query_vector,
+            limit=limit,
+            score_threshold=score_threshold,
         )
 
         results: list[RetrievalResult] = []
@@ -101,8 +107,14 @@ class KnowledgeRetriever:
                     content=payload_string(payload, "content"),
                     source=payload_string(payload, "source"),
                     title=payload_string(payload, "title"),
-                    section=payload_optional_string(payload, "section"),
-                    chunk_index=payload_integer(payload, "chunk_index"),
+                    section=payload_optional_string(
+                        payload,
+                        "section",
+                    ),
+                    chunk_index=payload_integer(
+                        payload,
+                        "chunk_index",
+                    ),
                     score=float(point.score),
                 )
             )
@@ -113,18 +125,27 @@ class KnowledgeRetriever:
 def build_argument_parser() -> argparse.ArgumentParser:
     """Create the command-line argument parser."""
     parser = argparse.ArgumentParser(description="Search the DANI knowledge base")
-    parser.add_argument("query", help="Question or search text.")
+
+    parser.add_argument(
+        "query",
+        help="Question or search text.",
+    )
+
     parser.add_argument(
         "--limit",
         type=int,
         default=DEFAULT_RESULT_LIMIT,
         help="Maximum number of results.",
     )
+
     parser.add_argument(
         "--score-threshold",
         type=float,
         default=None,
-        help="Optional minimum similarity score.",
+        help=(
+            "Optional minimum similarity score. "
+            "Uses the configured default when omitted."
+        ),
     )
 
     return parser
@@ -132,13 +153,20 @@ def build_argument_parser() -> argparse.ArgumentParser:
 
 if __name__ == "__main__":
     arguments = build_argument_parser().parse_args()
+
+    effective_score_threshold = (
+        settings.retrieval_score_threshold
+        if arguments.score_threshold is None
+        else arguments.score_threshold
+    )
+
     retriever = KnowledgeRetriever()
 
     try:
         matches = retriever.retrieve(
             query=arguments.query,
             limit=arguments.limit,
-            score_threshold=arguments.score_threshold,
+            score_threshold=effective_score_threshold,
         )
     except Exception as error:
         raise SystemExit(f"Knowledge retrieval failed: {error}") from error
@@ -147,7 +175,11 @@ if __name__ == "__main__":
         print("No matching knowledge chunks found.")
         raise SystemExit(0)
 
-    print(f"Retrieved {len(matches)} knowledge chunks:\n")
+    print(
+        f"Retrieved {len(matches)} knowledge chunks "
+        f"with score threshold "
+        f"{effective_score_threshold:.4f}:\n"
+    )
 
     for position, match in enumerate(matches, start=1):
         print(f"{position}. {match.title} [score={match.score:.4f}]")

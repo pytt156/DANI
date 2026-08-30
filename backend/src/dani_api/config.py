@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Literal
 
-from pydantic import SecretStr
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -31,6 +31,11 @@ class Settings(BaseSettings):
 
     qdrant_url: str = "http://localhost:6333"
     qdrant_collection: str = "dani_knowledge"
+    retrieval_score_threshold: float = Field(
+        default=0.30,
+        ge=-1.0,
+        le=1.0,
+    )
 
     cors_origins: list[str] = ["http://localhost:5173"]
 
