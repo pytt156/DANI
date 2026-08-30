@@ -50,6 +50,24 @@ def build_context(
     return "\n\n".join(sections)
 
 
+def deduplicate_sources(
+    results: list[RetrievalResult],
+) -> list[RetrievalResult]:
+    """Keep only the highest-ranked result from each source file."""
+
+    unique_sources: list[RetrievalResult] = []
+    seen_sources: set[str] = set()
+
+    for result in results:
+        if result.source in seen_sources:
+            continue
+
+        seen_sources.add(result.source)
+        unique_sources.append(result)
+
+    return unique_sources
+
+
 def build_retrieval_query(
     question: str,
     history: Sequence[ConversationMessage],
@@ -194,6 +212,9 @@ class RagService:
 
                 generated_answer = unsupported_answer
                 sources = []
+
+            if sources:
+                sources = deduplicate_sources(sources)
 
             total_duration_ms = round(
                 (perf_counter() - request_started_at) * 1000,

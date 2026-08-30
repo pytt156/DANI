@@ -88,6 +88,61 @@ def test_answer_uses_history_for_retrieval_and_generation() -> None:
     )
 
 
+def test_answer_deduplicates_returned_sources() -> None:
+    sources = [
+        RetrievalResult(
+            content="First profile chunk.",
+            source="profile.md",
+            title="Profile",
+            section="Working Style",
+            chunk_index=1,
+            score=0.91,
+        ),
+        RetrievalResult(
+            content="Second profile chunk.",
+            source="profile.md",
+            title="Profile",
+            section="Teamwork",
+            chunk_index=2,
+            score=0.86,
+        ),
+        RetrievalResult(
+            content="Docker experience.",
+            source="skills.md",
+            title="Skills",
+            section="Docker",
+            chunk_index=3,
+            score=0.82,
+        ),
+    ]
+
+    retriever = Mock()
+    retriever.retrieve.return_value = sources
+
+    language_model = Mock()
+    language_model.generate_answer.return_value = "Generated answer."
+
+    service = RagService(
+        retriever=retriever,
+        language_model=language_model,
+    )
+
+    result = service.answer("Example question")
+
+    assert result.sources == [
+        sources[0],
+        sources[2],
+    ]
+
+    language_model.generate_answer.assert_called_once()
+
+    context = language_model.generate_answer.call_args.kwargs["context"]
+
+    assert "First profile chunk." in context
+    assert "Second profile chunk." in context
+    assert "Docker experience." in context
+
+
 def test_answer_returns_generated_answer_and_sources() -> None:
     source = RetrievalResult(
         content="Example project uses FastAPI.",
