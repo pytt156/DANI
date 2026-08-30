@@ -1,543 +1,536 @@
 # FAQ
 
-### Tell me about yourself.
+## Career
 
-I am studying to become an AI and MLOps Engineer at Nackademin after spending nearly 20 years in hospitality, retail and operational leadership.
+### Tell me about Daniela.
 
-My background includes several years as a Kitchen Manager with full responsibility for staff, budgets, workflows and daily operations. I changed careers because I wanted a broader intellectual challenge and a profession where learning and problem solving are central to the work.
+Daniela is studying MLOps Engineering at Nackademin.
 
-Today, I am particularly interested in building AI systems that are reliable, measurable and useful beyond the initial prototype.
+Before changing careers, she spent close to 20 years working in restaurants, hotels, food retail and operational management.
 
-### Why should we hire you?
+She is now focused on MLOps, LLMOps, applied AI and the engineering around AI systems.
 
-Because I bring more than technical education.
+### Why did Daniela change careers?
 
-I combine growing technical competence with many years of experience in leadership, responsibility, business operations and solving problems under pressure.
+She wanted a more challenging problem-solving environment and felt she had gone about as far as she wanted to go in hospitality.
 
-I am curious, self-directed and willing to question weak assumptions. I also understand that a technically impressive solution has little value unless it solves the right problem and works reliably in practice.
+She also wanted a career with more room to keep learning and better long-term earning potential.
 
-### What is your greatest strength?
+### Why MLOps?
 
-My greatest strength is my curiosity.
+Honestly, the programme looked like the hardest and broadest option.
 
-When I become interested in something, I find it difficult to accept that I do not understand it. I keep investigating until I can see both how the individual parts work and how they fit into the larger system.
+It covered programming, machine learning, infrastructure, deployment and operations, which meant there would be plenty to learn and several kinds of problems to solve.
 
-In a rapidly changing field such as AI, I think that willingness to keep learning is one of my most valuable qualities.
+### What kind of role is Daniela looking for?
 
-### What is your greatest weakness?
+She is looking for an LIA placement starting in February 2027.
 
-I can react negatively to structures that feel unnecessarily rigid or controlling.
+The most relevant areas are:
 
-I work best when I understand the reason behind a process and have some freedom to think independently. At the same time, I have learned that structure is often necessary for quality, reliability and collaboration.
+- MLOps
+- LLMOps
+- applied AI
+- backend development
+- AI infrastructure
+- model serving
 
-My challenge is therefore to distinguish between processes that genuinely support the work and restrictions that add little value, without dismissing structure simply because I would have chosen a different approach.
+The exact title matters less than getting to work with real systems and learn from experienced engineers.
 
-### Why are you changing careers?
+### When does Daniela graduate?
 
-After nearly 20 years in hospitality and food retail, I wanted a new direction that would challenge me intellectually and allow continuous learning to be part of my everyday work.
+Expected graduation is January 2028.
 
-I was not trying to erase my previous career. I wanted to apply what it taught me — leadership, communication, business awareness and problem solving — in a more technical environment.
+### Why should someone consider Daniela for LIA?
 
-Technology, and particularly AI and MLOps, gave me the combination of complexity, creativity and practical responsibility I was looking for.
+She is early in her technical career but not early in working life.
 
-### Why do you want to work with MLOps?
+She brings nearly 20 years of experience with responsibility, operations, people and solving problems under pressure, together with practical work in Python, AI applications, APIs, RAG, Docker and model serving.
 
-I like that MLOps covers more than building a model.
+She also tends to learn quickly once she has something real to build.
 
-It includes deployment, monitoring, evaluation, infrastructure, maintenance and continuous improvement. It also requires communication between developers, operations, product, management and users.
+### Is Daniela already an expert in MLOps?
 
-That combination suits me. I enjoy technical problem solving, but I also want to understand the wider system, connect different perspectives and make sure that the technology creates actual value.
+No.
 
-### Where do you see yourself in five years?
+She is a student building practical experience across several parts of MLOps and AI engineering.
 
-I want to have a strong technical foundation and be trusted with responsibility for AI systems throughout their lifecycle.
+She is comfortable with what she knows and fairly open about what she still needs to learn.
 
-I see myself working close to both technology and the wider organisation — monitoring systems, evaluating whether they behave as expected and identifying how they can become more reliable, efficient and useful.
+### Where does Daniela want to be in a few years?
 
-Over time, I would like to move towards roles involving AI strategy, product or business development without losing the practical technical connection.
+She wants a strong enough technical foundation to take responsibility for AI systems beyond the prototype stage.
 
-### How do you handle conflict in a team?
+Longer term, she is interested in the overlap between technical systems, product decisions and business needs.
 
-I prefer to address disagreements directly rather than allowing frustration to build quietly.
+## Work Style
 
-I try to separate the idea from the person, understand what each person is actually trying to achieve and bring the discussion back to the shared goal.
+### What is Daniela like to work with?
 
-I am comfortable challenging someone else's reasoning, but I also expect my own ideas to be challenged. To me, disagreement is not automatically conflict. It can be a useful part of reaching a better decision.
+Curious, practical and fairly independent.
 
-### What do you do when you do not know something?
+She likes understanding what she is working on, takes responsibility for her part and usually gets more interested once a problem becomes complicated.
 
-First, I try to define exactly what I do not understand.
+She also prefers teams where people can be serious about the work without being serious every second of the day.
 
-Then I break the problem into smaller parts, read the relevant documentation, test possible solutions and compare the result with what I expected.
+### Does Daniela prefer working alone or in a team?
 
-I ask questions when that is the fastest or most reliable way forward, but I do not expect someone else to do the thinking for me. Once I find an answer, I want to understand why it works rather than simply copying it.
+Both.
 
-### How do you respond to feedback?
+She likes having enough independence to figure things out herself, but she also likes collaborative projects and working with people who know things she does not.
 
-I try to turn feedback into a concrete change in how I work.
+### What happens when Daniela does not know something?
 
-As a manager, I learned that different people cannot be led using exactly the same communication, expectations or support. I adjusted my leadership by treating each person and situation individually.
+Usually some combination of:
 
-I also learned that when I lead a team, I am responsible for creating the conditions in which the team can succeed. That changed how I think about both accountability and leadership.
+1. work out what she actually does not understand
+2. read the documentation
+3. test something
+4. break something
+5. understand it better
+6. fix it
 
-### What type of workplace are you looking for?
+She asks for help when that is the sensible next step.
 
-I am looking for a company that is large enough to have mature systems, real resources and meaningful technical problems, but still small enough for an individual to make a visible contribution.
+### How does Daniela learn?
 
-I value trust, independent thinking, open communication and room for constructive disagreement.
+By building.
 
-I want to work somewhere that takes both technical quality and business value seriously.
+Theory makes more sense to her once she has something concrete to connect it to.
 
-### What motivates you?
+A small task can easily turn into a much larger investigation if she discovers another layer underneath it.
 
-Learning, exploring and being useful.
+### How does Daniela handle pressure?
 
-I am motivated when I can understand a difficult system, improve something that is not working well or contribute knowledge that other people genuinely need.
+Fairly calmly.
 
-I also like responsibility. Being trusted with something important tends to make me more engaged, not less.
+Years in kitchens and service environments made her used to several things needing attention at once.
 
-### How do you work under pressure?
+She normally works out what is urgent, handles that first and deals with the rest in order.
 
-I become calm and practical.
+### How does Daniela communicate?
 
-My previous career involved busy operational environments where problems had to be solved while customers were waiting and the rest of the work continued.
+Directly, but not aggressively.
 
-I focus on what is most important, make the best decision possible with the information available and deal with the less urgent issues afterwards.
+She prefers clear language and is comfortable saying when something is unclear.
 
-### What can teammates expect from you?
+Her previous jobs involved customers, employees, managers and suppliers, so she is used to adapting how she explains things to different people.
 
-They can expect me to ask questions, contribute ideas and challenge solutions that do not appear well justified.
+### Does Daniela like structure?
 
-I am usually driving, solution-oriented and willing to take responsibility when something is unclear or difficult.
+Yes, when it helps.
 
-They can also expect direct communication, a calm response when problems arise and a fair amount of sarcasm and banter once we know each other.
+She likes clear goals, sensible processes and knowing what needs to happen.
 
-### What role do you take in meetings?
+She is less enthusiastic about process that exists mainly because nobody remembers why it exists.
 
-I am usually the person asking questions and testing assumptions.
+### Does Daniela need a lot of supervision?
 
-I want to understand what decision we are making, why we are making it and what problem it is supposed to solve.
+No.
 
-I am unlikely to remain silent just because everyone else appears to agree, but I am not interested in arguing for its own sake. I challenge ideas to improve the result.
+She is used to taking responsibility and working independently.
 
-## Technical and Career Questions
+She does appreciate feedback, context and access to people with more experience when she is learning something new.
 
-### What interests you most about AI systems?
+### What is Daniela's biggest strength?
 
-I am most interested in what happens after the first successful demonstration.
+Curiosity is probably the most consistent one.
 
-How do we know the system actually works? How do we monitor it? What happens when the data or requirements change? How do we make it reproducible, maintainable and cost-effective?
+Once she wants to understand something, she tends to keep going until the pieces start fitting together.
 
-Building the first version is interesting, but understanding and improving its behaviour over time is what attracts me most.
+### What is a weakness Daniela is aware of?
 
-### What makes a good AI solution?
+She can spend too much time following interesting side questions.
 
-A good AI solution solves a real and clearly defined problem.
+That is useful when deeper understanding matters and less useful when the original task was supposed to take twenty minutes.
 
-It should be evaluated against meaningful goals, possible to monitor and sufficiently transparent for the organisation to understand its risks and limitations.
+She has become more aware of when "understanding it properly" needs a time limit.
 
-A complicated solution is not automatically better. The value comes from how well the technology supports the user and the business.
+### How does Daniela respond to feedback?
 
-### What have you enjoyed most in your education?
+Best when it is specific.
 
-Programming and deep learning have been my favourite areas so far.
+She is generally more interested in what should change than in defending the original version.
 
-I enjoy programming because it combines logic, creativity and immediate feedback. Deep learning was interesting because it gave me an initial understanding of how systems learn patterns rather than following only explicitly written rules.
+Her management experience also taught her that the same kind of feedback does not work equally well for everyone.
 
-The multi-agent systems course was the most difficult, but it also gave me the deepest understanding of generative AI and workflow design.
+## Technical
 
-### What have you learned from working with multi-agent systems?
+### What is Daniela strongest at technically?
 
-I learned that adding more agents does not automatically create a better system.
+Her strongest practical area is Python-based AI application development.
 
-Agents can divide responsibilities such as planning, execution and review, but they also introduce more complexity, latency, cost and opportunities for failure.
+She has built projects involving:
 
-The important question is not whether an agent-based workflow can be built, but whether it improves the result enough to justify that complexity.
+- FastAPI
+- RAG
+- LLMs
+- AI agents
+- vector search
+- model serving
+- Docker
+- MLflow
+- machine learning
+- deep learning
 
-## Quick Personal Questions
+She is also comfortable working in Linux and through the terminal.
+
+### What interests Daniela most about AI?
+
+The system around it.
+
+A model answering correctly once is not enough to keep her interested for very long.
+
+She wants to know how it is evaluated, deployed, monitored, updated and made reliable enough to use.
+
+### Does Daniela like frontend development?
+
+She can work with frontend code when a project needs an interface, but she does not position herself as a frontend developer.
+
+She has used Streamlit and has built her portfolio interface with React, TypeScript and CSS.
+
+Her main interest is still the backend, AI and MLOps side.
+
+### What has Daniela built with RAG?
+
+She has worked on several RAG-based systems.
+
+These include Wired-AI, Morpheus and DANI.
+
+Her work has covered document preparation, chunking, embeddings, vector databases, retrieval, grounding, source handling and answer generation.
+
+### Has Daniela worked with AI agents?
+
+Yes.
+
+She has built agent and multi-agent workflows with roles such as planning, execution, review and human approval.
+
+One of the main things she learned is that adding more agents is very easy.
+
+Making them worth the added complexity is the harder part.
+
+### What does Daniela think makes a good AI solution?
+
+It should solve an actual problem.
+
+It should also be possible to evaluate, maintain and understand well enough that people know when it is working and when it is not.
+
+More AI is not automatically better AI.
+
+### What happens after Daniela gets something working?
+
+Usually she starts noticing everything that could be better.
+
+This is productive in moderation.
+
+## Previous Career
+
+### What did Daniela do before tech?
+
+Most of her career was in hospitality, restaurants and food retail.
+
+Her roles included:
+
+- Bed and Breakfast Manager
+- Restaurant Manager
+- deli and fish-counter work
+- Garde Manger / Cold Kitchen Chef
+- Kitchen Manager
+
+### What did Daniela do as Kitchen Manager?
+
+Her responsibilities included:
+
+- staff
+- recruitment
+- onboarding
+- scheduling
+- salary administration
+- work environment
+- purchasing
+- suppliers
+- budgets
+- costs
+- food waste
+- sales
+- workflows
+- daily operations
+
+She worked both with the team and with the wider operation around it.
+
+### What from Daniela's old career is useful in tech?
+
+A lot of the non-technical part.
+
+She is used to:
+
+- responsibility
+- changing priorities
+- customers and users
+- making decisions with incomplete information
+- practical problem solving
+- balancing quality, time and cost
+- keeping work moving when something goes wrong
+
+The tools changed more than the working habits did.
+
+## Personal
+
+### What does Daniela do outside technology?
+
+A fairly unhelpful number of things.
+
+Current and recurring interests include:
+
+- sailing
+- hiking
+- camping
+- cold-water swimming
+- computer games
+- board games
+- Dungeons & Dragons
+- Magic: The Gathering
+- science fiction and fantasy
+- photography
+- gardening
+- renovation
+- music
+- food
+- restaurants
+- travelling
+
+New hobbies also appear without much warning.
 
 ### Cats or dogs?
 
 Cats.
 
-Daniela has a black cat named Pepsi who has been part of her life for many years. She likes dogs too, but she is fundamentally a cat person.
+Daniela has a black cat named Pepsi.
+
+She likes dogs too, but this is not a neutral contest.
 
 ### Coffee or tea?
 
 Coffee.
 
-Preferably before anyone expects a serious conversation.
+Preferably before anything requiring unnecessary optimism.
 
 ### Morning person or night owl?
 
 Morning person.
 
-Daniela wakes up early and is generally most focused and effective in the morning.
+She generally gets up early and does her best focused work earlier in the day.
 
 ### Sweet or savoury?
 
 Savoury.
 
-Starters, cheese, restaurant food and proper snacks are generally more interesting than dessert.
+Starters, cheese and proper snacks usually win.
 
 ### Starter or dessert?
 
 Starter.
 
-The beginning of the meal is usually more exciting than the end.
+The beginning of the meal has better odds.
 
 ### Beer, wine or cocktails?
 
-Beer and champagne.
+Beer and champagne are recurring favourites.
 
-They serve very different purposes, and Daniela sees no reason to choose only one.
+Different jobs.
 
 ### Summer, autumn, winter or spring?
 
 Autumn.
 
-It has better clothes, better food, darker evenings and a general atmosphere that suits her.
+Better clothes, darker evenings and food improves immediately.
 
-### City break or nature holiday?
+### City or nature?
 
 Both.
 
-Daniela enjoys restaurants, travelling and discovering cities, but she also likes sailing, camping, walking and hiking.
+She likes restaurants and cities, but also sailing, hiking and camping.
 
 ### Hotel or camping?
 
-Camping for the experience, hotel for the comfort.
+Camping for the experience.
 
-The ideal compromise may be a sailboat, which provides limited comfort together with a constant supply of practical problems.
+Hotel for having a functioning bathroom.
 
-### Cook at home or eat at a restaurant?
+A sailboat is somewhere in the middle while somehow also being less convenient than both.
 
-Eat at a restaurant when the purpose is enjoyment.
+### Cook at home or eat out?
 
-After nearly 20 years working professionally with food, Daniela is fully capable of cooking but appreciates being served for once.
+Eat out when the point is enjoyment.
 
-### Pizza or tacos?
-
-Tacos.
-
-They are more varied, more social and easier to adapt to everyone at the table.
-
-### Pineapple on pizza?
-
-Pineapple is acceptable, but goat cheese and pear is the superior pizza topping.
-
-Preferably with something salty or sharp enough to balance the sweetness.
+After spending most of her previous career working with food, being served has acquired some appeal.
 
 ### Books or films?
 
-Books, in theory.
+Books in theory.
 
-Daniela likes the idea of reading more than she actually likes sitting still long enough to finish a book.
+Daniela likes reading, but sitting still long enough to finish one competes badly with everything else she has decided to do.
 
-The same problem applies to films. She rarely watches films at the cinema because sitting quietly through the entire experience requires more patience than she naturally possesses.
-
-### Film or television series?
+### Film or television?
 
 Television series.
 
-Episodes are easier to divide into manageable pieces, and a long series provides more time for characters, worlds and unnecessary chronological analysis.
+More room for characters, world-building and unnecessary chronological analysis.
 
 ### Star Wars or Star Trek?
 
-Both, for different reasons.
+Both.
 
-Star Wars offers mythology, character arcs and a galaxy Daniela can analyse in unreasonable chronological detail.
+Star Wars is better for mythology, characters and absurd amounts of timeline research.
 
-Star Trek offers exploration, ideas and a more optimistic view of the future.
-
-Forcing her to choose will probably result in follow-up questions about which era, series and category are being compared.
+Star Trek has exploration, ideas and a generally less catastrophic outlook on the future.
 
 ### Marvel or DC?
 
 Marvel.
 
-### Subtitles or dubbed?
-
-Subtitles for adults.
-
-Swedish dubbing is useful when watching with the children.
-
 ### Dungeons & Dragons or Magic: The Gathering?
 
-Dungeons & Dragons.
+Dungeons & Dragons if forced to choose.
 
-Daniela enjoys both, but D&D is more interactive, social and creative. It creates a shared story rather than only a winner and a loser.
+Both are good, but D&D adds collaborative storytelling and more opportunities for plans to go wrong in interesting ways.
 
 ### Cooperative or competitive games?
 
-Cooperative.
+Usually cooperative.
 
-Daniela prefers the feeling of “us against the game.”
+She likes "us against the game."
 
-Competitive games can also be enjoyable, but mostly when she wins.
-
-### Do you play to win?
-
-Yes.
-
-She values the social experience, strategy and shared enjoyment.
-
-She also strongly prefers winning.
-
-### Board games or computer games?
-
-Both.
-
-Board games, role-playing games and card games are better when the social part matters.
-
-Computer games are better when Daniela wants to enter another world without first finding a group and coordinating everyone's calendars.
+She is also not opposed to winning.
 
 ### Sailboat or motorboat?
 
 Sailboat.
 
-A motorboat may be faster, but sailing involves more strategy, more systems and significantly more opportunities to wonder why something suddenly stopped working.
+More systems, more strategy and substantially more opportunities for something to stop behaving as expected.
 
 ### Plan everything or improvise?
 
-Plan enough to understand the goal, then improvise when reality inevitably ignores the plan.
+Plan enough to know the goal.
 
-### Instructions first or start building immediately?
+Then adjust when reality ignores the plan.
 
-Start building, then consult the instructions when something behaves unexpectedly.
+### Instructions first or start building?
 
-Daniela learns well through practical experimentation, although experience has taught her that documentation can prevent some entirely avoidable problems.
+Usually start building.
+
+Documentation often becomes very compelling shortly afterwards.
 
 ### Neat desk or organised chaos?
 
-The goal is a neat desk.
+The intended state is neat.
 
-The reality is usually organised chaos.
+The observed state varies.
 
-It is, however, still neater than her husband's desk.
+### Inbox zero or thousands unread?
 
-### Inbox zero or thousands of unread messages?
+Much closer to inbox zero.
 
-Inbox zero.
-
-Unread notifications, large badge numbers and thousands of open tabs create immediate stress.
-
-Messages should be read, handled and removed from sight.
+Unread notifications feel like tiny unfinished tasks.
 
 ### One browser tab or one hundred?
 
 As few as possible.
 
-A large collection of open tabs feels less like productivity and more like several unfinished obligations shouting at once.
+Too many tabs stop feeling like information and start feeling like administrative debt.
 
-### Paper calendar or digital calendar?
+### Paper or digital calendar?
 
-Paper calendar in theory, digital calendar in practice.
+Digital in practice.
 
-Daniela loves the idea of a beautiful paper planner, but a digital calendar has the significant advantage of actually reminding her that something exists.
+Paper planners are nicer.
 
-### Voice message or text message?
+Digital calendars have the unfair advantage of remembering things.
 
-Text message.
+### Voice message or text?
 
-Voice messages require the recipient to stop what they are doing, find a suitable place and listen at someone else's chosen pace.
+Text.
 
-Text can be scanned, searched and answered efficiently.
+It can be read when convenient, scanned quickly and searched later.
 
-### Call or send a message?
+### Call or message?
 
-Send a message unless a conversation is genuinely necessary.
-
-Daniela has a mild dislike of unnecessary phone calls.
-
-When calls are required professionally, however, she handles them confidently and professionally.
+Message unless an actual conversation is needed.
 
 ### Early or late?
 
 Early.
 
-Daniela functions best in the morning and prefers having time rather than arriving stressed.
+Being early is much less annoying than being stressed.
 
 ### Big party or small dinner?
 
-A big party for a small group.
+Usually a small guest list with more effort than the phrase "small dinner" suggests.
 
-Daniela enjoys making an occasion feel substantial: proper food, drinks, decorations, themes and a sense that someone has made an effort.
+Food, drinks and a reason to make an occasion out of it are all welcome.
 
-The guest list is usually fairly small, often fewer than ten people, but the event itself does not need to feel small.
-
-### Social butterfly or homebody?
+### Social or homebody?
 
 Both.
 
-Daniela is social and enjoys parties, restaurants, drinks and time with friends.
+Daniela likes people, dinners, restaurants and parties.
 
-She also values family time, home projects and disappearing into a new interest without speaking to anyone for several hours.
+She can also disappear happily into a project or hobby for several hours.
 
-### What is Daniela likely to talk about for far too long?
+### What topic can make Daniela talk for too long?
 
-AI systems, Star Wars chronology, sailing, a new project, the interpretation of a game rule or why the current solution is unnecessarily inefficient.
+A current project.
 
-### What topic should you never casually mention unless you have time?
+Other reliable options include:
 
-A problem she has not solved yet.
-
-Once her curiosity is activated, the original conversation may not survive.
-
-### What household issue does Daniela care about too much?
-
-Loading the dishwasher correctly.
-
-Every item has a place. The water needs to reach the correct surfaces. Random placement is not a personality difference; it is inefficient system design.
-
-### What is Daniela most likely to impulse-buy?
-
-Something connected to a current project, hobby or newly discovered interest.
-
-Possible categories include garden plants, boat equipment, Magic cards, tools, craft materials and supplies for something she has recently decided she can make herself.
+- AI systems
+- sailing
+- Star Wars chronology
+- game rules
+- a problem she has not solved yet
 
 ### Does Daniela have too many hobbies?
 
-Objectively, probably.
+There is evidence supporting this theory.
 
-Subjectively, no. She simply has many active areas of research.
+Daniela disputes the methodology.
 
 ### What would Daniela do with an unexpected free day?
 
-She would begin with an ambitious plan to rest.
+Probably begin with a plan to do very little.
 
-She would then start a project, research a problem, reorganise something or decide that part of the house, garden or boat urgently needs improvement.
+There is a reasonable chance this ends with a project.
 
-By the end of the day, she would be tired and confused about what happened to the resting.
+### What is Daniela's biggest nerd trait?
 
-### What is Daniela's ideal superpower?
+She does not always consume fictional universes normally.
 
-The ability to finish every hobby project she starts.
+Timelines, continuity and chronological viewing orders have been known to become separate research projects.
 
-A close alternative would be the ability to become a genuine expert in one subject instead of becoming a partial expert in one hundred different subjects.
+### What kind of humour does Daniela have?
 
-### Would Daniela survive a zombie apocalypse?
+Dry, sarcastic and playful.
 
-Probably.
+Banter is good once everyone knows each other well enough for it to actually be banter.
 
-She remains calm during operational chaos, solves practical problems and is comfortable organising people.
+### What music does Daniela listen to?
 
-Her long-term survival would depend on whether the group tolerated detailed questions about why its current zombie-defence process was so inefficient.
+The range is fairly wide.
 
-### What is her alignment?
+It includes black metal, death metal, French indie and synthwave.
 
-Chaotic good with strong opinions about process improvement.
+### What would a good free Saturday look like?
 
-### What is her biggest nerd trait?
+Family, the boat, a walk, camping or some project at home.
 
-She does not simply watch fictional universes.
+Good food, drinks and friends later would not make it worse.
 
-She investigates timelines, continuity, character histories and the correct chronological order in which every film, series and individual episode should be watched.
+### What is Daniela likely to impulse-buy?
 
-### What is the fastest way to annoy Daniela?
+Something connected to whatever she became interested in recently.
 
-Use an inefficient system, refuse to explain why and respond to every question with:
+Past categories make hobbies look less like hobbies and more like temporary procurement departments.
 
-“That is just how we have always done it.”
+### What is Daniela like when something becomes a new interest?
 
-### What is the fastest way to win her over?
-
-Be curious, competent and funny.
-
-Explain your reasoning, tolerate direct questions and do not be afraid of friendly banter.
-
-Good food and champagne will not hurt.
-
-### What would your teammates tease you about?
-
-Probably that I cannot leave a weak assumption alone.
-
-If someone says, “That is just how we do it,” there is a good chance I will ask why — and then ask at least two follow-up questions.
-
-They would probably also mention the sarcasm.
-
-### What kind of task makes you lose track of time?
-
-Anything that turns into a rabbit hole.
-
-It can begin with a small technical problem, a historical detail in Star Wars or figuring out why something in the house, garden or boat is not working as expected.
-
-Once I become curious, I want to understand the complete system rather than only finding the quickest answer.
-
-### If your working style were a game role, what would it be?
-
-A strategist with support abilities and an occasional urge to take over the mission.
-
-I like understanding the whole map, identifying what is blocking the group and helping people perform well together.
-
-I do not need to be the formal leader, but I have difficulty watching a team remain stuck without trying to move it forward.
-
-### What happens when Daniela joins a meeting?
-
-There will probably be questions.
-
-I will want to know what we are deciding, why it matters and whether the suggested solution addresses the actual problem.
-
-There may also be sarcasm, but usually only after the meeting has become comfortable enough to survive it.
-
-### Coffee, tea or energy drink?
-
-Coffee.
-
-### What is a perfect free Saturday?
-
-Time with my family, preferably involving the boat, a walk, camping or some practical project at home or in the garden.
-
-Later, good food, drinks and friends would make it even better.
-
-### What do you do outside technology?
-
-I sail, play computer games, board games and card games, and watch far too much science fiction.
-
-I particularly enjoy Star Wars, Star Trek, Marvel and British game shows.
-
-I also spend time with my family, camp, walk, renovate, work in the garden and enjoy restaurants and drinks with friends.
-
-### What kind of humour do you have?
-
-Playful, sarcastic and based heavily on banter.
-
-I like people who can take the work seriously without acting serious every second of the day.
-
-### Describe a difficult situation you handled.
-
-After returning from a long period of parental leave, I struggled with feeling relevant and visible in a demanding and male-dominated kitchen environment.
-
-Rather than accepting that position, I took time to understand the organisation, identify where I could contribute and consider what kind of responsibility I wanted.
-
-I demonstrated that I could combine long-term improvements with immediate operational problem solving. I proposed concrete ways to improve workflows and efficiency, while also remaining calm and capable when something had to be solved immediately.
-
-Over time, I worked my way from a cold kitchen role into the position of Kitchen Manager.
-
-The experience taught me that progress is not always about being the loudest person in the room. It can also come from consistency, loyalty, understanding the operation and proving that you can solve both today's crisis and tomorrow's structural problem.
-
-### What fictional universe would you choose to live in?
-
-I would choose an early period in the Star Wars universe, before the Empire, before the Clone Wars and while there was still relative peace between the planets.
-
-I like the idea of a galaxy where travel between worlds is normal, the Jedi are still present and the future has not yet become quite so catastrophically complicated.
-
-Preferably somewhere far away from any political crisis that is about to become a trilogy.
-
-### What is something people are usually surprised to learn about you?
-
-There are several possible answers.
-
-I play Dungeons & Dragons and Magic: The Gathering. I played the cello and sang in a choir as a child.
-
-I have also travelled to more than 35 countries, including solo travel and several longer train journeys through Europe.
-
-Possibly the most revealing answer is that, as a child, I wanted to become a cleaner at Stockholm Central Station because I thought it was far too dirty and someone clearly needed to fix it.
-
-### What is one thing you take very seriously and one thing you refuse to take seriously?
-
-I take loading the dishwasher far too seriously.
-
-There is a correct place for everything, and efficiency matters.
-
-I refuse to take unnecessary workplace formality seriously. People can be competent, responsible and professional without pretending that every meeting is a state ceremony.
+Moderation is not always the first phase.

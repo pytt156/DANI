@@ -1,411 +1,436 @@
 # Profile
 
-## About Daniela
+## Basic Profile
 
-Daniela is studying to become an AI and MLOps Engineer at Nackademin.
+Daniela is studying MLOps Engineering at Nackademin.
 
-She is curious, practical and motivated by learning how things work. She enjoys problems that require both structure and experimentation, especially when several technical and human parts need to come together into a functioning whole.
+Expected graduation: January 2028.
 
-Her interest in MLOps is not limited to machine learning models. What attracts her is the wider system around them: development, infrastructure, deployment, collaboration, delivery and the connection between technical work and real business needs.
+She is looking for an LIA placement starting in February 2027.
 
-She likes the idea of being a central link between different parts of an organisation — developers, operations, customers, managers and product stakeholders — and helping turn technical work into something that can be delivered, maintained and used.
+Before starting her technical education, she spent close to 20 years working in restaurants, hotels, delicatessens and other operational roles.
 
-## Background
+Her most recent full-time role was Kitchen Manager at Erssons Fruängen.
 
-Before moving into technology, Daniela spent nearly 20 years working in restaurants, hotels, delicatessens and other customer-facing operational environments.
+## Current Direction
 
-That background taught her how to work in situations where priorities change quickly, several problems appear at once and decisions still need to be made.
+Daniela is moving into MLOps, LLMOps and applied AI engineering.
 
-She developed experience in:
+She is most interested in the parts around the model:
 
-* solving practical problems
-* staying calm under pressure
-* communicating with different kinds of people
-* taking responsibility
-* prioritising tasks
-* adapting when plans change
-* keeping work moving during stressful situations
+- backend services
+- APIs
+- deployment
+- infrastructure
+- containers
+- retrieval
+- evaluation
+- monitoring
+- reliability
+- CI/CD
+- production behaviour
 
-Her previous work was social, practical and operational. It required her to understand both people and processes, often while working under time pressure.
+She likes projects where several parts need to work together.
 
-These experiences influence how she approaches technology today. She is interested not only in whether a technical solution works, but also in how it fits into a larger organisation, who depends on it and what is required to make it useful in practice.
+A notebook with a working model is useful. She is more interested once that model has to become an actual system.
 
-## Why Daniela Chose Technology
+## Why Technology
 
-Daniela chose technology because she wanted to change direction in her professional life.
+Daniela changed careers because she wanted a more challenging problem-solving environment in her everyday work.
 
-After many years in the same broad industry, she wanted to move into an area where learning, exploration and development could be a larger part of her everyday work.
+After nearly 20 years in hospitality and food retail, she also felt that she had learned most of what that career could teach her and had gone about as far as she wanted to go in it.
 
-Technology offered the opportunity to begin again without discarding the experience she had already built.
-
-She could bring her ability to solve problems, communicate, coordinate and take responsibility into a field where she would also be challenged to learn completely new ways of thinking.
-
-AI became especially interesting because it is still developing rapidly. There is always another tool, method, architectural decision or problem to investigate.
-
-For Daniela, that creates a type of work where curiosity is useful rather than distracting.
+A technical career offered more room to keep learning, more complex problems to work on and, realistically, better long-term earning potential.
 
 ## Why MLOps
 
-What Daniela finds interesting about MLOps is the combination of technology, problem solving and coordination.
+Daniela chose the MLOps programme partly because it looked like the hardest and broadest option.
 
-A machine learning model is only one part of a much larger system. Someone must consider how the model is developed, tested, packaged, deployed, monitored, updated and connected to the rest of the organisation.
+It covered programming, machine learning, infrastructure, deployment and operations rather than focusing on only one part of the stack.
 
-That wider responsibility is what appeals to her.
-
-She is interested in the point where different areas meet:
-
-* machine learning and software development
-* development and operations
-* prototypes and production systems
-* technical teams and business needs
-* developers and end users
-* experimentation and reliable delivery
-
-Daniela likes roles where she can understand the larger picture rather than only one isolated component.
-
-She is drawn to the idea of being the person who helps different specialists understand one another, identifies what is preventing delivery and makes sure that the complete system can move forward.
-
-This resembles parts of her earlier working life. In restaurants, hotels and other operational environments, the work depended on many people, tasks and decisions coming together at the right time.
-
-MLOps offers a more technical version of that kind of responsibility.
-
-## Professional Interests
-
-Daniela is especially interested in applied AI and the engineering required to make AI systems usable.
-
-Her current interests include:
-
-* MLOps and LLMOps
-* AI application development
-* large language models
-* retrieval-augmented generation
-* AI agents and multi-agent systems
-* backend development
-* APIs
-* vector databases and semantic search
-* containerisation
-* cloud infrastructure
-* deployment
-* automated testing
-* monitoring and observability
-* evaluation of AI systems
-
-She enjoys building projects where several of these areas are combined.
-
-She is less interested in creating an isolated notebook that demonstrates a model and more interested in understanding how that model or AI component becomes part of a complete application.
+That suited what she was looking for: a field with a lot left to learn and problems that do not stop at the first working model.
 
 ## How Daniela Learns
 
-Daniela learns best by building something real.
+Daniela learns best by building.
 
-She prefers to begin with a problem, create an initial version and then investigate the parts she does not yet understand.
+Her usual approach is roughly:
 
-Her process often looks like this:
+1. understand what she is trying to make
+2. build the simplest version that works
+3. test it
+4. notice what she does not understand
+5. read documentation and investigate
+6. change the implementation
+7. repeat
 
-1. understand what the system is supposed to achieve
-2. break the problem into smaller parts
-3. build a simple working version
-4. test how it behaves
-5. identify weaknesses or missing knowledge
-6. improve the structure
-7. document what she has learned
+She does not usually wait until she understands every detail before starting.
 
-She does not need to understand every detail before beginning. She is comfortable starting with partial knowledge and developing a deeper understanding while working.
+Practical work tends to make the theory easier to understand.
 
-She often becomes more interested as a project grows. A task that begins with one technical question can lead her into architecture, infrastructure, user experience, evaluation or deployment.
-
-This is one reason she enjoys AI and MLOps: the work naturally connects many areas.
+She often starts with one question and ends up investigating several connected parts of the system.
 
 ## How Daniela Works
 
-Daniela tends to look at both details and the larger context.
+Daniela likes knowing why something works.
 
-She wants to understand the code and technical choices, but she also asks questions such as:
+If she is using a tool, library or design choice, she usually wants more than instructions for making it run.
 
-* Who will use this?
-* What problem does it solve?
-* How will it be deployed?
-* What happens when it fails?
-* How will another developer understand it?
-* How do we know whether it works well?
-* What does the organisation need from the system?
+She wants enough understanding to know:
 
-She is practical and prefers progress over unnecessary perfection.
+- what it is doing
+- why it is needed
+- what could break
+- what assumptions it depends on
+- whether there is a simpler option
 
-At the same time, she wants to understand why something works instead of simply copying a solution.
+She is practical about implementation.
 
-She is comfortable asking questions, testing alternatives and revising her approach when new information appears.
+Getting a working version is usually more useful to her than trying to design the perfect version before anything exists.
 
-## Strengths
+Once it works, she is likely to start finding things she wants to improve.
 
-### Problem Solving
+## Problem Solving
 
-Daniela has extensive experience dealing with problems that must be handled immediately.
+Daniela is comfortable working through problems without having the full answer at the beginning.
 
-She is used to assessing a situation, deciding what matters most and taking the next reasonable action even when all information is not available.
+She usually breaks the problem into smaller parts and tries to identify what is actually blocking progress.
 
-### Coordination
+If something fails, she tends to test, inspect logs, change one thing at a time and work backwards from the behaviour she can see.
 
-She naturally notices how different tasks and people depend on one another.
+Her background in service and kitchen operations also made her used to dealing with problems while other work is still happening.
 
-This makes her interested in roles where she can connect technical work, delivery and organisational needs.
+She is generally calm when several things need attention at once.
 
-### Communication
+## In a Team
 
-Daniela has spent much of her professional life communicating with customers, colleagues and managers.
+Daniela is comfortable working independently but likes collaborative projects.
 
-She understands that the same information often needs to be explained differently depending on who is receiving it.
+She usually takes responsibility for her own part without needing every next step assigned.
 
-### Responsibility
+If a project becomes unclear or gets stuck, she may help organise the work or suggest a next step.
 
-She is comfortable taking ownership of a task and following it through.
+She does not need to lead everything.
 
-Her previous work required reliability, judgement and the ability to continue functioning during busy or stressful situations.
+She likes working with people who know things she does not and who are willing to explain their reasoning.
 
-### Curiosity
+She is also comfortable saying when she does not understand something.
 
-Daniela is motivated by learning and exploration.
+## Communication
 
-She enjoys discovering how systems work, testing new tools and following technical questions beyond their most immediate answer.
+Daniela prefers fairly direct and informal communication.
 
-### Practical Perspective
+She has worked with customers, staff, managers and suppliers for many years and is used to adjusting how she explains something depending on who she is talking to.
 
-She evaluates technology by what it can actually achieve.
+She would rather ask for clarification than quietly guess what someone meant.
 
-She cares about technical quality, but also about whether the system is useful, maintainable and possible to deliver.
+She likes teams where people can discuss different ideas without treating disagreement as a personal problem.
 
-## Life Outside Technology
+This is not a major part of her professional identity. It is simply how she prefers to work.
 
-Daniela's interests outside technology are varied, but many of them share the same qualities she enjoys in technical work: exploration, problem solving, strategy and creating something tangible.
+## Previous Career
 
-### Sailing
+Daniela worked in hospitality, restaurants and food retail from 2008 to 2025.
 
-Daniela sails and enjoys both the practical and strategic parts of being on a boat.
+Her roles included:
 
-Sailing involves planning, weather, navigation, technical systems and constant adaptation to changing conditions. It also requires calm decision-making when reality does not match the original plan.
+- Bed and Breakfast Manager
+- Restaurant Manager
+- delicatessen and fish-counter work
+- Garde Manger / Cold Kitchen Chef
+- Kitchen Manager
 
-### Games
+Her work involved both customer-facing and operational responsibilities.
 
-She plays computer games, board games and card games.
+As Kitchen Manager she worked with:
 
-She enjoys understanding rules, systems and strategies, as well as the social side of playing with other people.
+- staff
+- recruitment
+- onboarding
+- scheduling
+- salary administration
+- work environment
+- purchasing
+- suppliers
+- budgets
+- costs
+- food waste
+- sales
+- daily operations
+- workflow improvements
 
-### Film and Television
+She had responsibility for both people and the practical operation.
 
-Daniela watches a wide range of films and television series.
+## What Transfers From Her Previous Career
 
-Some of her favourites include:
+Daniela is new to the tech industry, but not new to working life.
 
-* Star Wars
-* Star Trek
-* Marvel
-* British game shows
+Her previous jobs gave her experience with:
 
-She enjoys large fictional universes, character-driven stories and programmes built around knowledge, humour or problem solving.
+- taking responsibility
+- prioritising under pressure
+- communicating with different people
+- solving practical problems
+- making decisions with incomplete information
+- keeping track of several moving parts
+- balancing quality, time and cost
+- dealing with changing plans
+- understanding customer needs
 
-### Family
+She does not see her previous career as unrelated to MLOps.
 
-Daniela spends much of her free time with her family.
+The technical tools are new. A lot of the working habits are not.
 
-Family is an important part of her life, and she values activities that can be experienced together.
+## Technical Interests
 
-### Nature and Travel
+Daniela is currently interested in:
 
-She enjoys camping, walking and hiking.
+- MLOps
+- LLMOps
+- applied AI
+- generative AI
+- RAG
+- AI agents
+- model serving
+- FastAPI
+- backend architecture
+- vector databases
+- Docker
+- cloud deployment
+- testing
+- CI/CD
+- monitoring
+- observability
+- AI evaluation
+- system reliability
 
-These activities give her a chance to explore, spend time outdoors and step away from everyday routines.
+She especially likes projects that include more than one of these areas.
 
-### Home and Garden Projects
+## Current Technical Level
 
-Daniela enjoys renovating, repairing things and working in the garden.
+Daniela is still early in her technical career.
 
-She likes projects where she can see a concrete result and where planning, creativity and practical work come together.
+She does not claim expert-level knowledge in every tool she has used.
 
-### Food and Friends
+Her strongest practical area is Python-based AI application development.
 
-She also enjoys eating at restaurants and having drinks with friends.
+She has built projects involving:
 
-After many years working around food and hospitality, restaurants remain something she appreciates — now from the other side of the table.
+- machine learning
+- deep learning
+- FastAPI
+- Streamlit
+- RAG
+- vector search
+- LLMs
+- agents
+- Docker
+- cloud deployment
+- MLflow
+- model serving
 
-## What Daniela Is Developing
+She is comfortable with Linux, Git and terminal-based development.
 
-Daniela is still at the beginning of her technical career and does not present herself as an expert in every technology she has used.
+## Currently Developing
 
-She is actively developing deeper knowledge in:
+Daniela is actively learning more about:
 
-* production-ready AI systems
-* cloud infrastructure
-* CI/CD
-* deployment
-* automated testing
-* monitoring
-* LLM evaluation
-* system design
-* security
-* reliability
-* collaboration in technical teams
+- production backend architecture
+- automated testing
+- CI/CD
+- cloud infrastructure
+- monitoring
+- observability
+- security
+- Kubernetes
+- infrastructure as code
+- scalable deployment
+- production AI evaluation
+- reliability
 
-She sees her current stage as a period of active development.
-
-Her goal is not to collect as many tools as possible, but to understand how the tools connect and when they should be used.
+These are developing areas, not claims of expertise.
 
 ## What Daniela Is Looking For
 
-Daniela is looking for an LIA placement and future work where she can continue developing within AI, MLOps or related backend and infrastructure roles.
+Daniela is looking for an LIA placement beginning in February 2027.
 
-She is particularly interested in an environment where she can:
+She is interested in MLOps, LLMOps, applied AI and related backend or infrastructure work.
 
-* contribute to real technical projects
-* work with applied AI or machine learning systems
-* learn from experienced developers and engineers
-* understand how systems are moved into production
-* take part in technical and organisational discussions
-* work across team boundaries
-* gradually take greater responsibility
+She would like an environment where she can:
 
-She would fit well in a role where technical development is connected to real users, customers or business needs.
+- work on real systems
+- learn from experienced engineers
+- contribute code
+- see how things are deployed
+- see how production systems are monitored and maintained
+- work with AI beyond a notebook or demo
+- gradually take more responsibility
 
-She is especially interested in organisations where MLOps is not treated as only infrastructure, but as the connection between experimentation, software engineering and reliable delivery.
+The exact title matters less than the kind of work.
 
-## What Daniela Brings to a Team
+## Work Environment
 
-Daniela brings a combination of technical curiosity and long professional experience.
+Daniela works best with some independence and clear goals.
 
-She may be relatively new to the technology industry, but she is not new to working, responsibility or collaboration.
+She likes understanding why a task matters and having enough room to work out how to solve it.
 
-She brings experience from environments where:
+She does not need constant supervision.
 
-* customers have immediate expectations
-* teams must communicate clearly
-* plans change
-* mistakes have practical consequences
-* priorities compete
-* someone must remain calm and solve the problem
+She does appreciate feedback, technical discussion and people who are willing to explain how they approach a problem.
 
-She combines this background with a growing technical foundation in AI, backend development and MLOps.
+She prefers practical environments over overly formal ones.
 
-She is willing to ask questions, investigate unfamiliar areas and take responsibility for understanding how her work affects the larger system.
+## Under Pressure
 
-## Personal Perspective
+Daniela spent many years working in environments where stopping everything until a problem was fully analysed was not an option.
 
-Daniela does not see herself as someone who only wants to sit with one narrow technical task.
+When several things happen at once, she tends to prioritise:
 
-She wants to understand how things connect.
+1. what is urgent
+2. what affects other people or systems
+3. what can wait
 
-That may mean understanding how an AI model receives its data, how an API exposes the result, how the application is deployed, how the customer experiences it and how the team knows whether it is working correctly.
+She generally becomes practical rather than panicked.
 
-This is what makes MLOps appealing to her.
+Once the immediate problem is handled, she is more interested in why it happened and whether it can be prevented next time.
 
-It combines technology with coordination, delivery, communication and continuous improvement.
+## Strengths
 
-Daniela wants to build a career where she can remain curious, learn new things and gradually become someone others trust to understand both the technical system and the wider context around it.
+### Curiosity
 
+Daniela likes understanding things properly.
 
-## Daniela as a Person and Teammate
+She can spend a lot of time following a technical question once it becomes interesting.
 
-Daniela is social, calm and easy to talk to, but she is not passive.
+### Practicality
 
-In a team, she is often one of the people who pushes the work forward. She notices when something is unclear, inefficient or unnecessarily complicated and is usually willing to say so.
+She prefers useful solutions over complicated ones that only look impressive.
 
-She is critical in a constructive sense. She does not challenge ideas simply to argue, but because she wants to understand whether the proposed solution is actually the best one.
+### Responsibility
 
-Her instinct is often to ask:
+She is used to being responsible for work that affects other people.
 
-* Why are we doing it this way?
-* What problem are we really trying to solve?
-* Is there a simpler approach?
-* What are we missing?
-* What happens if this does not work?
-* Could we build this differently?
+### Learning
 
-She is solution-oriented and does not enjoy spending too long discussing a problem without moving towards a concrete next step.
+She is comfortable entering areas she does not know yet and figuring them out.
 
-When something is not working, she tends to focus less on blame and more on what can be changed.
+### Communication
 
-## Role in a Team
+She has long experience communicating with people with different roles and levels of knowledge.
 
-Daniela naturally takes a driving role, particularly when a group lacks direction or momentum.
+### Systems Thinking
 
-She is comfortable:
+She often becomes interested in how separate pieces affect the whole system.
 
-* taking initiative
-* suggesting alternative approaches
-* organising unclear work
-* identifying practical next steps
-* connecting different ideas
-* helping a discussion move towards a decision
+## Personality at Work
 
-She does not necessarily need to be the formal leader, but she often becomes one of the people who keeps track of the bigger picture and makes sure the group continues moving.
+Daniela is social and generally easy to talk to.
 
-At the same time, she values input from people with different expertise. She enjoys working with people who are willing to explain their reasoning, challenge her ideas and improve the solution together.
+She likes doing good work, but does not think work needs to feel formal all the time.
 
-She works best in teams where disagreement is not treated as conflict and where people can question ideas without making the discussion personal.
+Her humour is usually dry, sarcastic and informal once she knows people.
 
-## In Meetings
+She likes banter.
 
-In meetings, Daniela is engaged and vocal.
+She also likes people who can take a problem seriously without taking themselves seriously.
 
-She asks questions, tests assumptions and challenges ideas that appear unclear, weakly justified or disconnected from the actual goal.
+## Things That Describe Daniela Better Than "Challenging"
 
-She is unlikely to remain silent merely because everyone else appears to agree.
+Daniela is:
 
-If she believes that an important issue is being overlooked, she will usually bring it up.
+- curious
+- practical
+- independent
+- responsible
+- engaged
+- calm under pressure
+- interested in how things connect
+- comfortable asking when something is unclear
+- willing to change direction when something does not work
 
-Her questions may be direct, but the purpose is normally to improve the decision, uncover risks or make sure the group understands what it is agreeing to.
+Most of the time, she just wants enough understanding to do the work properly.
 
-She appreciates meetings that have a clear purpose and lead to decisions, responsibilities or next steps.
+## Outside Technology
 
-Long discussions without a clear outcome can frustrate her, particularly when the group is avoiding the central issue.
+Daniela has a lot of interests.
 
-## Communication Style
+She likes both outdoor activities and extremely indoor activities.
 
-Daniela communicates openly and directly.
+Her interests include:
 
-She prefers clear language over unnecessary formality and usually says what she thinks rather than relying on hints.
+- sailing
+- hiking
+- camping
+- cold-water swimming
+- computer games
+- board games
+- Dungeons & Dragons
+- Magic: The Gathering
+- science fiction
+- fantasy
+- photography
+- gardening
+- renovation
+- practical DIY projects
+- music
+- food
+- restaurants
+- travelling
 
-She can discuss serious topics, but she also likes communication to feel human rather than overly polished or corporate.
+She also tends to develop new interests faster than old ones disappear.
 
-She is comfortable talking to different kinds of people and adapts how she explains something depending on whether she is speaking with a developer, customer, colleague or manager.
+## Sailing
 
-Her background in hospitality has made her attentive to tone, reactions and group dynamics. She can often sense when someone is confused, uncomfortable or not being heard, even if they do not say it directly.
+Daniela sails.
 
-## Humour and Social Style
+She likes the mix of planning, weather, navigation, technical systems and adapting when conditions change.
 
-Daniela is playful and enjoys humour as part of everyday collaboration.
+She is interested in understanding how the boat works, not only in getting from one place to another.
 
-Her humour is often:
+## Games
 
-* sarcastic
-* teasing
-* quick
-* informal
-* based on banter
+Daniela plays computer games, board games, role-playing games and card games.
 
-She enjoys teams where people can joke with one another, as long as the humour is mutual and the environment remains respectful.
+She likes strategy, systems and cooperative games.
 
-She is not particularly drawn to an overly stiff workplace culture. She prefers teams where people can be competent and serious about the work without behaving seriously every minute of the day.
+She also prefers winning, which is compatible with enjoying the social experience despite what some people may claim.
 
-Humour helps her build relationships, reduce tension and make demanding work more enjoyable.
+## Science Fiction and Fantasy
 
-## What Colleagues Can Expect
+Daniela likes Star Wars, Star Trek, Marvel and other science-fiction and fantasy settings.
 
-People working with Daniela can expect her to:
+She has spent more time thinking about Star Wars chronology than was strictly required.
 
-* ask questions
-* challenge weak assumptions
-* suggest new approaches
-* contribute ideas
-* take initiative
-* look for practical solutions
-* communicate openly
-* remain calm when problems arise
-* use humour to create a relaxed atmosphere
-* care about whether the team is actually moving forward
+## Music
 
-They can also expect her to be honest when she does not understand something.
+Daniela listens to a fairly wide range of music.
 
-She would rather ask a direct question than pretend to understand and allow a mistake to grow.
+Her taste includes black metal, death metal, French indie and synthwave.
 
-Daniela is most effective in environments where curiosity, initiative and constructive disagreement are appreciated.
+## Home and Projects
 
-She is not someone who wants to complete tasks without understanding their purpose. She wants to know how the work fits together, why decisions are being made and whether there is a better way to reach the goal.
+Daniela likes renovating, gardening, repairing things and starting practical projects.
+
+She often enjoys the research and problem-solving part as much as the finished result.
+
+A small home project can occasionally develop requirements that were not present in the original scope.
+
+## Food and Hospitality
+
+Daniela still likes food, restaurants and drinks even after spending most of her previous career working around them.
+
+She prefers being on the customer side now.
+
+## Family
+
+Daniela spends a large part of her free time with her family.
+
+Family life, projects, hobbies and technical interests all compete for roughly the same finite number of hours.
+
+## Short Version
+
+Daniela is changing careers from hospitality and operational management into MLOps.
+
+She likes building things, understanding how they work and following them past the point where the first demo succeeds.
+
+She has nearly 20 years of experience solving problems, taking responsibility and working with people.
