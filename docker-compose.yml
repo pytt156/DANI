@@ -9,7 +9,9 @@ services:
   backend:
     build:
       context: ./backend
+
     container_name: dani-backend
+
     environment:
       ENVIRONMENT: production
       LOG_LEVEL: INFO
@@ -41,6 +43,30 @@ services:
       - qdrant
 
     restart: unless-stopped
+
+  ingest:
+    build:
+      context: ./backend
+
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_COLLECTION: dani_knowledge
+
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+
+    volumes:
+      - ./knowledge:/knowledge:ro
+
+    depends_on:
+      - qdrant
+
+    command: [ "python", "-m", "dani_api.rag.ingest" ]
+
+    profiles:
+      - tools
+
+    restart: "no"
 
 volumes:
   qdrant_data:
