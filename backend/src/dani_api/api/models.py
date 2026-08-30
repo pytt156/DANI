@@ -1,7 +1,7 @@
 from typing import Literal
 
 from dani_api.access import AccessTier
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class ChatHistoryMessage(BaseModel):
@@ -28,6 +28,18 @@ class ChatRequest(BaseModel):
         default_factory=list,
         max_length=8,
     )
+
+    @field_validator("message")
+    @classmethod
+    def validate_message(cls, value: str) -> str:
+        """Reject whitespace-only questions and normalize surrounding whitespace."""
+
+        normalized = value.strip()
+
+        if not normalized:
+            raise ValueError("Message cannot be empty.")
+
+        return normalized
 
 
 class SourceResponse(BaseModel):

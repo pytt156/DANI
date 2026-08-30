@@ -29,7 +29,11 @@ class EmbeddingService:
                 "OPENAI_API_KEY is missing. Add it to the project root .env file."
             )
 
-        self.client = OpenAI(api_key=settings.openai_api_key.get_secret_value())
+        self.client = OpenAI(
+            api_key=settings.openai_api_key.get_secret_value(),
+            timeout=settings.provider_timeout_seconds,
+            max_retries=settings.provider_max_retries,
+        )
 
     def embed_text(self, text: str) -> list[float]:
         """Create one embedding vector from a non-empty text."""

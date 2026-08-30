@@ -99,6 +99,8 @@ class LanguageModel:
             return (
                 OpenAI(
                     api_key=settings.openai_api_key.get_secret_value(),
+                    timeout=settings.provider_timeout_seconds,
+                    max_retries=settings.provider_max_retries,
                 ),
                 model or settings.openai_chat_model,
             )
@@ -115,6 +117,8 @@ class LanguageModel:
             OpenAI(
                 api_key=settings.openrouter_api_key.get_secret_value(),
                 base_url=settings.openrouter_base_url,
+                timeout=settings.provider_timeout_seconds,
+                max_retries=settings.provider_max_retries,
             ),
             openrouter_model,
         )

@@ -19,6 +19,18 @@ class Settings(BaseSettings):
     openai_embedding_model: str = "text-embedding-3-small"
     openai_chat_model: str = "gpt-5-mini"
 
+    provider_timeout_seconds: float = Field(
+        default=45.0,
+        gt=0,
+        le=120,
+    )
+
+    provider_max_retries: int = Field(
+        default=0,
+        ge=0,
+        le=3,
+    )
+
     openrouter_api_key: SecretStr | None = None
     openrouter_chat_model: str = ""
     openrouter_base_url: str = "https://openrouter.ai/api/v1"

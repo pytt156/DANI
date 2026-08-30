@@ -39,7 +39,7 @@ def test_chat_returns(client: TestClient) -> None:
     try:
         response = client.post(
             "/api/chat",
-            json={"message": "What technologies does the example project use?"},
+            json={"message": ("What technologies does the example project use?")},
         )
 
         assert response.status_code == 200
@@ -63,40 +63,7 @@ def test_chat_returns(client: TestClient) -> None:
             tier=AccessTier.FREE,
             history=[],
         )
-    finally:
-        app.dependency_overrides.clear()
 
-
-def test_chat_rejects_missing_message(client: TestClient) -> None:
-    rag_service = Mock()
-
-    app.dependency_overrides[get_rag_service] = lambda: rag_service
-
-    try:
-        response = client.post(
-            "/api/chat",
-            json={},
-        )
-
-        assert response.status_code == 422
-        rag_service.answer.assert_not_called()
-    finally:
-        app.dependency_overrides.clear()
-
-
-def test_chat_rejects_empty_message(client: TestClient) -> None:
-    rag_service = Mock()
-
-    app.dependency_overrides[get_rag_service] = lambda: rag_service
-
-    try:
-        response = client.post(
-            "/api/chat",
-            json={"message": ""},
-        )
-
-        assert response.status_code == 422
-        rag_service.answer.assert_not_called()
     finally:
         app.dependency_overrides.clear()
 
@@ -152,7 +119,69 @@ def test_chat_passes_history_to_rag_service(
         app.dependency_overrides.clear()
 
 
-def test_chat_rejects_message_that_is_too_long(client: TestClient) -> None:
+def test_chat_rejects_missing_message(
+    client: TestClient,
+) -> None:
+    rag_service = Mock()
+
+    app.dependency_overrides[get_rag_service] = lambda: rag_service
+
+    try:
+        response = client.post(
+            "/api/chat",
+            json={},
+        )
+
+        assert response.status_code == 422
+        rag_service.answer.assert_not_called()
+
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_chat_rejects_empty_message(
+    client: TestClient,
+) -> None:
+    rag_service = Mock()
+
+    app.dependency_overrides[get_rag_service] = lambda: rag_service
+
+    try:
+        response = client.post(
+            "/api/chat",
+            json={"message": ""},
+        )
+
+        assert response.status_code == 422
+        rag_service.answer.assert_not_called()
+
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_chat_rejects_whitespace_only_message(
+    client: TestClient,
+) -> None:
+    rag_service = Mock()
+
+    app.dependency_overrides[get_rag_service] = lambda: rag_service
+
+    try:
+        response = client.post(
+            "/api/chat",
+            json={"message": "   "},
+        )
+
+        assert response.status_code == 422
+        rag_service.answer.assert_not_called()
+
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_chat_rejects_message_that_is_too_long(
+    client: TestClient,
+) -> None:
     rag_service = Mock()
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
@@ -165,30 +194,100 @@ def test_chat_rejects_message_that_is_too_long(client: TestClient) -> None:
 
         assert response.status_code == 422
         rag_service.answer.assert_not_called()
+
     finally:
         app.dependency_overrides.clear()
 
 
-def test_chat_returns_400_for_value_error(client: TestClient) -> None:
+def test_chat_rejects_too_much_history(
+    client: TestClient,
+) -> None:
     rag_service = Mock()
-    rag_service.answer.side_effect = ValueError("Question cannot be empty.")
+
+    app.dependency_overrides[get_rag_service] = lambda: rag_service
+
+    history = [
+        {
+            "role": "user",
+            "content": f"Message {index}",
+        }
+        for index in range(9)
+    ]
+
+    try:
+        response = client.post(
+            "/api/chat",
+            json={
+                "message": "Example question",
+                "history": history,
+            },
+        )
+
+        assert response.status_code == 422
+        rag_service.answer.assert_not_called()
+
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_chat_rejects_invalid_history_role(
+    client: TestClient,
+) -> None:
+    rag_service = Mock()
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
 
     try:
         response = client.post(
             "/api/chat",
-            json={"message": "   "},
+            json={
+                "message": "Example question",
+                "history": [
+                    {
+                        "role": "system",
+                        "content": "Example history",
+                    }
+                ],
+            },
         )
 
-        assert response.status_code == 400
-        assert response.json() == {"detail": "Question cannot be empty."}
+        assert response.status_code == 422
+        rag_service.answer.assert_not_called()
+
     finally:
         app.dependency_overrides.clear()
 
 
-def test_chat_returns_503_for_unexpected_error(client: TestClient) -> None:
+def test_chat_returns_503_for_service_value_error(
+    client: TestClient,
+) -> None:
     rag_service = Mock()
+
+    rag_service.answer.side_effect = ValueError("OPENROUTER_API_KEY is not configured.")
+
+    app.dependency_overrides[get_rag_service] = lambda: rag_service
+
+    try:
+        response = client.post(
+            "/api/chat",
+            json={"message": "Example question"},
+        )
+
+        assert response.status_code == 503
+
+        assert response.json() == {
+            "detail": ("The knowledge service is temporarily unavailable")
+        }
+
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_chat_returns_503_for_unexpected_error(
+    client: TestClient,
+) -> None:
+    rag_service = Mock()
+
     rag_service.answer.side_effect = RuntimeError("Service unavailable.")
 
     app.dependency_overrides[get_rag_service] = lambda: rag_service
@@ -200,9 +299,11 @@ def test_chat_returns_503_for_unexpected_error(client: TestClient) -> None:
         )
 
         assert response.status_code == 503
+
         assert response.json() == {
-            "detail": "The knowledge service is temporarily unavailable"
+            "detail": ("The knowledge service is temporarily unavailable")
         }
+
     finally:
         app.dependency_overrides.clear()
 
@@ -214,14 +315,18 @@ def test_health_check(client: TestClient) -> None:
     assert response.json() == {"status": "ok"}
 
 
-def test_response_contains_request_id(client: TestClient) -> None:
+def test_response_contains_request_id(
+    client: TestClient,
+) -> None:
     response = client.get("/health")
 
     assert response.status_code == 200
     assert response.headers["x-request-id"]
 
 
-def test_existing_request_id_is_reused(client: TestClient) -> None:
+def test_existing_request_id_is_reused(
+    client: TestClient,
+) -> None:
     request_id = "test-request-123"
 
     response = client.get(
