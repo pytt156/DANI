@@ -1,12 +1,52 @@
+from functools import lru_cache
+
 import mlflow
+import structlog
 from mlflow.genai import load_prompt
 from openai import OpenAI
 
 from dani_api.access import AccessTier
 from dani_api.config import settings
+from dani_api.prompts import DEFAULT_SYSTEM_PROMPT
 
 PROMPT_NAME = "dani-system-prompt"
 PROMPT_ALIAS = "production"
+
+logger = structlog.get_logger(__name__)
+
+
+@lru_cache(maxsize=1)
+def load_system_prompt() -> str:
+    """Load DANI's system prompt, with a local fallback."""
+
+    if not settings.mlflow_enabled:
+        return DEFAULT_SYSTEM_PROMPT
+
+    try:
+        mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
+
+        prompt = load_prompt(
+            f"prompts:/{PROMPT_NAME}@{PROMPT_ALIAS}",
+        )
+
+        if not isinstance(prompt.template, str):
+            raise TypeError("DANI system prompt must be registered as a text prompt.")
+
+        template = prompt.template.strip()
+
+        if not template:
+            raise ValueError("DANI system prompt is empty.")
+
+        return template
+
+    except Exception:
+        logger.exception(
+            "mlflow_prompt_load_failed",
+            prompt_name=PROMPT_NAME,
+            prompt_alias=PROMPT_ALIAS,
+        )
+
+        return DEFAULT_SYSTEM_PROMPT
 
 
 class LanguageModel:
@@ -75,17 +115,8 @@ class LanguageModel:
         )
 
     def _load_system_prompt(self) -> str:
-        """Load the production DANI system prompt from MLflow."""
-        mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
-
-        prompt = load_prompt(
-            f"prompts:/{PROMPT_NAME}@{PROMPT_ALIAS}",
-        )
-
-        if not isinstance(prompt.template, str):
-            raise TypeError("DANI system prompt must be registered as a text prompt.")
-
-        return prompt.template.strip()
+        """Return the configured DANI system prompt."""
+        return load_system_prompt()
 
     def generate_answer(
         self,
