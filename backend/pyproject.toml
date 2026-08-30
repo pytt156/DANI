@@ -1,7 +1,7 @@
 [project]
 name = "dani-api"
 version = "0.1.0"
-description = "Add your description here"
+description = "FastAPI RAG backend for DANI, Daniela's Assistant for Navigating Information"
 readme = "README.md"
 authors = [
     { name = "Daniela Algerydh", email = "danielaalgerydh@gmail.com" }
@@ -17,9 +17,6 @@ dependencies = [
     "structlog>=26.1.0",
     "uvicorn[standard]>=0.51.0",
 ]
-
-[project.scripts]
-dani-api = "dani_api:main"
 
 [build-system]
 requires = ["uv_build>=0.9.17,<0.10.0"]
