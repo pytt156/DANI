@@ -219,3 +219,11 @@ __marimo__/
 
 # notebooks
 notebooks/
+
+# notes/audits
+*.txt
+
+# MLflow local state
+mlflow.db
+mlruns/
+mlartifacts/
