@@ -1,17 +1,13 @@
 from typing import Annotated
 
-import structlog
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 
-from dani_api.access import resolve_access_tier
+from dani_api.access import resolve_access
 from dani_api.api.dependencies import get_rag_service
 from dani_api.api.models import ChatRequest, ChatResponse, SourceResponse
-from dani_api.conversation import ConversationMessage
 from dani_api.rag.service import RagService
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
-
-logger = structlog.get_logger(__name__)
 
 RagServiceDependency = Annotated[
     RagService,
@@ -33,32 +29,15 @@ def chat(
     ] = None,
 ) -> ChatResponse:
     """Answer a question using the knowledge base."""
-
-    access_tier = resolve_access_tier(access_key)
-
-    history = [
-        ConversationMessage(
-            role=message.role,
-            content=message.content.strip(),
-        )
-        for message in request.history
-        if message.content.strip()
-    ]
+    access = resolve_access(access_key)
 
     try:
         result = rag_service.answer(
             request.message,
-            tier=access_tier,
-            history=history,
+            access=access,
+            history=request.to_conversation_history(),
         )
-
     except Exception as error:
-        logger.exception(
-            "chat_request_failed",
-            access_tier=access_tier.value,
-            error_type=type(error).__name__,
-        )
-
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="The knowledge service is temporarily unavailable",
@@ -76,5 +55,5 @@ def chat(
             )
             for source in result.sources
         ],
-        access_tier=access_tier,
+        access_tier=access.tier,
     )

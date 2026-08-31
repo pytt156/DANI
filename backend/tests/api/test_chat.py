@@ -4,8 +4,13 @@ from unittest.mock import Mock
 import pytest
 from fastapi.testclient import TestClient
 
-from dani_api.access import AccessTier
+from dani_api.access import (
+    AccessContext,
+    AccessTier,
+    hash_access_key,
+)
 from dani_api.api.dependencies import get_rag_service
+from dani_api.config import settings
 from dani_api.conversation import ConversationMessage
 from dani_api.main import app
 from dani_api.rag.retrieval import RetrievalResult
@@ -40,7 +45,7 @@ def test_chat_returns(client: TestClient) -> None:
     try:
         response = client.post(
             "/api/chat",
-            json={"message": ("What technologies does the example project use?")},
+            json={"message": "What technologies does the example project use?"},
         )
 
         assert response.status_code == 200
@@ -61,7 +66,10 @@ def test_chat_returns(client: TestClient) -> None:
 
         rag_service.answer.assert_called_once_with(
             "What technologies does the example project use?",
-            tier=AccessTier.FREE,
+            access=AccessContext(
+                tier=AccessTier.FREE,
+                key_id=None,
+            ),
             history=[],
         )
 
@@ -93,7 +101,7 @@ def test_chat_passes_history_to_rag_service(
                     },
                     {
                         "role": "assistant",
-                        "content": ("Daniela has built DANI and other MLOps projects."),
+                        "content": "Daniela has built DANI and other MLOps projects.",
                     },
                 ],
             },
@@ -103,7 +111,10 @@ def test_chat_passes_history_to_rag_service(
 
         rag_service.answer.assert_called_once_with(
             "Which of those used Docker?",
-            tier=AccessTier.FREE,
+            access=AccessContext(
+                tier=AccessTier.FREE,
+                key_id=None,
+            ),
             history=[
                 ConversationMessage(
                     role="user",
@@ -111,9 +122,57 @@ def test_chat_passes_history_to_rag_service(
                 ),
                 ConversationMessage(
                     role="assistant",
-                    content=("Daniela has built DANI and other MLOps projects."),
+                    content="Daniela has built DANI and other MLOps projects.",
                 ),
             ],
+        )
+
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_chat_passes_premium_access_context(
+    client: TestClient,
+    monkeypatch,
+) -> None:
+    premium_key = "dani_test_premium_key"
+
+    monkeypatch.setattr(
+        settings,
+        "premium_access_key_hashes",
+        {
+            "application-1": hash_access_key(premium_key),
+        },
+    )
+
+    rag_service = Mock()
+
+    rag_service.answer.return_value = RagAnswer(
+        answer="Generated answer.",
+        sources=[],
+    )
+
+    app.dependency_overrides[get_rag_service] = lambda: rag_service
+
+    try:
+        response = client.post(
+            "/api/chat",
+            json={"message": "Example question"},
+            headers={
+                "X-DANI-Access-Key": premium_key,
+            },
+        )
+
+        assert response.status_code == 200
+        assert response.json()["access_tier"] == "premium"
+
+        rag_service.answer.assert_called_once_with(
+            "Example question",
+            access=AccessContext(
+                tier=AccessTier.PREMIUM,
+                key_id="application-1",
+            ),
+            history=[],
         )
 
     finally:
@@ -277,7 +336,7 @@ def test_chat_returns_503_for_service_value_error(
         assert response.status_code == 503
 
         assert response.json() == {
-            "detail": ("The knowledge service is temporarily unavailable")
+            "detail": "The knowledge service is temporarily unavailable"
         }
 
     finally:
@@ -302,7 +361,7 @@ def test_chat_returns_503_for_unexpected_error(
         assert response.status_code == 503
 
         assert response.json() == {
-            "detail": ("The knowledge service is temporarily unavailable")
+            "detail": "The knowledge service is temporarily unavailable"
         }
 
     finally:

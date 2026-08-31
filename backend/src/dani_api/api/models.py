@@ -3,6 +3,7 @@ from typing import Literal
 from pydantic import BaseModel, Field, field_validator
 
 from dani_api.access import AccessTier
+from dani_api.conversation import ConversationMessage
 
 
 class ChatHistoryMessage(BaseModel):
@@ -41,6 +42,16 @@ class ChatRequest(BaseModel):
             raise ValueError("Message cannot be empty.")
 
         return normalized
+
+    def to_conversation_history(self) -> list[ConversationMessage]:
+        """Convert validated API history to domain conversation messages."""
+        return [
+            ConversationMessage(
+                role=message.role,
+                content=message.content,
+            )
+            for message in self.history
+        ]
 
 
 class SourceResponse(BaseModel):

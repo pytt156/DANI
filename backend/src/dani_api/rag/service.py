@@ -7,7 +7,7 @@ import mlflow
 import structlog
 from mlflow.entities import SpanType
 
-from dani_api.access import AccessTier
+from dani_api.access import AccessContext, AccessTier
 from dani_api.config import settings
 from dani_api.conversation import ConversationMessage
 from dani_api.llm import LanguageModel
@@ -134,7 +134,7 @@ class RagService:
     def answer(
         self,
         question: str,
-        tier: AccessTier = AccessTier.FREE,
+        access: AccessContext | None = None,
         limit: int = DEFAULT_RESULT_LIMIT,
         score_threshold: float | None = None,
         history: Sequence[ConversationMessage] | None = None,
@@ -144,6 +144,10 @@ class RagService:
 
         if not normalized_question:
             raise ValueError("Question cannot be empty.")
+
+        access_context = access or AccessContext(
+            tier=AccessTier.FREE,
+        )
 
         normalized_history: Sequence[ConversationMessage]
 
@@ -163,7 +167,9 @@ class RagService:
             normalized_history,
         )
 
-        provider, model = self._provider_and_model(tier)
+        provider, model = self._provider_and_model(
+            access_context.tier,
+        )
 
         request_started_at = perf_counter()
 
@@ -171,7 +177,8 @@ class RagService:
             "rag_request_started",
             question_length=len(normalized_question),
             history_count=len(normalized_history),
-            access_tier=tier.value,
+            access_tier=access_context.tier.value,
+            key_id=access_context.key_id,
             result_limit=limit,
             score_threshold=effective_score_threshold,
         )
@@ -179,14 +186,16 @@ class RagService:
         with (
             start_rag_trace(
                 question=normalized_question,
-                access_tier=tier.value,
+                access_tier=access_context.tier.value,
+                key_id=access_context.key_id,
                 provider=provider,
                 model=model,
                 retrieval_limit=limit,
                 score_threshold=effective_score_threshold,
             ) as trace_span,
             start_rag_run(
-                access_tier=tier.value,
+                access_tier=access_context.tier.value,
+                key_id=access_context.key_id,
                 provider=provider,
                 model=model,
                 retrieval_limit=limit,
@@ -267,7 +276,8 @@ class RagService:
 
                 logger.warning(
                     "retrieval_empty",
-                    access_tier=tier.value,
+                    access_tier=access_context.tier.value,
+                    key_id=access_context.key_id,
                     history_count=len(normalized_history),
                     result_count=0,
                     retrieval_duration_ms=retrieval_duration_ms,
@@ -281,7 +291,9 @@ class RagService:
 
             context = build_context(sources)
 
-            language_model = self.language_model or LanguageModel(tier=tier)
+            language_model = self.language_model or LanguageModel(
+                tier=access_context.tier,
+            )
 
             llm_started_at = perf_counter()
 
@@ -357,7 +369,8 @@ class RagService:
 
         logger.info(
             "rag_request_completed",
-            access_tier=tier.value,
+            access_tier=access_context.tier.value,
+            key_id=access_context.key_id,
             provider=provider,
             model=model,
             source_count=len(sources),

@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     openrouter_chat_model: str = ""
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
 
-    premium_access_key_hashes: str = ""
+    premium_access_key_hashes: dict[str, str] = {}
 
     mlflow_tracking_uri: str = "http://127.0.0.1:5000"
     mlflow_experiment_name: str = "dani"
@@ -68,15 +68,6 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore",
     )
-
-    @property
-    def premium_access_key_hash_set(self) -> set[str]:
-        """Return configured premium access-key hashes."""
-        return {
-            value.strip()
-            for value in self.premium_access_key_hashes.split(",")
-            if value.strip()
-        }
 
     @property
     def use_json_logs(self) -> bool:

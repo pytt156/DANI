@@ -2,7 +2,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from dani_api.access import AccessTier
+from dani_api.access import AccessContext, AccessTier
 from dani_api.config import settings
 from dani_api.conversation import ConversationMessage
 from dani_api.rag.retrieval import RetrievalResult
@@ -59,7 +59,9 @@ def test_answer_uses_history_for_retrieval_and_generation() -> None:
 
     result = service.answer(
         "Which of those used Docker?",
-        tier=AccessTier.FREE,
+        access=AccessContext(
+            tier=AccessTier.FREE,
+        ),
         history=history,
     )
 
@@ -167,7 +169,10 @@ def test_answer_returns_generated_answer_and_sources() -> None:
 
     result = service.answer(
         "What technologies does the example project use?",
-        tier=AccessTier.PREMIUM,
+        access=AccessContext(
+            tier=AccessTier.PREMIUM,
+            key_id="test-key",
+        ),
     )
 
     assert result.answer == "Generated answer."
@@ -302,7 +307,10 @@ def test_answer_creates_premium_language_model_for_premium_tier() -> None:
 
         service.answer(
             "Example question",
-            tier=AccessTier.PREMIUM,
+            access=AccessContext(
+                tier=AccessTier.PREMIUM,
+                key_id="test-key",
+            ),
         )
 
     language_model_class.assert_called_once_with(
