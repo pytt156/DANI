@@ -121,6 +121,7 @@ def configure_mlflow() -> bool:
 def start_rag_run(
     *,
     access_tier: str,
+    key_id: str | None,
     provider: str,
     model: str,
     retrieval_limit: int,
@@ -150,12 +151,15 @@ def start_rag_run(
             }
         )
 
-        mlflow.set_tags(
-            {
-                "request_type": "rag_chat",
-                "environment": settings.environment,
-            }
-        )
+        tags = {
+            "request_type": "rag_chat",
+            "environment": settings.environment,
+        }
+
+        if key_id is not None:
+            tags["key_id"] = key_id
+
+        mlflow.set_tags(tags)
 
     except Exception as error:  # noqa: BLE001
         logger.warning(
@@ -230,6 +234,7 @@ def start_rag_trace(
     *,
     question: str,
     access_tier: str,
+    key_id: str | None,
     provider: str,
     model: str,
     retrieval_limit: int,
@@ -255,6 +260,10 @@ def start_rag_trace(
         )
 
         span.set_attribute("access_tier", access_tier)
+
+        if key_id is not None:
+            span.set_attribute("key_id", key_id)
+
         span.set_attribute("provider", provider)
         span.set_attribute("model", model)
         span.set_attribute(
@@ -270,14 +279,19 @@ def start_rag_trace(
             score_threshold if score_threshold is not None else "none",
         )
 
+        trace_tags = {
+            "environment": settings.environment,
+            "access_tier": access_tier,
+            "provider": provider,
+        }
+
+        if key_id is not None:
+            trace_tags["key_id"] = key_id
+
         mlflow.update_current_trace(
             client_request_id=(str(request_id) if request_id is not None else None),
             request_preview=question,
-            tags={
-                "environment": settings.environment,
-                "access_tier": access_tier,
-                "provider": provider,
-            },
+            tags=trace_tags,
         )
 
         yield span
