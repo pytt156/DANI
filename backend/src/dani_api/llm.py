@@ -13,7 +13,11 @@ from dani_api.mlflow_tracking import (
     configure_mlflow_client,
     mlflow_server_available,
 )
-from dani_api.prompts import DEFAULT_SYSTEM_PROMPT, GROUNDING_GUARD
+from dani_api.prompts import (
+    DEFAULT_SYSTEM_PROMPT,
+    GROUNDING_GUARD,
+    NO_ANSWER_PREFIX,
+)
 
 PROMPT_NAME = "dani-system-prompt"
 PROMPT_ALIAS = "production"
@@ -57,6 +61,16 @@ def load_system_prompt() -> str:
         )
 
         return DEFAULT_SYSTEM_PROMPT
+
+
+def clean_model_answer(answer: str) -> str:
+    """Remove internal control markers from a model answer."""
+    normalized_answer = answer.strip()
+
+    if normalized_answer.startswith(NO_ANSWER_PREFIX):
+        normalized_answer = normalized_answer[len(NO_ANSWER_PREFIX) :].lstrip()
+
+    return normalized_answer
 
 
 class LanguageModel:
@@ -175,7 +189,7 @@ class LanguageModel:
             store=False,
         )
 
-        answer = response.output_text.strip()
+        answer = clean_model_answer(response.output_text)
 
         if not answer:
             raise ValueError("The language model returned an empty answer.")
