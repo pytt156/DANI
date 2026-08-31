@@ -4,6 +4,7 @@ import structlog
 from fastapi import Depends, FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
+from dani_api.api.access import router as access_router
 from dani_api.api.chat import router as chat_router
 from dani_api.api.dependencies import get_vector_store
 from dani_api.config import settings
@@ -37,6 +38,7 @@ app.add_middleware(
 app.middleware("http")(request_logging_middleware)
 
 app.include_router(chat_router)
+app.include_router(access_router)
 
 
 @app.get("/health", tags=["health"])
