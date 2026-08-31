@@ -2,11 +2,26 @@
 
 ## Technical Profile
 
-Daniela has a broad practical foundation across programming, machine learning, generative AI, backend development, MLOps and cloud deployment.
+Daniela is an MLOps Engineering student with practical experience building Python-based machine-learning and AI applications.
 
-Her strongest area is Python-based AI application development. She is comfortable building systems from scratch, working through the terminal and combining several services into a functioning application.
+Her strongest current areas are:
 
-She distinguishes between tools she has used practically and areas where her knowledge is still introductory.
+* Python
+* FastAPI
+* retrieval-augmented generation
+* AI and LLM applications
+* Docker
+* Linux
+* Git and GitHub
+* model serving
+* MLflow
+* working with APIs and connected services
+
+She has also gained practical experience with cloud deployment, CI/CD and running a live AI backend on AWS.
+
+Daniela is still early in her technical career and does not present every technology she has encountered as an area of expertise.
+
+This document distinguishes between technologies she uses regularly, technologies she has used in projects and areas where her experience is still introductory.
 
 ## Programming
 
@@ -16,45 +31,65 @@ She distinguishes between tools she has used practically and areas where her kno
 
 Python is Daniela's primary programming language.
 
-She can write applications from scratch and has used Python for:
+She has used it to build complete applications and workflows involving:
 
-- machine learning
-- deep learning
-- generative AI
-- retrieval-augmented generation
-- AI agents
-- backend APIs
-- data processing
-- model training and inference
-- evaluation workflows
-- automation
+* backend APIs
+* machine learning
+* deep learning
+* model training
+* model inference
+* retrieval-augmented generation
+* embeddings
+* vector search
+* AI agents
+* LLM applications
+* evaluation
+* automation
+* data processing
+* testing
+* command-line tools
 
-She has a very good understanding of Python fundamentals and is continuing to develop deeper knowledge of software architecture, testing and production patterns.
+Her recent projects use Python as the main language for both AI logic and backend application development.
+
+She is comfortable structuring Python applications across multiple modules rather than working only in notebooks.
+
+She is continuing to develop deeper knowledge of software architecture, testing patterns, asynchronous programming and production Python.
 
 ### C#
 
 **Level: Foundational**
 
-Daniela completed Programming 1 in C# with the highest grade.
+Daniela completed Programming 1 using C# and received grade A.
 
-She has practical experience with:
+Her experience includes:
 
-- variables and data types
-- conditions and loops
-- methods
-- classes and objects
-- debugging
-- basic object-oriented programming
+* variables and data types
+* conditions
+* loops
+* methods
+* classes and objects
+* basic object-oriented programming
+* debugging
+* program structure
 
-Python is now her primary language, but C# gave her an initial foundation in structured programming.
+C# is not her current primary language.
 
 ### SQL
 
 **Level: Foundational practical experience**
 
-Daniela has used SQL in coursework and projects involving relational data, querying and data processing.
+Daniela has used SQL through education and project work.
 
-She has worked with PostgreSQL, DuckDB and SQLite.
+Her experience includes:
+
+* queries
+* relational data
+* filtering
+* joins
+* basic schema work
+* using databases from applications
+
+She has worked with technologies including PostgreSQL, DuckDB and SQLite.
 
 ## Backend Development
 
@@ -62,33 +97,63 @@ She has worked with PostgreSQL, DuckDB and SQLite.
 
 **Level: Practical project experience**
 
-Daniela has used FastAPI to build REST APIs for machine learning and generative AI applications.
+FastAPI is Daniela's main backend framework.
+
+She has used it for both machine-learning inference services and generative-AI applications.
 
 Her experience includes:
 
-- creating API endpoints
-- request and response models
-- Pydantic validation
-- health endpoints
-- model inference endpoints
-- document and retrieval endpoints
-- separating training and inference
-- connecting backends to Streamlit applications
-- working with asynchronous code at an introductory level
+* API route design
+* request and response schemas
+* Pydantic validation
+* dependency injection
+* REST endpoints
+* health endpoints
+* model-inference endpoints
+* multipart file uploads
+* RAG chat endpoints
+* error handling
+* middleware
+* CORS
+* connecting APIs to frontend applications
+* structured API responses
+
+In DANI, FastAPI is used as the production backend for the RAG service.
 
 ### Pydantic
 
-Daniela has used Pydantic for schema definition, validation and structured data handling in FastAPI and AI applications.
+Daniela uses Pydantic for:
+
+* request validation
+* response schemas
+* structured application data
+* application configuration
+* environment-based settings
+
+She has also used PydanticAI in generative-AI coursework.
+
+### REST APIs
+
+Daniela has practical experience building and consuming HTTP APIs.
+
+She understands concepts including:
+
+* HTTP methods
+* request and response bodies
+* headers
+* status codes
+* JSON responses
+* validation
+* stateless services
+* separation between frontend and backend
 
 ### SQLAlchemy
 
 **Level: Introductory**
 
-Daniela has used SQLAlchemy in a limited capacity and understands its role in connecting Python applications to relational databases.
+Daniela has limited practical exposure to SQLAlchemy and understands its role in Python applications that interact with relational databases.
 
-### REST APIs
-
-Daniela understands the basic principles of REST-based application design and has exposed machine learning and AI functionality through APIs.
+It is not currently one of her strongest tools.
 
 ## Machine Learning
 
@@ -96,123 +161,414 @@ Daniela understands the basic principles of REST-based application design and ha
 
 **Level: Foundational practical experience**
 
-Daniela has trained and evaluated supervised machine learning models.
+Daniela has studied and implemented classical machine-learning workflows.
 
-Her coursework and projects have included:
+Her experience includes:
 
-- regression
-- classification
-- preprocessing
-- feature engineering
-- training and validation
-- model evaluation
-- optimisation
-- separating model training from inference
+* supervised learning
+* regression
+* classification
+* preprocessing
+* feature engineering
+* train/validation/test separation
+* model evaluation
+* comparing model performance
+* reproducibility
 
-She has worked with models and techniques including:
-
-- linear regression
-- logistic regression
-- random forest
-- k-nearest neighbours
-
-### scikit-learn
-
-Daniela has used scikit-learn for classical machine learning workflows, preprocessing, model training and evaluation.
+She has used scikit-learn in coursework and projects.
 
 ### Deep Learning
 
-**Level: Introductory practical experience**
+**Level: Practical project experience**
 
-Daniela has worked with deep learning through coursework and training projects.
+Daniela has practical experience training neural networks and integrating trained models into applications.
 
-She has experience with:
+Her strongest deep-learning experience comes from PyTorch.
 
-- neural network training
-- loss functions
-- optimisation
-- validation strategies
-- model evaluation
-- inference
-- separating training code from serving code
+She has worked with:
 
-She considers deep learning one of the most interesting areas she has studied, while recognising that her experience is still introductory.
+* convolutional neural networks
+* training loops
+* validation loops
+* loss functions
+* optimizers
+* checkpointing
+* hyperparameter experiments
+* reproducible data splitting
+* test evaluation
+* CPU and GPU execution
+* model serialization
+* inference
 
 ### PyTorch
 
-Daniela has used PyTorch for training and evaluating neural networks, including an image-classification model served through FastAPI and Docker.
+**Level: Practical project experience**
+
+Daniela built a modular PyTorch training pipeline for CIFAR-10 image classification.
+
+She experimented with learning rates, batch sizes and training duration and selected the final model using validation performance.
+
+The trained model was later reused in a model-serving project.
+
+She has also worked with:
+
+* saved PyTorch weights
+* TorchScript export
+* `torch.jit.load`
+* inference preprocessing
+* logits
+* softmax
+* confidence scores
 
 ### TensorFlow
 
-Daniela has used TensorFlow in coursework and understands the basic workflow for defining, training and evaluating models.
+**Level: Introductory practical experience**
+
+Daniela has used TensorFlow during her machine-learning studies.
+
+Her PyTorch experience is currently more extensive.
 
 ### NumPy and pandas
 
-Daniela has used NumPy and pandas for data manipulation, preprocessing, analysis and machine learning workflows.
+Daniela has used NumPy and pandas for data handling, experimentation and machine-learning workflows.
 
-## Generative AI
+## Model Serving
+
+**Level: Practical project experience**
+
+Daniela has experience taking a trained model beyond the training stage and integrating it into an application.
+
+Her CIFAR-10 project covered:
+
+`training -> checkpoint -> TorchScript artifact -> FastAPI inference -> Streamlit client -> Docker`
+
+She understands the importance of separating:
+
+* training code
+* saved model artifacts
+* inference logic
+* preprocessing
+* API serving
+* user interfaces
+* runtime configuration
+
+She has built stateless inference APIs and containerized model-serving applications.
+
+## Generative AI and LLM Applications
 
 ### Large Language Models
 
 **Level: Practical project experience**
 
-Daniela has built applications that use large language models as part of larger systems rather than only through isolated prompts.
+Daniela has built applications that use large language models through APIs.
 
-Her experience includes:
+Her work has included:
 
-- prompt design
-- structured model output
-- tool use
-- agent workflows
-- retrieval-augmented generation
-- evaluation
-- human-in-the-loop patterns
-- multi-agent systems
+* OpenAI
+* OpenRouter
+* prompt design
+* system prompts
+* structured outputs
+* context construction
+* source-grounded answers
+* fallback behaviour
+* model-provider configuration
 
-### AI Agents and Multi-Agent Systems
-
-Daniela has designed and built agent-based workflows using roles such as:
-
-- planner
-- executor
-- critic
-- reviewer
-- human approval
-
-She understands that adding agents can improve a workflow, but can also increase complexity, cost, latency and difficulty of evaluation.
-
-She evaluates agent architectures based on whether they provide a meaningful improvement over a simpler solution.
-
-### PydanticAI
-
-Daniela has used PydanticAI to build structured AI agents, manage model interaction and evaluate generated responses.
-
-She has also worked with AI-based evaluation patterns similar to LLM-as-a-judge.
-
-### LangChain
-
-Daniela has used LangChain in agent and generative AI coursework.
+She focuses primarily on integrating models into larger applications rather than training foundation models.
 
 ### Retrieval-Augmented Generation
 
-Daniela has built RAG systems involving:
+**Level: Strong practical project experience**
 
-- Markdown and document ingestion
-- text chunking
-- embeddings
-- vector search
-- retrieval pipelines
-- prompt context construction
-- grounded response generation
-- evaluation of retrieved answers
+RAG is one of Daniela's most developed areas within generative AI.
 
-### Cohere Embeddings
+She has built multiple RAG systems and worked with the complete retrieval flow:
 
-Daniela has used Cohere multilingual embeddings in a RAG project.
+1. document loading
+2. text structuring
+3. chunking
+4. embeddings
+5. vector storage
+6. query embedding
+7. semantic retrieval
+8. context construction
+9. LLM generation
+10. source attribution
 
-### LanceDB
+Her work includes both the collaborative Wired-AI project and DANI.
 
-Daniela has used LanceDB as a vector database for storing and retrieving document embeddings.
+She has worked with retrieval concerns such as:
+
+* chunk size
+* chunk boundaries
+* metadata
+* retrieval relevance
+* result limits
+* similarity scores
+* fallback behaviour
+* grounding
+* source presentation
+
+### Embeddings and Semantic Search
+
+Daniela has practical experience with embedding-based retrieval.
+
+She has used:
+
+* OpenAI embeddings
+* Cohere multilingual embeddings
+* vector similarity search
+* Qdrant
+* LanceDB
+
+DANI currently uses OpenAI `text-embedding-3-small` embeddings with Qdrant.
+
+### Vector Databases
+
+Daniela has practical experience with:
+
+* Qdrant
+* LanceDB
+
+She has used vector stores to persist document chunks, metadata and embeddings and retrieve relevant information through semantic similarity search.
+
+### AI Agents and Multi-Agent Systems
+
+**Level: Practical educational experience**
+
+Daniela has built agent-based workflows during her generative-AI studies.
+
+She has worked with systems where agents had responsibilities such as:
+
+* planning
+* execution
+* critique
+* validation
+* human approval
+
+Her experience includes both LangChain and PydanticAI.
+
+A major lesson from this work was that multi-agent systems introduce additional complexity, latency, cost and failure points and should be used only when that complexity provides a clear benefit.
+
+### LangChain
+
+**Level: Practical educational exposure**
+
+Daniela has used LangChain when building AI-agent workflows.
+
+It is not currently a central dependency in her main personal projects.
+
+### PydanticAI
+
+**Level: Practical project experience**
+
+Daniela has used PydanticAI for structured generative-AI workflows, schemas and agent logic.
+
+It was used in the Wired-AI project.
+
+## LLMOps and Evaluation
+
+Daniela has practical experience thinking about AI applications as systems that need to be evaluated and observed rather than only demonstrated.
+
+Her work has included:
+
+* prompt evaluation
+* RAG evaluation
+* retrieval quality
+* structured experiment tracking
+* comparing changes
+* latency measurements
+* source counts
+* retrieval scores
+* fallback behaviour
+
+### MLflow
+
+**Level: Practical project experience**
+
+Daniela has used MLflow in several contexts.
+
+Her experience includes:
+
+* experiment tracking
+* logging evaluation results
+* shared remote MLflow environments
+* RAG metrics
+* model and configuration metadata
+* prompt management
+
+DANI uses MLflow both for optional RAG observability and for managing its production system prompt.
+
+## Testing and Code Quality
+
+Daniela has practical experience with automated testing and code-quality tooling.
+
+She currently uses:
+
+* pytest
+* Ruff
+
+DANI's backend test suite covers API behaviour such as:
+
+* successful requests
+* validation failures
+* expected errors
+* unexpected service errors
+* health endpoints
+* request IDs
+
+GitHub Actions runs linting and tests before production deployment.
+
+Daniela is continuing to develop deeper knowledge of testing strategies and production-quality test coverage.
+
+## Docker and Containers
+
+### Docker
+
+**Level: Practical project experience**
+
+Daniela has used Docker across several projects.
+
+She has containerized:
+
+* FastAPI backends
+* machine-learning inference APIs
+* Streamlit frontends
+* RAG applications
+* multi-service systems
+
+She understands concepts including:
+
+* Dockerfiles
+* container images
+* ports
+* environment variables
+* volumes
+* isolated runtimes
+
+### Docker Compose
+
+**Level: Practical project experience**
+
+Daniela uses Docker Compose to run applications containing multiple connected services.
+
+Her projects have included combinations such as:
+
+* FastAPI + Streamlit
+* FastAPI + Qdrant
+* backend + vector database + supporting services
+
+She has worked with:
+
+* service networking
+* volumes
+* port publishing
+* service dependencies
+* local and production Compose configurations
+
+## CI/CD
+
+### GitHub Actions
+
+**Level: Practical project experience**
+
+Daniela has configured GitHub Actions workflows for continuous integration and deployment.
+
+In DANI, pushes and pull requests targeting `main` run automated backend validation.
+
+The CI workflow includes:
+
+* dependency installation with `uv`
+* Ruff
+* pytest
+
+A successful CI run on `main` can trigger the production deployment workflow.
+
+### Continuous Deployment
+
+Daniela has built an automated deployment flow for DANI.
+
+The production path includes:
+
+`GitHub -> GitHub Actions -> AWS authentication -> AWS Systems Manager -> EC2 -> Docker Compose`
+
+The workflow uses OpenID Connect to assume an AWS IAM role rather than relying on long-lived AWS access credentials stored in GitHub.
+
+AWS Systems Manager is then used to execute the deployment on the EC2 instance.
+
+This deployment work was configured by Daniela as part of the DANI project.
+
+## Cloud and Infrastructure
+
+### AWS
+
+**Level: Practical introductory-to-intermediate project experience**
+
+Daniela has practical experience operating an application on AWS.
+
+For DANI, she configured an EC2 instance through the Linux terminal and uses it to host the production backend and supporting services.
+
+Her current AWS experience includes:
+
+* EC2
+* IAM
+* OpenID Connect integration
+* Systems Manager
+* Linux server administration
+* application deployment
+* environment configuration
+
+Her AWS experience is project-based rather than broad expertise across the full AWS platform.
+
+### AWS EC2
+
+Daniela has configured and operates a Linux EC2 instance for DANI.
+
+She has worked directly with the server through the terminal to configure the runtime environment and services needed by the application.
+
+### AWS IAM and OIDC
+
+Daniela has configured a deployment approach where GitHub Actions assumes an AWS IAM role using OpenID Connect.
+
+This allows the deployment workflow to obtain temporary AWS credentials instead of storing permanent AWS access keys in the repository.
+
+### AWS Systems Manager
+
+DANI's deployment workflow uses AWS Systems Manager to execute deployment commands on the EC2 instance.
+
+This avoids requiring GitHub Actions to connect directly to the production server over SSH.
+
+### Azure
+
+**Level: Introductory practical experience**
+
+Daniela has worked with Azure during her MLOps and cloud studies.
+
+Her AWS experience is currently more developed because DANI is actively deployed there.
+
+## Reverse Proxy and Web Infrastructure
+
+### Caddy
+
+**Level: Practical project experience**
+
+Daniela uses Caddy as the reverse proxy in front of the production DANI API.
+
+Requests to:
+
+`api.daniela.algerydh.com`
+
+are forwarded to the FastAPI service running on the EC2 host at:
+
+`127.0.0.1:8000`
+
+### Cloudflare
+
+**Level: Practical project experience**
+
+Daniela uses Cloudflare as part of the infrastructure around her personal website and DANI deployment.
+
+Her experience is focused on the configuration required for her own deployed services rather than broad Cloudflare platform expertise.
 
 ## Data and Databases
 
@@ -220,261 +576,260 @@ Daniela has used LanceDB as a vector database for storing and retrieving documen
 
 **Level: Foundational practical experience**
 
-Daniela has used PostgreSQL in coursework and project environments.
+Daniela has worked with PostgreSQL through coursework and projects.
+
+It has also been used as part of supporting infrastructure in project environments.
 
 ### DuckDB
 
-Daniela has used DuckDB for local analytical data work and SQL-based processing.
+**Level: Foundational practical experience**
+
+Daniela has used DuckDB in data-oriented coursework and workflows.
 
 ### SQLite
 
-Daniela has limited experience with SQLite in smaller applications and local environments.
+**Level: Foundational practical experience**
 
-### Vector Databases
+Daniela has used SQLite as a lightweight relational database in development and educational contexts.
 
-Daniela has practical experience with vector storage and semantic retrieval through LanceDB.
-
-## MLOps
-
-### MLflow
+### Qdrant
 
 **Level: Practical project experience**
 
-Daniela has used MLflow for:
+Qdrant is the vector database used by DANI.
 
-- experiment tracking
-- model evaluation
-- remote tracking
-- prompt management
-- prompt registry workflows
-- comparing runs and results
+Daniela has worked with:
 
-She has worked with both local and remote MLflow setups.
+* creating collections
+* vector dimensions
+* cosine similarity
+* point payloads
+* upserts
+* semantic queries
+* similarity scores
+* persistent storage
+* health checks
 
-### Docker
+### LanceDB
 
 **Level: Practical project experience**
 
-Daniela uses Docker to package applications and create reproducible runtime environments.
+Daniela used LanceDB as the vector database in Wired-AI.
 
-She has containerised:
-
-- machine learning model APIs
-- FastAPI backends
-- Streamlit frontends
-- multi-service AI applications
-
-### Docker Compose
-
-Daniela has used Docker Compose to run applications with several connected services locally.
+Her work included storing and retrieving embedded knowledge chunks and associated metadata.
 
 ### DVC
 
 **Level: Introductory practical experience**
 
-Daniela has used DVC for data and artifact versioning in machine learning workflows.
+Daniela has used DVC in machine-learning coursework for data or artifact versioning.
 
-### GitHub Actions
+It is not currently a central tool in her main projects.
 
-**Level: Introductory practical experience**
-
-Daniela has used GitHub Actions for CI/CD-related workflows and automation.
-
-### Model Serving
-
-Daniela has practical experience serving trained models through FastAPI and Docker.
-
-She understands the importance of separating:
-
-- training
-- saved artifacts
-- inference
-- API serving
-- deployment configuration
-
-### Experimentation and Evaluation
-
-Daniela has worked with:
-
-- model validation
-- performance comparison
-- loss functions
-- prompt evaluation
-- AI response evaluation
-- reproducibility
-- structured experiment tracking
-
-## Cloud and Deployment
-
-### AWS
-
-**Level: Practical introductory experience**
-
-Daniela has deployed prepared models and applications in AWS environments.
-
-She has also used the Linux terminal to inspect and monitor services running on AWS.
-
-### Azure
-
-**Level: Practical introductory experience**
-
-Daniela has deployed prepared models and applications to Azure.
-
-### Cloud Infrastructure
-
-Daniela understands the basic relationship between:
-
-- application packaging
-- cloud compute
-- deployment
-- environment configuration
-- logs
-- monitoring
-- service availability
-
-She is continuing to develop deeper knowledge of cloud architecture, security, scaling and infrastructure automation.
-
-## Development Environment
+## Linux and Development Environment
 
 ### Linux
 
 **Level: Very comfortable**
 
-Daniela uses Pop!_OS as her primary operating system.
+Linux is Daniela's primary development environment.
 
-She is comfortable working in Linux environments and normally performs development tasks through the terminal.
+She uses Pop!_OS on her own computer and also works with Linux on remote servers.
+
+Her experience includes:
+
+* filesystem navigation
+* package and dependency management
+* processes
+* permissions
+* environment variables
+* Docker
+* Git
+* network and service inspection
+* remote server work
+* application startup and troubleshooting
 
 ### Command Line
 
-Daniela regularly uses the command line for:
+Daniela is comfortable working primarily through the terminal.
 
-- navigating projects
-- managing environments
-- running applications
-- installing dependencies
-- working with Git
-- starting APIs
-- running Docker
-- inspecting services
-- working with remote systems
+She regularly uses the command line for:
+
+* project navigation
+* Python environments
+* Git
+* Docker
+* application startup
+* testing
+* dependency installation
+* server administration
+* inspecting logs and services
+* deployment work
 
 ### Git and GitHub
 
 **Level: Practical everyday use**
 
-Daniela uses Git and GitHub for version control and project collaboration.
+Daniela uses Git and GitHub regularly.
 
 Her experience includes:
 
-- repository setup
-- commits
-- branches
-- merges
-- pull requests
-- resolving project structure issues
-- collaborative workflows
+* repository creation
+* commits
+* branches
+* merging
+* rebasing
+* pull requests
+* resolving merge conflicts
+* branch protection
+* collaborative workflows
+* GitHub Actions
+
+She has worked both independently and in team repositories.
 
 ### uv
 
-Daniela uses uv for Python dependency management, virtual environments and workspace-based projects.
+**Level: Practical everyday use**
+
+Daniela uses `uv` for:
+
+* Python dependency management
+* virtual environments
+* locked dependencies
+* running project commands
+
+Several of her current Python projects use `uv`.
 
 ### Jupyter
 
-Daniela has used Jupyter notebooks for data exploration, machine learning and experimentation.
+Daniela uses Jupyter notebooks primarily for:
+
+* experimentation
+* data exploration
+* machine learning
+* comparing model configurations
+
+She prefers application code to live in structured modules when moving beyond exploration.
 
 ## Frontend and User Interfaces
+
+Frontend development is not Daniela's main specialisation, but she has practical experience building interfaces for her projects.
 
 ### Streamlit
 
 **Level: Practical project experience**
 
-Daniela has built Streamlit interfaces for machine learning and generative AI applications.
+Daniela has built Streamlit interfaces for:
 
-She has used Streamlit to:
+* RAG applications
+* machine-learning model serving
+* document-based AI applications
 
-- collect user input
-- display model responses
-- communicate with FastAPI backends
-- build simple document and RAG interfaces
-- present application results
+She has used Streamlit to collect user input, call backend APIs and display results.
+
+### React
+
+**Level: Practical project experience**
+
+Daniela uses React in her personal website and the DANI interface.
+
+She can work with components, routing, state and API integration in the context of her own applications.
+
+She does not currently position herself as a specialist frontend developer.
+
+### TypeScript
+
+**Level: Practical project experience**
+
+Daniela uses TypeScript in the React-based personal website and DANI frontend.
+
+Her TypeScript experience is primarily application-oriented rather than advanced language or frontend-framework expertise.
 
 ### HTML and CSS
 
-**Level: Foundational**
+**Level: Practical foundation**
 
-Daniela studied web design earlier and can still understand and write basic HTML and CSS.
+Daniela has previous education in web design and currently works directly with HTML/CSS concepts when building her personal website.
 
-She does not currently position herself as a frontend developer.
+She has practical experience with:
+
+* responsive layouts
+* component styling
+* media queries
+* hover and interaction states
+* mobile layouts
+
+Frontend development remains secondary to her focus on AI, backend development and MLOps.
 
 ## Architecture and System Thinking
 
-Daniela is particularly interested in how the parts of a technical system connect.
+Daniela is particularly interested in how different parts of a technical system connect.
+
+Her projects increasingly combine multiple layers such as:
+
+* user interfaces
+* APIs
+* AI or machine-learning logic
+* databases
+* vector stores
+* containers
+* observability
+* cloud infrastructure
+* CI/CD
+* production deployment
 
 She considers questions such as:
 
-- What problem is the system solving?
-- How does data move through the application?
-- How are components separated?
-- How will the system be deployed?
-- How can it be monitored?
-- What happens when it fails?
-- How will quality be evaluated?
-- How can cost or performance be improved?
+* Where does data enter the system?
+* How do services communicate?
+* Which component owns each responsibility?
+* What happens when a dependency fails?
+* How is the system deployed?
+* How can its behaviour be observed?
+* How is quality evaluated?
+* How are credentials and configuration handled?
 
-She prefers building complete applications over isolated notebooks or demonstrations.
-
-## Working Methods
-
-### Problem Solving
-
-Daniela breaks complex problems into smaller parts, builds a working version and improves it through testing and investigation.
-
-### Independent Learning
-
-She is comfortable entering unfamiliar technical areas, reading documentation, testing alternatives and identifying what she still needs to learn.
-
-### Critical Thinking
-
-Daniela questions unclear assumptions and wants technical decisions to be connected to a real problem or goal.
-
-### Collaboration
-
-She is active and driving in group projects and often helps organise unclear work, identify risks and move discussions towards implementation.
-
-### Communication
-
-Her previous management experience helps her communicate across different roles and levels of technical understanding.
-
-### Responsibility
-
-Daniela is comfortable taking ownership of tasks and following them through from problem definition to implementation and evaluation.
+She prefers understanding the full path through an application rather than treating each technology as an isolated tool.
 
 ## Strongest Current Areas
 
-Daniela's strongest current combination is:
+Daniela would currently describe her strongest technical areas as:
 
-- Python-based AI application development
-- generative AI, RAG and agent workflows
-- backend APIs and model serving
-- Docker-based application environments
-- Linux and terminal-driven development
-- understanding the complete AI system lifecycle
+* Python
+* FastAPI
+* RAG
+* LLM application development
+* Docker
+* Linux and command-line development
+* Git and GitHub
+* MLflow
+* model serving
+* integrating multiple services into a working application
 
-## Currently Developing
+She also has growing practical experience with:
 
-Daniela is actively developing deeper competence in:
+* AWS
+* CI/CD
+* GitHub Actions
+* Qdrant
+* deployment
+* React and TypeScript
 
-- automated testing
-- production-grade backend architecture
-- asynchronous Python
-- database integration
-- CI/CD
-- cloud infrastructure
-- monitoring and observability
-- system security
-- scalable deployment
-- Kubernetes
-- infrastructure as code
-- production evaluation of AI systems
+## Areas Still Developing
 
-These areas are listed as developing skills rather than established expertise.
+Daniela is actively developing deeper competence in areas including:
+
+* production backend architecture
+* automated testing
+* asynchronous Python
+* system architecture
+* cloud architecture
+* infrastructure automation
+* monitoring
+* observability
+* security
+* reliability
+* scaling
+* production AI evaluation
+
+These are areas she is learning and practising rather than claiming as established expertise.

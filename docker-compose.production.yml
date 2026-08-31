@@ -1,4 +1,0 @@
-services:
-  backend:
-    environment:
-      CORS_ORIGINS: '["https://daniela.algerydh.com"]'

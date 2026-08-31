@@ -1,260 +1,227 @@
 # Education
 
-## Overview
+## MLOps Engineering
 
-Daniela is studying to become an AI and MLOps Engineer at Nackademin.
-
-She chose the programme partly because it appeared to be the most technically demanding and broadest option available to her. Rather than selecting the narrowest or easiest route into technology, she wanted an education that would expose her to several connected areas: programming, machine learning, artificial intelligence, cloud infrastructure, deployment and system operations.
-
-Her goal is to understand the complete lifecycle of an AI system, from the first lines of code and model development to deployment, monitoring, maintenance and continuous improvement.
-
-## AI and MLOps Engineer
-
-**Nackademin**  
+**Nackademin**
+**2025–2028**
 **Expected graduation: January 2028**
 
-The programme combines software development, machine learning and the operational practices required to run technical systems reliably.
+Daniela is studying MLOps Engineering at Nackademin, a 2.5-year vocational programme covering machine learning, software development, infrastructure, cloud platforms, deployment and the operational lifecycle around AI systems.
 
-Daniela is particularly interested in the parts of the education that connect experimentation with production. She wants to understand not only how an AI system can be built, but also:
+The programme combines model development with the engineering required to build, deploy and maintain machine-learning and AI applications.
 
-- how it is packaged and deployed
-- how its behaviour is evaluated
-- how failures and performance problems are detected
-- how it is monitored over time
-- how its infrastructure is maintained
-- how it can be optimised and made more efficient
-- how changes can be introduced safely
+Daniela has received the highest available grade in all graded courses completed so far.
 
-This wider lifecycle is the main reason MLOps appeals to her.
+She is also a student representative on the MLOps Engineering programme's management board.
 
-## Why Daniela Chose the Programme
+## Completed Courses
 
-The honest reason Daniela initially chose the AI and MLOps programme was that it looked like the hardest and broadest alternative.
+Completed courses currently include:
 
-She wanted to challenge herself and enter a field that would require her to develop in several directions at once.
+* Python Programming for MLOps
+* Linux Administration
+* Database Management
+* Machine Learning Models & Algorithms
+* Machine Learning Frameworks
+* AI-enhanced Knowledge Strategy & Hybrid AI Teams
+* MLOps & Cloud Platforms
+* Business Management
 
-The programme offered a combination of:
+## Current Studies
 
-- programming
-- artificial intelligence
-- machine learning
-- infrastructure
-- deployment
-- automation
-- system design
-- operations
-- technical problem solving
+Daniela is currently studying:
 
-This suited her curiosity and her desire to understand how different technical components work together.
+* Edge Computing
 
-She was not interested only in learning to use an existing AI service or training an isolated model. She wanted to gain the foundation needed to build complete systems and understand what happens around the model.
+## Upcoming Studies
 
-## Academic Performance
+Upcoming parts of the programme include:
 
-Daniela has received the highest available grade in every course and assessed component completed so far in the programme.
+* Continuous Integration & Delivery
+* System Architecture & Tech Stack for MLOps
+* Security & Integrity
+* Monitoring & Troubleshooting of ML Models
+* LIA 1
 
-This reflects both her academic performance and the standards she sets for herself.
+LIA is the programme's workplace-based internship period.
 
-She is ambitious and often goes substantially deeper into a subject than the assignment requires. When a course introduces a new technology or concept, she tends to investigate how it works beyond the immediate exercise.
+Daniela is available for her first LIA placement from February 2027.
 
-Her focus is not only on completing an assignment successfully. She wants to understand:
+## Technical Areas Covered
 
-- why the solution works
-- what assumptions it depends on
-- how it could fail
-- whether another solution would be better
-- how it would behave in a larger system
-- what would be required to use it in production
+The programme has given Daniela practical experience across several connected areas.
 
-She sets high expectations for her own work and may continue improving a project after it already meets the formal requirements.
+These include:
 
-## How Daniela Studies
+* Python
+* Linux
+* databases and SQL
+* machine-learning algorithms
+* deep learning
+* PyTorch
+* machine-learning model training
+* model evaluation
+* model serving
+* generative AI
+* large language models
+* AI agents and multi-agent systems
+* retrieval-augmented generation
+* embeddings and vector search
+* APIs and backend services
+* Docker and containerisation
+* cloud platforms
+* MLOps
+* LLMOps
+* MLflow
+* collaborative Git workflows
 
-Daniela is an ambitious, questioning and independent student.
+Several of these areas have been developed further through Daniela's course projects and personal projects.
 
-She learns particularly well when she can combine theory with practical development.
+## Machine Learning
 
-Her typical learning process is to:
+The programme has covered both classical machine learning and deep learning.
 
-1. understand the purpose of the concept
-2. build a working implementation
-3. test its behaviour
-4. identify what she does not yet understand
-5. research the underlying mechanisms
-6. reconsider the original implementation
-7. improve and document it
+Daniela has worked with model development, training, validation and evaluation as well as the engineering around trained models.
 
-She asks many questions and is willing to challenge explanations or design choices when the reasoning is unclear.
+One example is her CIFAR-10 work, where she developed a PyTorch training pipeline, experimented with training parameters and used validation-based checkpoint selection before evaluating the selected model on the test set.
 
-She does not interpret questioning as opposition. For her, it is a way to develop a more accurate understanding and avoid building on weak assumptions.
+That model was later reused in a separate course project focused on model serving, creating a practical connection between model training and inference infrastructure.
 
-## Role in Group Projects
+## Generative AI and Multi-Agent Systems
 
-In group work, Daniela is usually active and driving.
+One part of the programme focused on generative AI, AI agents and multi-agent workflows.
 
-She often contributes by:
+Daniela built systems where different agents had responsibilities such as:
 
-- helping establish the direction of the project
-- breaking large tasks into manageable parts
-- asking questions about architectural decisions
-- identifying gaps or risks
-- suggesting alternative solutions
-- keeping track of the complete system
-- encouraging the group to move from discussion to implementation
-- taking responsibility for difficult or unclear tasks
+* planning
+* execution
+* review and critique
+* human approval
 
-She is self-directed and does not need detailed instructions before she begins exploring a problem.
+The work gave her practical experience with orchestrating language-model workflows rather than only making individual model calls.
 
-At the same time, she values collaboration and wants technical decisions to be discussed rather than made without explanation.
+One of the main lessons from the course was that adding agents also adds complexity.
 
-She works best in groups where members are comfortable questioning one another, explaining their reasoning and changing direction when a better solution appears.
+A multi-agent architecture can provide useful separation of responsibilities, but it can also introduce:
 
-## Favourite Areas of Study
+* additional latency
+* additional model cost
+* more failure points
+* more complicated state and control flow
 
-### Programming
+This influenced Daniela's later approach to AI systems: architecture should be chosen based on the problem rather than because a particular pattern is technically possible.
 
-The programming-focused parts of the programme have been among Daniela's favourites.
+## RAG and LLMOps
 
-She enjoys the combination of logic, creativity and immediate feedback that programming provides.
+Retrieval-augmented generation has become one of the areas Daniela has explored most extensively.
 
-Programming allows her to move from an abstract idea to a functioning result. It also creates a clear problem-solving process: understand the desired behaviour, design a solution, test it and improve it.
+During her education she worked on Wired-AI, a collaborative RAG-based onboarding assistant.
 
-She is especially interested in programming when it forms part of a larger application rather than being limited to isolated exercises.
+The project involved areas including:
 
-### Deep Learning
+* document ingestion
+* chunking
+* embeddings
+* semantic retrieval
+* vector databases
+* grounded language-model responses
+* structured outputs
+* source attribution
+* MLflow
+* evaluation
+* Docker
+* backend APIs
 
-Deep learning was another area that stood out to her, even though the course could only provide an introduction to a very large subject.
+She later continued developing these areas independently through DANI, her AI-powered portfolio assistant.
 
-She found it interesting to explore how systems can identify patterns and learn representations from data rather than relying entirely on explicitly programmed rules.
+DANI extends the same general field into a larger deployed system with FastAPI, Qdrant, model-provider routing, MLflow observability, automated testing, Docker, AWS infrastructure and CI/CD.
 
-The course gave her an initial understanding of the concepts and made her interested in learning more about how neural networks behave, how they are evaluated and how they can be used responsibly in larger systems.
+## MLOps and Cloud
 
-## Most Challenging Area
+The programme has introduced Daniela to the engineering around machine-learning systems rather than treating model training as the end of the process.
 
-### Multi-Agent Systems and Generative AI
+Her work has included:
 
-The course involving multi-agent systems was the most difficult part of the programme so far, but it was also one of the most substantial and rewarding.
+* packaging applications
+* Docker
+* Docker Compose
+* model artifacts
+* inference APIs
+* service separation
+* cloud infrastructure
+* experiment tracking
+* reproducibility
+* deployment-oriented architecture
 
-The course gave Daniela a deeper understanding of generative AI and how agent-based systems can be used to improve workflows.
+She has also extended this outside the formal course requirements.
 
-She learned about generative AI both technically and at a more abstract system level.
+For DANI, Daniela configured and operates an AWS EC2 instance, uses Caddy as a reverse proxy and created a GitHub Actions deployment pipeline that deploys the application through AWS Systems Manager.
 
-The technical work involved understanding how components such as language models, prompts, tools, state and agent roles can be combined.
+## Programming
 
-The broader work involved considering questions such as:
+Python is Daniela's main programming language during the programme.
 
-- How should a complex task be divided?
-- Which responsibilities should belong to separate agents?
-- How should information move between them?
-- How can one agent review or criticise another agent's output?
-- When is human intervention required?
-- Does adding more agents actually improve the system?
-- How can the workflow be evaluated?
+She has used Python for:
 
-The course helped her understand that an agent is not inherently intelligent or useful merely because it uses a language model. The design of the workflow, context, tools, responsibilities and evaluation determines whether the system produces meaningful results.
+* backend development
+* machine learning
+* deep learning
+* RAG systems
+* AI agents
+* APIs
+* data handling
+* automation
+* testing
+* model serving
 
-## Learning from Multi-Agent Systems
+She has worked with frameworks and libraries including:
 
-One important lesson was that generative AI systems can be approached as workflows rather than as single prompts.
+* FastAPI
+* Pydantic
+* PyTorch
+* scikit-learn
+* MLflow
+* Streamlit
+* Qdrant
+* OpenAI APIs
 
-A problem can be divided into several stages, with different components responsible for planning, execution, review or human approval.
+The exact technologies vary between projects.
 
-This can improve a workflow when the division of responsibility is justified.
+## How Daniela Approaches the Education
 
-However, additional agents also introduce:
+Daniela learns most effectively by building and experimenting.
 
-- greater complexity
-- more opportunities for errors
-- increased latency
-- increased costs
-- harder debugging
-- more complex state management
+Rather than stopping when an assignment produces the expected output, she often continues investigating the underlying system or extends the project into adjacent areas.
 
-Daniela therefore learned to consider not only whether an agent-based solution can be built, but whether the added architecture produces enough value to justify its complexity.
+Examples include:
 
-This course strengthened her interest in complete AI systems and in the engineering decisions around them.
+* experimenting with training parameters rather than using a single PyTorch configuration
+* taking a trained model into a separate model-serving architecture
+* examining RAG retrieval and evaluation rather than focusing only on generated answers
+* developing DANI beyond a local prototype into a deployed service
 
-## Technical Direction
-
-Daniela wants to be able to build AI systems from the ground up, deploy them and remain responsible for their performance throughout their operational lifetime.
-
-She wants to understand the full path from:
-
-- problem and requirements
-- data and application design
-- model or AI component
-- backend and integration
-- testing and evaluation
-- packaging and deployment
-- monitoring and maintenance
-- optimisation and improvement
-
-She is especially interested in the later stages of this lifecycle, where systems must prove that they work outside a development environment.
-
-## Future Responsibilities
-
-The type of responsibility Daniela expects to enjoy most is overseeing and improving active systems.
-
-This includes work such as:
-
-- monitoring system health
-- examining whether an AI system behaves as expected
-- investigating unexpected outputs
-- identifying performance bottlenecks
-- improving reliability
-- optimising infrastructure and resource usage
-- evaluating model or application quality
-- reducing unnecessary latency or cost
-- improving development and deployment workflows
-- maintaining systems as requirements change
-
-She is attracted to work that requires continuous attention rather than treating deployment as the end of a project.
-
-For Daniela, a system is not finished simply because it is running. It must continue to behave correctly, provide value and remain possible to maintain.
-
-## Desired Competence at Graduation
-
-By the end of the programme, Daniela wants to be able to take an AI system through its complete lifecycle.
-
-She wants to feel confident in:
-
-- designing an AI application
-- writing the supporting software
-- working with models and data
-- creating backend services and APIs
-- testing technical and AI-specific behaviour
-- containerising applications
-- deploying services to cloud infrastructure
-- creating automated delivery workflows
-- implementing monitoring and observability
-- evaluating whether a system performs as intended
-- troubleshooting production problems
-- maintaining and improving deployed systems
-
-She does not expect to know everything at graduation.
-
-Her goal is to have a sufficiently broad and reliable foundation to understand the complete system, contribute independently and recognise where deeper specialist knowledge is required.
+This practical approach has helped connect concepts that are sometimes taught separately, such as machine learning, backend development, infrastructure and deployment.
 
 ## Previous Technical Studies
 
-Before entering the AI and MLOps programme, Daniela completed prerequisite courses through adult education.
+Before beginning the MLOps programme, Daniela completed prerequisite studies through adult education.
 
 ### Programming 1 — C#
 
 **Grade: A**
 
-The course introduced fundamental programming concepts through C#.
+The course introduced programming fundamentals using C#.
 
-It covered areas such as:
+Topics included:
 
-- variables and data types
-- conditions
-- loops
-- methods
-- object-oriented concepts
-- debugging
-- program structure
-- problem solving through code
+* variables and data types
+* conditions
+* loops
+* methods
+* object-oriented programming
+* debugging
+* program structure
+* problem solving
 
 Daniela received the highest grade in the course.
 
@@ -262,134 +229,64 @@ Daniela received the highest grade in the course.
 
 **Grade: B**
 
-The course strengthened the mathematical foundation required for further technical studies.
+The course provided the mathematical prerequisite for further technical studies.
 
-It included areas such as algebra, functions, equations and applied mathematical problem solving.
+It included areas such as:
+
+* algebra
+* equations
+* functions
+* applied mathematical problem solving
 
 ## Upper Secondary Education
 
 ### Media and Photography
 
-**Fredrika Bremergymnasiet**  
+**Fredrika Bremergymnasiet**
 **2005–2008**
 
-Daniela studied a media and photography-oriented upper secondary programme.
+Daniela previously studied a media and photography-oriented upper secondary programme.
 
-The education combined visual communication, photography, digital tools, media production and theoretical subjects.
+The programme included subjects such as:
 
-Relevant courses included:
+* photography
+* web design
+* computer knowledge
+* digital creation
+* desktop publishing
+* multimedia
+* media production
+* visual communication
 
-- Computer Knowledge
-- Desktop Publishing
-- Web Design
-- Digital Creation
-- Photography A
-- Photography B
-- Photography C
-- Media Communication
-- Media Studies
-- Media Production
-- Multimedia
-- Text Communication
-- Aesthetic Activities: Visual Art
-- Design: Textile and Fashion
-- Project Work
+Daniela received the highest historical grade, MVG, in several subjects including:
 
-She received the highest historical grade, MVG, in several relevant subjects, including:
+* Computer Knowledge
+* Web Design
+* Photography A
+* Photography C
+* Project Work
 
-- Computer Knowledge
-- Web Design
-- Photography A
-- Photography C
-- Project Work
+The programme gave her early experience with digital tools, visual communication and web-related work before her later career change into technology.
 
-She also received VG in subjects including:
+## Educational Direction
 
-- Desktop Publishing
-- Digital Creation
-- Photography B
-- Media Studies
-- Media Production
+Daniela's current goal is to build a broad technical foundation around the complete lifecycle of machine-learning and AI applications.
 
-The programme gave Daniela early experience with digital tools, visual structure, communication and project-based work.
+By graduation she wants practical competence across areas such as:
 
-## Photography and Visual Communication
+* software development
+* machine learning
+* AI applications
+* backend services
+* testing
+* containerisation
+* cloud infrastructure
+* CI/CD
+* monitoring and observability
+* deployment
+* troubleshooting
+* maintaining deployed systems
 
-Photography was a substantial part of Daniela's upper secondary education.
+She does not expect to specialise deeply in every part of that lifecycle.
 
-The courses involved both technical and creative decisions, including:
-
-- composition
-- lighting
-- visual storytelling
-- image selection
-- editing
-- communicating an intended feeling or message
-- evaluating the quality of a visual result
-
-This background remains relevant to how she approaches technical products.
-
-She is attentive not only to whether something functions, but also to how information is structured, presented and experienced by the user.
-
-Photography also taught her that technical settings are tools rather than the final goal. A technically correct image is not necessarily an effective image, just as technically functioning software is not necessarily a useful product.
-
-## Web and Digital Media Background
-
-The programme also included early work with web design, desktop publishing, multimedia and digital creation.
-
-Although the tools and technologies have changed substantially since 2008, the education introduced Daniela to the idea that digital products combine several disciplines:
-
-- technology
-- structure
-- content
-- visual communication
-- audience needs
-- usability
-
-This is conceptually connected to her current interest in building complete AI products rather than isolated technical demonstrations.
-
-## From Media to AI and MLOps
-
-Daniela's path from media and photography through hospitality and leadership into AI and MLOps is not a conventional technical career path.
-
-However, the different stages provide complementary perspectives.
-
-Her media education contributed:
-
-- creativity
-- visual communication
-- project work
-- experience with digital tools
-- awareness of presentation and audience
-
-Her professional career contributed:
-
-- leadership
-- responsibility
-- customer understanding
-- operational problem solving
-- business awareness
-- communication across roles
-
-Her current education is adding:
-
-- programming
-- AI and machine learning
-- backend development
-- infrastructure
-- deployment
-- testing
-- monitoring
-- MLOps and LLMOps
-
-Together, these experiences shape how she approaches technology: as a combination of engineering, communication, people and practical delivery.
-
-## Educational Goals
-
-Daniela is not studying only to obtain a qualification.
-
-She wants to use the education to make a durable transition into a technical career where learning remains a central part of the work.
-
-Her long-term goal is to become someone who can understand both the individual components and the larger AI system around them.
-
-She wants colleagues to be able to rely on her to ask difficult questions, investigate abnormal behaviour, identify opportunities for improvement and help move systems from experimental ideas into dependable products.
+Her aim is to understand how the parts connect, be able to work independently across several of them and know when deeper specialist expertise is required.

@@ -1,660 +1,557 @@
-# CIFAR-10 Image Classification Service
+# CIFAR-10 Training and Model Serving
 
 ## Summary
 
-CIFAR-10 Image Classification Service is a containerized machine learning application for serving image predictions from a trained PyTorch convolutional neural network.
+This project follows a CIFAR-10 image-classification model from training and experimentation to a containerized inference service.
 
-The project demonstrates how a trained model can be exported, loaded for inference, exposed through a FastAPI service and accessed through a separate Streamlit interface.
+Daniela first built a modular PyTorch training pipeline for a convolutional neural network and used validation-based experiments to select the final model.
 
-The application is divided into two isolated services that run in separate Docker containers and communicate over an internal network.
+The trained model was then reused in a collaborative model-serving project with Ömer Aytug. In that project, the model was exported to TorchScript, served through a FastAPI API and accessed through a separate Streamlit frontend.
 
-## Purpose
-
-The purpose of the project was to move beyond model training and focus on model serving, integration and deployment structure.
-
-The main goals were to:
-
-- serve a trained PyTorch model through an API
-- keep preprocessing consistent during inference
-- separate the user interface from the inference service
-- containerize the complete application
-- create a stateless API
-- use a collaborative Git workflow
-- structure the project in a way that resembles a small production service
+Together, the two stages demonstrate the transition from model development to a usable machine-learning service.
 
 ## Project Context
 
-This was a collaborative educational project completed by Daniela Algerydh and Ömer Aytug.
+The work was completed in two connected stages.
 
-The work was divided through feature branches and pull requests.
+The first stage focused on model training:
 
-The main development areas included:
+* PyTorch model development
+* dataset handling
+* reproducible training
+* hyperparameter experiments
+* validation-based model selection
+* checkpointing
+* final test evaluation
 
-- model integration
-- TorchScript export
-- FastAPI inference service
-- Streamlit frontend
-- Docker containerization
-- Docker Compose networking
-- project configuration
-- documentation
-- testing and verification
+The second stage focused on model serving:
 
-## Problem
+* model artifact integration
+* TorchScript export
+* inference preprocessing
+* FastAPI
+* Streamlit
+* Docker
+* Docker Compose networking
+* stateless API design
+* collaborative Git development
 
-A trained machine learning model is not directly useful to an end user.
+The model produced during the training work became the starting point for the serving project rather than being treated as an unrelated model artifact.
 
-It needs a reliable inference workflow, input validation, preprocessing, a service interface and a way for another application or user to access the result.
+## Dataset
 
-This project addressed the question:
+The model was trained on CIFAR-10.
 
-How can a trained PyTorch image-classification model be converted into a reusable, containerized service with a separate user interface?
+The dataset contains:
 
-## Architecture
+* 50,000 training images
+* 10,000 test images
+* 10 image classes
+* 32 × 32 RGB images
 
-The system consists of three main layers:
+The training data was further divided into training and validation sets.
 
-1. A Streamlit user interface
-2. A FastAPI inference service
-3. A PyTorch model loaded through TorchScript
+The final configuration used 10% of the training data for validation.
 
-The Streamlit application accepts an uploaded image and sends it to the FastAPI service.
+## PyTorch Training Pipeline
 
-The FastAPI service validates and preprocesses the image, runs inference through the PyTorch model and returns the predicted class together with a confidence score.
+Daniela structured the training work as a modular pipeline rather than keeping the full workflow in a single notebook or script.
 
-The frontend and backend run in separate Docker containers.
+The project separated responsibilities into components for:
 
-## Service Design
+* configuration
+* dataset handling
+* model architecture
+* training
+* evaluation
+* utility functions
 
-### Streamlit Frontend
+A main entrypoint ran the complete training pipeline, while a separate notebook was used for experiments.
 
-The frontend is responsible for:
+The goal was to make training easier to reproduce, inspect and modify.
 
-- accepting image uploads
-- displaying an image preview
-- sending the image to the API
-- displaying the predicted label
-- displaying the confidence score
-- showing the raw JSON response when requested
+## Training Procedure
 
-The frontend does not load the machine learning model directly.
+The model-selection process kept training, validation and final testing separate.
 
-It communicates with the inference service over HTTP.
+The workflow was:
 
-### FastAPI Inference Service
+1. Train the model on the training split.
+2. Evaluate it against the validation split after each epoch.
+3. Save a checkpoint when validation accuracy improves.
+4. Load the best checkpoint after training.
+5. Evaluate that model once against the test set.
 
-The FastAPI service is responsible for:
+The test set was not used to choose the model.
 
-- exposing health and prediction endpoints
-- receiving uploaded image files
-- validating the request
-- preprocessing the image
-- loading the TorchScript model
-- running inference
-- calculating confidence
-- returning structured JSON
+Model selection was based on validation performance.
+
+This distinction was an important part of the project because repeatedly tuning against test results would make the final test score less meaningful.
+
+## Experiments
+
+Daniela experimented with several training parameters before choosing the final configuration.
+
+The experiments included changes to:
+
+* learning rate, from 0.1 down to 0.0001
+* batch sizes of 16, 64 and 128
+* training lengths between 5 and 25 epochs
+
+The experiments showed several clear behaviours.
+
+A learning rate of 0.1 was too high and the network remained close to random classification performance.
+
+Very low learning rates produced much slower learning.
+
+A batch size of 128 performed better in the experiments than the smaller alternatives.
+
+Validation accuracy generally peaked around epochs 10–13 and could decline afterward, showing signs of overfitting and reinforcing the decision to save the best validation checkpoint rather than simply use the final epoch.
+
+## Final Training Configuration
+
+The selected configuration was:
+
+* batch size: 128
+* learning rate: 0.0005
+* epochs: 15
+* validation fraction: 0.1
+* optimizer: Adam
+* loss function: CrossEntropyLoss
+
+The best model checkpoint was selected using validation accuracy.
+
+The final test accuracy was:
+
+`0.7140`
+
+or approximately 71.4%.
+
+The test accuracy was slightly below the best validation accuracy.
+
+## Reproducibility
+
+Reproducibility was a deliberate part of the training pipeline.
+
+The project included:
+
+* fixed Python random seeds
+* fixed NumPy random seeds
+* fixed PyTorch random seeds
+* deterministic CUDA configuration
+* reproducible train/validation splitting
+* automatic device detection
+
+The training code could detect and use CUDA, MPS or CPU depending on the available environment.
+
+One practical challenge was ensuring that the training/validation split remained deterministic, which required explicitly controlling the random generator used during splitting.
+
+Daniela also verified GPU execution during development rather than assuming that PyTorch was actually using the GPU.
+
+## From Training to Serving
+
+After completing the training pipeline, the next project focused on what happens after a model has been trained.
+
+A model checkpoint by itself is not yet an application.
+
+To make the classifier usable by another service or user, the project needed to handle:
+
+* model serialization
+* loading the model for inference
+* consistent preprocessing
+* input validation
+* an API interface
+* a user-facing client
+* service networking
+* reproducible runtime environments
+
+The saved PyTorch model therefore became the input to the model-serving stage.
+
+## Model Artifacts
+
+The original trained weights are stored as:
+
+`best_model.pt`
+
+For serving, the model was exported to a separate TorchScript artifact:
+
+`model.torchscript.pt`
+
+The export process is handled separately from normal application startup.
+
+The model architecture and original checkpoint are needed when generating the TorchScript artifact, but the running inference API loads the exported model directly using `torch.jit.load`.
+
+This creates a clearer separation between the training artifact and the artifact used by the serving application.
+
+## TorchScript
+
+TorchScript was used to serialize the trained PyTorch model for inference.
+
+The export step separates:
+
+* model training
+* saved PyTorch weights
+* model architecture
+* artifact export
+* runtime inference
+
+The serving API does not retrain the model or reconstruct the training process when it starts.
+
+It loads the prepared inference artifact.
+
+## Inference Preprocessing
+
+The serving application applies the image transformations required by the trained model.
+
+Images are:
+
+1. resized to 32 × 32 pixels
+2. converted to tensors
+3. normalized using the CIFAR-10 mean and standard-deviation values
+
+The normalization mean is:
+
+* 0.4914
+* 0.4822
+* 0.4465
+
+The standard deviation is:
+
+* 0.2470
+* 0.2435
+* 0.2616
+
+Keeping preprocessing consistent between training and inference is important because changing the input transformation can change how the model interprets incoming images.
+
+## Model Serving Architecture
+
+The serving application has three main layers:
+
+1. Streamlit frontend
+2. FastAPI inference service
+3. PyTorch model loaded through TorchScript
+
+The frontend and API run as separate services.
+
+Streamlit handles user interaction while FastAPI owns the inference workflow.
+
+The frontend does not load or execute the model directly.
+
+## Prediction Flow
+
+A prediction follows this sequence:
+
+1. A user uploads an image through Streamlit.
+2. Streamlit sends the image to the FastAPI service.
+3. FastAPI receives and validates the uploaded file.
+4. The image is resized and normalized.
+5. The TorchScript model generates logits.
+6. Softmax converts those logits into class probabilities.
+7. The service selects the class with the highest probability.
+8. FastAPI returns the class index, class label and confidence score.
+9. Streamlit displays the result.
+
+The complete prediction flow was tested from image upload through returned model response.
+
+## FastAPI Service
+
+The inference backend is implemented with FastAPI.
+
+It exposes two main endpoints.
+
+### Health
+
+`GET /health`
+
+This returns a simple status response:
+
+`{"status": "ok"}`
+
+The endpoint can be used to verify that the API is available.
+
+### Prediction
+
+`POST /predict`
+
+The endpoint accepts an uploaded image as multipart form data.
+
+Supported input formats include:
+
+* JPG
+* JPEG
+* PNG
+
+A successful response includes:
+
+* predicted class index
+* predicted class label
+* confidence score
 
 The API is stateless.
 
-Each request contains everything needed for the prediction, and the service does not depend on user sessions or stored request state.
+Uploaded images, predictions and user sessions are not persisted between requests.
 
-### PyTorch Model
+Each inference request is handled independently.
 
-The trained convolutional neural network performs image classification on the CIFAR-10 classes.
+## Streamlit Frontend
 
-The original trained weights are stored separately from the exported TorchScript model.
+Streamlit provides a simple interface for interacting with the model.
 
-The TorchScript artifact is used during inference.
+A user can:
 
-## System Flow
+* upload an image
+* preview it
+* submit it for prediction
+* see the predicted CIFAR-10 class
+* see the confidence score
+* inspect the raw API response
 
-The application follows this sequence:
+The frontend communicates with the FastAPI service over HTTP rather than accessing the PyTorch model itself.
 
-1. The user uploads an image through Streamlit.
-2. The frontend sends the image as a multipart request.
-3. FastAPI receives and validates the file.
-4. The image is resized and normalized.
-5. The TorchScript model generates logits.
-6. Softmax converts the output into class probabilities.
-7. The service selects the most likely class.
-8. The API returns the class index, label and confidence.
-9. Streamlit displays the result.
+## Docker and Service Separation
 
-## Model Details
+The serving application is containerized with Docker.
 
-The model is a convolutional neural network trained on CIFAR-10.
-
-The model architecture is defined in the application code and used during TorchScript export.
-
-The original model weights are stored as:
-
-- best_model.pt
-
-The exported inference artifact is stored as:
-
-- model.torchscript.pt
-
-The inference service loads the scripted model using torch.jit.load.
-
-## TorchScript Export
-
-TorchScript was used to convert the trained PyTorch model into a serialized artifact suitable for inference.
-
-The export process is handled through a dedicated script.
-
-This separates:
-
-- the original training artifact
-- the model architecture
-- the export step
-- the final inference artifact
-
-The original weights are only required when generating the TorchScript model.
-
-The running API uses the exported TorchScript artifact.
-
-## Preprocessing
-
-The inference pipeline applies the same image transformations expected by the trained model.
-
-The preprocessing steps are:
-
-- resize the image to 32 by 32 pixels
-- convert the image to a tensor
-- normalize using the CIFAR-10 mean values
-- normalize using the CIFAR-10 standard deviation values
-
-The normalization values are:
-
-- mean: 0.4914, 0.4822, 0.4465
-- standard deviation: 0.2470, 0.2435, 0.2616
-
-Using consistent preprocessing is essential because the model was trained on data prepared with the same transformation logic.
-
-## Confidence Calculation
-
-The model produces logits rather than direct probabilities.
-
-Softmax is applied to convert the logits into class probabilities.
-
-The highest probability is returned as the confidence score.
-
-The response contains:
-
-- predicted class index
-- predicted class label
-- confidence score
-
-## API Endpoints
-
-## Health Endpoint
-
-The health endpoint is available at:
-
-GET /health
-
-It returns a simple status response confirming that the API is running.
-
-Expected response:
-
-{"status": "ok"}
-
-This endpoint can be used for:
-
-- manual verification
-- container health checks
-- deployment checks
-- monitoring integrations
-
-## Prediction Endpoint
-
-The prediction endpoint is available at:
-
-POST /predict
-
-It accepts an uploaded image through multipart form data.
-
-Supported formats include:
-
-- JPG
-- JPEG
-- PNG
-
-A successful response contains:
-
-- predicted_index
-- predicted_label
-- confidence
-
-Example response:
-
-{
-  "predicted_index": 3,
-  "predicted_label": "cat",
-  "confidence": 0.87
-}
-
-## Frontend
-
-The Streamlit interface provides a simple manual testing environment for the model-serving API.
-
-The user can:
-
-- upload an image
-- preview the selected file
-- send the image for prediction
-- view the predicted class
-- view the confidence score
-- inspect the raw API response
-
-The frontend communicates with the FastAPI service through the prediction endpoint.
-
-## Containerization
-
-The application is containerized using Docker.
-
-The frontend and backend run in separate containers.
+FastAPI and Streamlit run in separate containers.
 
 Docker Compose is used to:
 
-- build both services
-- start both containers
-- connect them through an internal network
-- manage service startup
-- provide a consistent local environment
+* build the services
+* start the containers
+* connect them through an internal network
+* provide consistent runtime environments
 
-The service separation demonstrates how the interface and inference layer can be deployed and managed independently.
+Within the Docker Compose network, the Streamlit service communicates with FastAPI using the backend service rather than a locally loaded model.
 
-## Docker Networking
+This keeps responsibilities separated:
 
-The Streamlit container communicates with the FastAPI container through the Docker Compose network.
+* Streamlit handles presentation
+* FastAPI handles inference
+* PyTorch handles prediction
 
-This means that the frontend does not need to access the model directly.
+The application was designed to run on CPU, so no GPU infrastructure is required for serving the model.
 
-The internal service connection keeps the responsibilities separated:
+## Collaboration
 
-- Streamlit handles presentation
-- FastAPI handles inference
-- PyTorch handles prediction
+The model-serving stage was completed collaboratively by Daniela Algerydh and Ömer Aytug.
 
-## Stateless API Design
+Development used feature branches and pull requests rather than direct development on the main branch.
 
-The inference API is stateless.
+The main branch was protected and pull requests required review before merging.
 
-It does not store uploaded images, predictions or user sessions between requests.
+The workflow included:
 
-This design makes the service easier to:
+* creating focused feature branches
+* implementing and verifying changes
+* opening pull requests
+* reviewing each other's work
+* updating branches when required
+* resolving merge conflicts
+* merging after approval
 
-- scale horizontally
-- restart
-- test
-- replace
-- deploy behind a load balancer
+Working on related features in parallel also created practical experience with branch synchronization and merge conflicts.
 
-Each prediction request is handled independently.
+## Daniela's Work
 
-## CPU-Compatible Runtime
+Daniela developed the original PyTorch training pipeline and trained the CIFAR-10 model used as the basis for the later serving work.
 
-The application is designed to run on CPU.
+Her training work included:
 
-This makes local development and testing easier and avoids requiring GPU infrastructure.
+* modular training code
+* data handling
+* validation-based model selection
+* checkpointing
+* hyperparameter experiments
+* reproducibility
+* final evaluation
 
-The model is small enough to support practical inference in a CPU-based environment.
+In the collaborative serving stage, her work included project integration, application development, containerized service design, pull-request collaboration, verification and documentation.
 
-## Project Structure
-
-The project is organised into:
-
-- application code
-- model artifacts
-- export scripts
-- frontend code
-- Docker configuration
-- project dependencies
-- documentation assets
-
-The main application package includes:
-
-- configuration
-- FastAPI entrypoint
-- model architecture
-- model loading
-- preprocessing
-- inference logic
-
-The TorchScript export logic is kept in a separate script.
-
-## Separation of Responsibilities
-
-The project separates several concerns clearly.
-
-### Configuration
-
-Class labels and shared configuration are stored separately from application logic.
-
-### API Entrypoint
-
-The FastAPI entrypoint defines the service and routes.
-
-### Model Architecture
-
-The original architecture is kept in a dedicated module and is primarily used during export.
-
-### Inference Logic
-
-Model loading, preprocessing and prediction are handled separately from the API route definitions.
-
-### Frontend
-
-The Streamlit interface is separated from the backend service and model logic.
-
-### Export Logic
-
-TorchScript conversion is performed through a dedicated script rather than during normal application startup.
-
-## Technologies
-
-- Python
-- PyTorch
-- TorchScript
-- FastAPI
-- Streamlit
-- Docker
-- Docker Compose
-- Pydantic
-- Pillow
-- uv
-- Git
-- GitHub
-
-## Development Process
-
-The project used a feature-branch workflow.
-
-Changes were developed in separate branches and integrated through pull requests.
-
-The main branch was protected, and pull request reviews were required before merging.
-
-Key development areas included:
-
-- model integration
-- containerization
-- frontend integration
-
-This workflow helped the collaborators review changes and keep the main branch stable.
-
-## Pull Request Workflow
-
-The pull request process required each collaborator to:
-
-- create a dedicated feature branch
-- implement and verify the change
-- push the branch
-- open a pull request
-- review changes
-- resolve conflicts when necessary
-- merge only after approval
-
-This created practical experience with collaborative software development rather than working directly on the main branch.
-
-## Merge Conflicts and Branch Management
-
-One challenge was keeping feature branches synchronized with the main branch.
-
-When several related changes were developed at the same time, outdated branches could create merge conflicts.
-
-The team handled this through:
-
-- regularly updating branches
-- rebasing when required
-- reviewing changed files
-- resolving conflicts before merging
-- using pull requests to make integrations visible
-
-This reinforced the importance of small, focused branches and frequent synchronization.
+The combined work gave her experience across both model development and model serving rather than only one side of the workflow.
 
 ## Verification
 
-The system was verified through:
+The serving system was verified through:
 
-- the health endpoint
-- manual image uploads
-- API requests
-- Swagger UI
-- Streamlit testing
-- command-line requests
-- container startup checks
+* the health endpoint
+* manual image uploads
+* direct API requests
+* Swagger UI
+* Streamlit
+* command-line requests
+* container startup checks
 
-The health endpoint confirmed that the API was available.
+The prediction endpoint verified the full path from uploaded image to returned prediction.
 
-The prediction endpoint confirmed that the complete flow from image upload to model response worked.
+## Challenges and Learning
 
-## Running the Application
+### Model Selection
 
-The complete application can be built and started through Docker Compose.
+The training experiments demonstrated why model selection should use validation data rather than the final test set.
 
-After startup:
+They also showed how learning rate, batch size and training duration can materially affect model behaviour.
 
-- the FastAPI service is available on port 8000
-- the Streamlit interface is available on port 8501
+### Reproducibility
 
-The user can interact with the system through the browser or call the API directly.
+Producing a deterministic train/validation split required more than setting a single global seed.
 
-## Key Design Decisions
+The project reinforced the need to control randomness throughout the training pipeline.
 
-### Use TorchScript for Inference
+### Overfitting
 
-The trained PyTorch model was exported to TorchScript.
+Longer training showed validation performance peaking and then declining.
 
-This created a dedicated inference artifact and reduced the dependency on rebuilding the original training setup during application startup.
+This made validation-based checkpointing more useful than simply saving the model from the final epoch.
 
-### Separate Frontend and Backend
+### Training versus Inference
 
-The frontend and inference service run as separate applications.
+Moving the same model into a serving project made the distinction between training and inference concrete.
 
-This keeps user-interface concerns separate from model-serving concerns.
+The serving system does not need the complete experiment environment.
 
-### Use Docker Compose
-
-Docker Compose provides a reproducible way to run both services together.
-
-It also demonstrates service discovery and internal networking.
-
-### Keep the API Stateless
-
-The API does not retain data between requests.
-
-This makes the service simpler and easier to scale.
-
-### Keep Preprocessing Close to Inference
-
-The required image transformations are part of the inference logic.
-
-This reduces the risk that clients preprocess images inconsistently.
-
-## Results
-
-The completed project provides a functioning image-classification service.
-
-The application can:
-
-- start through Docker Compose
-- expose a health endpoint
-- receive uploaded images
-- preprocess the input consistently
-- run inference through a TorchScript model
-- return a predicted class
-- return a confidence score
-- display results in Streamlit
-- run frontend and backend in isolated containers
-
-The full flow from user upload to model response was functional.
-
-## Daniela's Contribution
-
-Daniela contributed to the collaborative development of the service.
-
-Her work included project integration, application development, containerized service design, pull request collaboration, verification and documentation.
-
-The project gave her practical experience with combining a previously trained model with a complete serving architecture.
-
-## What Daniela Learned
-
-The project strengthened Daniela's understanding of the difference between training a model and serving one.
-
-Her main learning included:
-
-- exporting PyTorch models to TorchScript
-- loading serialized models for inference
-- keeping preprocessing consistent
-- building inference endpoints with FastAPI
-- accepting multipart file uploads
-- returning structured prediction responses
-- calculating confidence from logits
-- creating a separate Streamlit client
-- containerizing multiple services
-- configuring communication between containers
-- designing stateless APIs
-- collaborating through pull requests
-- handling merge conflicts
-
-The project also demonstrated that model serving includes much more than calling a prediction function.
-
-The complete system must manage input, validation, preprocessing, artifacts, networking, runtime configuration and user interaction.
-
-## Challenges
-
-### Model Integration
-
-The model had originally been created in a previous assignment.
-
-Integrating it into a new serving project required understanding:
-
-- the architecture
-- the saved weights
-- the expected input shape
-- the preprocessing requirements
-- the output format
-- how to export it safely
+Instead it needs a stable model artifact, deterministic preprocessing and a predictable inference interface.
 
 ### TorchScript Export
 
-The model architecture and original weights needed to be loaded correctly before export.
+The original architecture and weights needed to be loaded correctly before generating the TorchScript model.
 
-The team also needed to verify that the exported artifact produced valid predictions during inference.
+The exported artifact then had to be verified to ensure it produced valid predictions.
 
-### Container Communication
+### Container Networking
 
-The frontend and backend had to communicate correctly while running in separate containers.
+Separating Streamlit and FastAPI meant the services had to communicate correctly through Docker networking.
 
-This required understanding:
+This required working with:
 
-- Docker networking
-- internal service names
-- exposed ports
-- local versus container addresses
-- startup order
+* internal service names
+* container addresses
+* exposed ports
+* startup behaviour
 
-### Collaborative Integration
+### Collaborative Development
 
-Working in parallel created a need for clear branch boundaries, frequent updates and pull request reviews.
+Feature-branch development and pull requests introduced practical issues such as branches falling behind main and merge conflicts when several connected features changed simultaneously.
 
-Merge conflicts became part of the practical learning.
+## Technologies
+
+The combined project used:
+
+* Python
+* PyTorch
+* TorchScript
+* FastAPI
+* Streamlit
+* Docker
+* Docker Compose
+* Pydantic
+* Pillow
+* uv
+* Git
+* GitHub
+* NumPy
 
 ## Limitations
 
-The project is educational and not production-ready.
+The project is educational rather than a production deployment.
 
-Current limitations include:
+The serving application does not currently include features such as:
 
-- limited input validation
-- no authentication
-- no rate limiting
-- no persistent logging
-- no structured monitoring
-- no metrics collection
-- no CI pipeline for container builds
-- no automated deployment
-- no model registry
-- no model version endpoint
-- no drift detection
-- no automated performance testing
-- limited model optimization
-- fixed configuration values
-- no GPU-specific runtime
+* authentication
+* rate limiting
+* production monitoring
+* metrics collection
+* model registry integration
+* drift detection
+* automated deployment
+* autoscaling
+* automated performance testing
 
-The reused CIFAR-10 model was not heavily optimized for accuracy or inference performance.
+Input validation is also limited compared with what would be appropriate for an internet-facing production service.
 
-## What Could Be Improved
+The CIFAR-10 model was primarily used to explore the training and serving workflow rather than maximize state-of-the-art classification accuracy.
 
-Future improvements could include:
+## Possible Improvements
 
-- stronger file validation
-- maximum upload-size limits
-- structured error responses
-- structured logging
-- Prometheus-compatible metrics
-- request tracing
-- latency monitoring
-- model-version metadata
-- environment-based configuration
-- automated tests
-- CI for linting and container builds
-- automated image scanning
-- deployment to a cloud environment
-- autoscaling
-- model performance optimization
-- quantization
-- batch inference
-- improved frontend feedback
-- support for additional image formats
-- production-ready health and readiness checks
+The training side could be extended with:
 
-The model itself could also be improved through:
+* data augmentation
+* dropout or weight decay
+* learning-rate scheduling
+* deeper architectures such as ResNet
+* better experiment logging
+* automated training checks
 
-- architecture experimentation
-- additional training
-- data augmentation
-- hyperparameter tuning
-- calibration analysis
-- evaluation of confidence reliability
+The serving side could be extended with:
+
+* stronger file validation
+* upload-size limits
+* structured logging
+* metrics and tracing
+* latency monitoring
+* model-version metadata
+* automated tests
+* CI for linting and container builds
+* cloud deployment
+* quantization
+* batch inference
+* automated health and readiness checks
 
 ## Use of LLMs
 
-Large language models were used as development support.
+Large language models were used as development support during both stages.
 
-They assisted with:
+They were used for tasks such as:
 
-- reviewing project structure
-- clarifying architectural decisions
-- debugging environment problems
-- refining documentation
+* reviewing code and project structure
+* debugging environment problems
+* discussing reproducibility
+* validating experimental approaches
+* documentation support
 
-All implementation, integration and verification were performed manually by the project collaborators.
+Hyperparameter choices and final model selection were based on the actual experiment results.
+
+Implementation, integration and verification were performed by the project participants.
 
 ## Relevance to MLOps
 
-The project demonstrates several important MLOps concepts:
+The combined project demonstrates a larger part of the machine-learning lifecycle than either stage does alone.
 
-- separation of training and inference
-- serialized model artifacts
-- reproducible runtime environments
-- API-based model serving
-- consistent preprocessing
-- containerized services
-- service isolation
-- internal networking
-- stateless inference
-- collaborative development
-- deployment-oriented architecture
+It includes:
 
-It focuses on the transition from a trained model to a usable service.
+`data -> training -> validation -> model selection -> checkpoint -> inference artifact -> API -> containerized service -> client`
 
-## Repository
+Relevant MLOps concepts include:
 
-Repository name: mlops-model-serving
+* reproducible training
+* separation of train, validation and test data
+* experiment-driven model selection
+* model checkpointing
+* separation of training and inference
+* serialized model artifacts
+* consistent preprocessing
+* API-based model serving
+* stateless inference
+* reproducible runtime environments
+* containerized services
+* service isolation
+* internal networking
+* collaborative Git workflows
+
+The project helped Daniela understand not only how to train a model, but how to turn a trained model into a service that another application can actually use.
+
+## Repositories
+
+Training pipeline:
+
+`pytorch-training-pipeline`
+
+Model-serving application:
+
+`mlops-model-serving`
 
 ## Collaborators
 
-- Daniela Algerydh
-- Ömer Aytug
+Model-serving stage:
+
+* Daniela Algerydh
+* Ömer Aytug

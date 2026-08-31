@@ -2,317 +2,259 @@
 
 ## Overview
 
-Daniela has nearly 20 years of professional experience from restaurants, hospitality, retail, delicatessens and food service.
+Before changing direction towards AI and MLOps, Daniela spent most of her professional career in hospitality, restaurants, delicatessens and food retail.
 
-Her career developed from practical operational roles into positions with increasing responsibility for staff, daily operations, sales, purchasing, budgets and organisational development.
+Her work progressed from practical customer-facing and operational roles into management positions with responsibility for staff, daily operations, purchasing, budgets, workflows and sales.
 
-Before changing direction towards AI and MLOps, she worked in environments where customer expectations were immediate, margins mattered and unexpected problems had to be solved while operations continued.
-
-Her experience includes:
-
-- personnel management
-- recruitment and onboarding
-- scheduling and salary administration
-- work environment responsibility
-- staff coaching and development
-- purchasing and supplier negotiations
-- budgeting and cost control
-- sales initiatives
-- customer service
-- workflow design
-- quality control
-- daily operational leadership
+This background is separate from her current technical education, but it provides professional experience in areas such as responsibility, leadership, business operations and working in environments where problems often need to be solved immediately.
 
 ## Career Timeline
 
 ### Kitchen Manager
 
-**Erssons FrånEgen AB, Fruängen**  
+**Erssons FrånEgen AB, Fruängen, Stockholm**
 **September 2022 – August 2025**
 
-Daniela was responsible for the daily operation of the kitchen and led a team consisting of at least five permanent employees, together with several part-time staff members.
+Daniela was responsible for the daily operation of the kitchen and led a team consisting of at least five permanent employees together with additional part-time staff.
 
-She had full personnel responsibility, including:
+She had personnel responsibility covering areas including:
 
-- recruitment
-- onboarding
-- scheduling
-- salary administration
-- work environment
-- staff development
-- performance management
-- daily leadership
-- operational planning
+* recruitment
+* onboarding
+* scheduling
+* salary administration
+* work environment
+* staff development
+* performance management
+* daily leadership
 
-Her role also included responsibility for purchasing, supplier relationships, budgeting, cost control, food quality, workflows and sales performance.
+Her operational responsibilities also included:
 
-During her time as Kitchen Manager, Daniela worked to improve both the financial performance of the kitchen and the working environment for the staff.
+* production and workflow planning
+* purchasing
+* supplier relationships
+* budgeting
+* cost control
+* inventory
+* food quality
+* sales performance
 
-She:
-
-- reduced food waste
-- reduced personnel costs
-- increased revenue
-- increased activity and visibility on social media
-- created sales activities and promotional initiatives
-- negotiated new agreements with suppliers
-- introduced more efficient workflows
-- organised training and development activities
-- used team activities and rewards to strengthen morale
-
-### Leadership Style
-
-Daniela describes her leadership style as participative, present and coaching.
-
-She worked closely with the team in the daily operation rather than managing only from a distance. This gave her a practical understanding of individual strengths, problems and development needs.
-
-One of the most important lessons she took from the role was that there is no universal leadership method that works for every person or situation.
-
-Different employees may need different forms of:
-
-- communication
-- structure
-- encouragement
-- responsibility
-- feedback
-- support
-- challenge
-
-A solution that works well for one employee may not work for another, even when the underlying situation appears similar.
-
-Daniela therefore learned to treat each person and situation as unique while still maintaining clear expectations and accountability.
-
-Her leadership required her to balance:
-
-- individual needs and team performance
-- empathy and business requirements
-- coaching and accountability
-- staff wellbeing and operational efficiency
-- immediate problems and long-term development
-
-She also learned that leadership decisions are often made without complete information. In a working kitchen, issues frequently need to be handled immediately while considering the effect on staff, customers, costs and the wider operation.
-
-### Garde Manger / Cold Kitchen Chef
-
-**Erssons FrånEgen AB, Fruängen**  
-**October 2016 – September 2022**
-
-Before becoming Kitchen Manager, Daniela worked as a cold kitchen chef at Erssons.
-
-Her work included preparing and presenting cold dishes, delicatessen products, catering orders and other food for retail and customer service.
-
-The role required:
-
-- food preparation
-- planning and prioritisation
-- quality control
-- hygiene and food safety
-- customer service
-- coordination with colleagues
-- handling high-volume periods
-- reducing waste
-- maintaining consistent presentation and quality
-
-During these years, Daniela developed a detailed understanding of the kitchen operation, the products, the customers and the team.
-
-This practical experience later became an important foundation for her work as Kitchen Manager. She was promoted internally after several years in the operation, which meant that she entered the management role with direct knowledge of the work performed by the team.
-
-## Previous Experience
-
-### Retail, Delicatessen and Fish Counter
-
-**City Gross**  
-**2014 – 2016**
-
-Daniela worked in retail food service, including delicatessen and fish-counter operations.
-
-Her responsibilities included:
-
-- customer service
-- sales
-- product recommendations
-- food handling
-- preparation and display
-- quality control
-- hygiene and cleaning
-- stock handling
-- reducing waste
-- working during high customer volumes
-
-The role required both product knowledge and the ability to understand what individual customers needed.
-
-She learned to combine service, sales and operational efficiency while maintaining high standards for food safety and product quality.
-
-### Retail, Delicatessen and Fish Counter
-
-**Various retail locations and employers**  
-**2012 – 2014**
-
-During this period, Daniela worked across several retail food environments, including Coop and privately operated businesses.
-
-The employment history involved changes of ownership, locations and operating companies, but the work remained centred around retail, delicatessen and fish-counter operations.
-
-Rather than listing every ownership and location change separately, this experience is grouped as one continuous period.
+During her time as Kitchen Manager, Daniela worked with both operational and commercial improvements.
 
 Her work included:
 
-- customer service and sales
-- fish and delicatessen products
-- food preparation
-- product displays
-- stock and freshness control
-- hygiene routines
-- adapting to different workplaces and teams
+* reducing food waste
+* reducing personnel costs
+* increasing revenue
+* negotiating new supplier agreements
+* improving workflows
+* creating sales activities and promotions
+* increasing activity and visibility on social media
+* organising training and development activities for staff
+* using team activities and rewards to strengthen morale
 
-The period gave her experience of entering changing environments quickly and adapting to different procedures, managers and customer groups.
+The role required her to consider several parts of the operation at the same time: staff, customers, production, quality, costs and sales.
+
+Problems frequently had to be handled while the kitchen remained operational, so decisions could not always wait for complete information or extended analysis.
+
+## From Employee to Manager
+
+Daniela was promoted internally after several years working directly in the same operation.
+
+This meant that she entered the Kitchen Manager role with practical knowledge of:
+
+* the products
+* production workflows
+* customer expectations
+* recurring operational problems
+* the team
+* the physical workplace
+
+Moving from colleague to manager also changed her responsibilities.
+
+She had to balance maintaining relationships with employees against responsibilities such as performance management, scheduling, business requirements and accountability for the complete operation.
+
+One of her main lessons from management was that employees cannot always be led in the same way.
+
+Different people may require different levels or forms of:
+
+* structure
+* communication
+* feedback
+* encouragement
+* independence
+* challenge
+* support
+
+Her approach became increasingly situational rather than applying one fixed management style to every employee.
+
+### Garde Manger / Cold Kitchen Chef
+
+**Erssons FrånEgen AB, Fruängen, Stockholm**
+**October 2016 – September 2022**
+
+Before becoming Kitchen Manager, Daniela worked in the cold kitchen at Erssons.
+
+Her work included preparing and presenting food for the shop, customers and catering orders.
+
+Responsibilities included:
+
+* food preparation
+* delicatessen production
+* catering
+* planning and prioritisation
+* quality control
+* hygiene and food safety
+* customer service
+* coordination with colleagues
+* handling high-volume periods
+* stock and freshness awareness
+* reducing waste
+* maintaining consistent presentation and quality
+
+The role gave Daniela detailed knowledge of the operation before she later moved into management.
+
+Her years working directly in production also gave her experience of how decisions about staffing, workflows and planning affect employees performing the work in practice.
+
+### Retail, Delicatessen and Fish Counter
+
+**City Gross**
+**2014 – 2016**
+
+Daniela worked in food retail with a focus on delicatessen and fish-counter operations.
+
+Her work included:
+
+* customer service
+* sales
+* product recommendations
+* fish and delicatessen products
+* food handling and preparation
+* product presentation
+* quality control
+* hygiene
+* stock handling
+* freshness control
+* reducing waste
+
+The role combined customer-facing sales with practical food handling and operational responsibilities.
+
+Working behind a staffed counter also required adapting recommendations to individual customers while maintaining product knowledge, quality and efficient service during busy periods.
+
+### Retail, Delicatessen and Fish Counter
+
+**Various employers and locations**
+**2012 – 2014**
+
+Daniela worked across several food-retail environments during this period, including Coop and privately operated businesses.
+
+Changes of ownership, employer and location make the employment history unnecessarily complicated to represent as separate entries, so the period is grouped here by type of work.
+
+Her responsibilities remained centred around:
+
+* customer service and sales
+* fish and delicatessen products
+* food preparation
+* displays
+* stock management
+* freshness control
+* hygiene
+* daily retail operations
+
+Working across changing workplaces gave her experience adapting to different procedures, teams and managers while continuing to perform similar operational responsibilities.
 
 ### Restaurant Manager
 
-**TastyThai**  
+**TastyThai**
 **2010 – 2012**
 
-Daniela worked as Restaurant Manager in a customer-focused restaurant environment.
+Daniela worked as Restaurant Manager in a customer-facing restaurant environment.
 
-The role involved responsibility for the daily operation and coordination between staff, service and customer needs.
+The role involved responsibility for daily operations and coordination between staff, service and customer requirements.
 
-Her work included areas such as:
+Her work included:
 
-- daily operational leadership
-- staff coordination
-- customer service
-- planning
-- problem solving
-- quality control
-- sales
-- maintaining service during busy periods
+* daily operational leadership
+* staff coordination
+* customer service
+* planning
+* problem solving
+* quality control
+* sales
+* maintaining service during busy periods
 
-The role strengthened her ability to see the complete operation rather than only one work area.
+The role required her to consider the restaurant as a complete operation rather than focusing on only one individual task.
 
-She needed to balance customer experience, staff needs and practical delivery while ensuring that the restaurant continued to function throughout the day.
+She needed to coordinate staff and practical delivery while maintaining customer service throughout the day.
 
 ### Bed and Breakfast Manager
 
-**Sjöbloms Landsort**  
+**Sjöbloms Landsort**
 **2008 – 2010**
 
 Daniela was responsible for the daily operation of a bed and breakfast on Landsort.
 
-The role combined hospitality, service, planning and practical problem solving.
+The role combined hospitality with independent operational responsibility.
 
-Her responsibilities included areas such as:
+Her work included:
 
-- guest communication
-- bookings
-- breakfast service
-- preparing guest rooms
-- coordinating daily operations
-- handling unexpected guest needs
-- maintaining service standards
-- solving practical issues independently
+* guest communication
+* bookings
+* breakfast service
+* preparing guest rooms
+* coordinating daily operations
+* maintaining service standards
+* handling unexpected guest needs
+* solving practical problems independently
 
-Working in a smaller hospitality environment required flexibility and personal responsibility.
+Because it was a smaller hospitality operation, the role required flexibility.
 
-Guests experienced the service as a complete whole, which meant that Daniela needed to manage both visible customer interactions and the practical work behind them.
+There was less separation between customer service, administration and practical work, so Daniela was responsible for both the guest experience and much of the work required behind it.
 
-## Development Through the Roles
+## Professional Progression
 
-Daniela's professional development was gradual and based on practical experience.
+Daniela's career developed gradually through practical experience.
 
-She worked in several operational roles before taking on formal leadership responsibility. This gave her an understanding of the work from the perspective of both an employee and a manager.
+The overall progression was:
 
-Her career progression can be described as:
+1. hospitality and customer service
+2. restaurant operations
+3. food retail and specialist counter work
+4. several years of hands-on kitchen operations
+5. personnel and operational management
 
-1. learning service and operational work directly
-2. gaining experience across hospitality, restaurants and retail
-3. taking responsibility for complete daily operations
-4. leading teams and managing personnel
-5. improving workflows, costs and sales
-6. developing employees and organisational culture
+She therefore has experience working both as an employee within an operation and as the manager responsible for the people performing that work.
 
-Because she spent many years performing the work herself, she understands how management decisions affect the people carrying them out.
+By the time she became Kitchen Manager, her responsibilities extended beyond daily production into areas such as:
 
-## Transferable Skills
+* staffing
+* personnel development
+* work environment
+* purchasing
+* suppliers
+* costs
+* revenue
+* workflows
+* sales initiatives
 
-### Leadership
+## Career Change
 
-Daniela has experience leading employees with different personalities, abilities and needs.
+Daniela left her Kitchen Manager role in 2025 while changing professional direction towards technology.
 
-She has handled recruitment, scheduling, salaries, work environment, coaching and development.
+She is now studying MLOps Engineering at Nackademin.
 
-### Operational Problem Solving
+Her previous employment is not technical experience, and she does not present it as such.
 
-She is accustomed to environments where problems cannot simply be postponed.
+What it does provide is substantial experience from real operational environments where:
 
-She can assess a situation, prioritise and act while the operation continues.
+* people depend on one another
+* customer needs affect priorities
+* costs matter
+* processes need to work in practice
+* unexpected problems occur
+* responsibility cannot simply be postponed
+* technical or organisational decisions ultimately affect users and employees
 
-### Communication
+These experiences influence how Daniela approaches technical projects today.
 
-Her roles required communication with:
-
-- employees
-- managers
-- customers
-- suppliers
-- temporary staff
-- new recruits
-
-She learned to adjust her communication depending on the person and situation.
-
-### Coordination
-
-Daniela is comfortable working between different parts of an operation.
-
-She has coordinated staff, purchasing, production, sales and customer requirements.
-
-### Business Awareness
-
-As Kitchen Manager, she worked with:
-
-- revenue
-- personnel costs
-- food waste
-- purchasing
-- supplier agreements
-- sales initiatives
-
-This gave her experience of connecting daily operational decisions to wider financial results.
-
-### Adaptability
-
-Daniela has worked across changing workplaces, teams, ownership structures and responsibilities.
-
-She is comfortable entering unfamiliar situations, understanding how they function and identifying what needs to be done.
-
-### Customer Perspective
-
-Nearly all of her previous roles involved direct or indirect responsibility for customer experience.
-
-This has influenced how she now thinks about technical systems: the result must not only work internally, but also create value for the person using it.
-
-## Connection to Technology and MLOps
-
-Daniela's previous career is different from her current technical direction, but many of the core responsibilities are closely related.
-
-MLOps requires more than technical implementation. It also involves coordination between:
-
-- developers
-- data scientists
-- operations
-- product teams
-- managers
-- customers
-- business requirements
-
-This type of cross-functional responsibility is one of the reasons Daniela is interested in MLOps.
-
-Her previous roles taught her to:
-
-- understand the larger operation
-- coordinate people with different responsibilities
-- identify bottlenecks
-- manage competing priorities
-- connect daily work to business outcomes
-- communicate between different groups
-- improve systems while they are actively being used
-
-She is now developing the technical knowledge needed to apply these strengths in AI and software environments.
+She is particularly interested in the wider system around a technical solution: how different components connect, how the system will be used, what happens when something fails and what is required to make it work reliably in practice.

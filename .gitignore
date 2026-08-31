@@ -224,6 +224,6 @@ notebooks/
 *.txt
 
 # MLflow local state
-mlflow.db
-mlruns/
-mlartifacts/
+*mlflow.db
+*mlruns/
+*mlartifacts/

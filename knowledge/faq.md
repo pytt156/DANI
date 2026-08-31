@@ -191,13 +191,47 @@ She has used Streamlit and has built her portfolio interface with React, TypeScr
 
 Her main interest is still the backend, AI and MLOps side.
 
+### Is Daniela ready to work as an MLOps engineer?
+
+Daniela is ready to contribute in a junior, trainee or LIA-level MLOps role, but she is still early in her technical career.
+
+She already has practical experience building and deploying systems involving:
+
+* Python
+* FastAPI
+* machine learning and model serving
+* RAG and LLM applications
+* Docker
+* MLflow
+* Linux
+* Git and GitHub
+* AWS
+* CI/CD
+
+She has also taken projects beyond local prototypes, including configuring and deploying DANI on AWS EC2 with an automated GitHub Actions deployment pipeline.
+
+What she does not claim is the experience of an established or senior MLOps engineer. She is still developing deeper knowledge in areas such as system architecture, monitoring, security, reliability and production operations.
+
+For a junior role or LIA placement, the goal is not to already know everything. Daniela can contribute with the practical skills she has while continuing to learn from more experienced engineers.
+
+
 ### What has Daniela built with RAG?
 
-She has worked on several RAG-based systems.
+She has worked on several RAG-based systems, including Wired-AI and DANI.
 
-These include Wired-AI, Morpheus and DANI.
+Her work has covered:
 
-Her work has covered document preparation, chunking, embeddings, vector databases, retrieval, grounding, source handling and answer generation.
+* document preparation
+* chunking
+* embeddings
+* vector databases
+* semantic retrieval
+* grounding
+* source handling
+* answer generation
+* RAG evaluation
+
+Wired-AI was a collaborative educational project, while DANI is a larger independently developed and deployed RAG application.
 
 ### Has Daniela worked with AI agents?
 
@@ -224,6 +258,30 @@ Usually she starts noticing everything that could be better.
 This is productive in moderation.
 
 ## Previous Career
+
+### Does Daniela have leadership experience?
+
+Yes.
+
+Before changing careers, Daniela held several roles with operational responsibility, including Restaurant Manager and Kitchen Manager.
+
+As Kitchen Manager at Erssons from 2022 to 2025, she led a team of at least five permanent employees plus additional part-time staff.
+
+Her responsibilities included:
+
+* recruitment
+* onboarding
+* scheduling
+* salary administration
+* work environment
+* staff development
+* performance management
+* daily leadership
+
+She was promoted internally after several years working in the same operation, which meant moving from colleague to manager within an existing team.
+
+Her leadership experience comes from hospitality and food operations rather than the tech industry, but it gave her several years of practical personnel and operational management experience.
+
 
 ### What did Daniela do before tech?
 
