@@ -1,15 +1,48 @@
 services:
   qdrant:
-    image: qdrant/qdrant:v1.19.0
+    image: qdrant/qdrant:latest
     container_name: dani-qdrant
     volumes:
       - qdrant_data:/qdrant/storage
     restart: unless-stopped
 
+  mlflow:
+    build:
+      context: ./backend
+    container_name: dani-mlflow
+
+    command:
+      - mlflow
+      - server
+      - --backend-store-uri
+      - sqlite:////mlflow/mlflow.db
+      - --artifacts-destination
+      - /mlflow/artifacts
+      - --host
+      - 0.0.0.0
+      - --port
+      - "5000"
+      - --allowed-hosts
+      - "mlflow:5000,localhost:*,127.0.0.1:*"
+
+    volumes:
+      - mlflow_data:/mlflow
+
+    ports:
+      - "127.0.0.1:5000:5000"
+
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health')" ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+    restart: unless-stopped
+
   backend:
     build:
       context: ./backend
-
     container_name: dani-backend
 
     environment:
@@ -20,16 +53,11 @@ services:
       QDRANT_URL: http://qdrant:6333
       QDRANT_COLLECTION: dani_knowledge
 
-      RETRIEVAL_SCORE_THRESHOLD: ${RETRIEVAL_SCORE_THRESHOLD:-0.30}
-
       CORS_ORIGINS: '["http://localhost:5173","https://daniela.algerydh.com"]'
 
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-5-mini}
       OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
-
-      PROVIDER_TIMEOUT_SECONDS: ${PROVIDER_TIMEOUT_SECONDS:-45}
-      PROVIDER_MAX_RETRIES: ${PROVIDER_MAX_RETRIES:-0}
 
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
       OPENROUTER_CHAT_MODEL: ${OPENROUTER_CHAT_MODEL}
@@ -37,50 +65,21 @@ services:
 
       PREMIUM_ACCESS_KEY_HASHES: ${PREMIUM_ACCESS_KEY_HASHES:-}
 
-      MLFLOW_ENABLED: ${MLFLOW_ENABLED:-false}
-      MLFLOW_TRACKING_URI: ${MLFLOW_TRACKING_URI:-http://127.0.0.1:5000}
+      MLFLOW_ENABLED: ${MLFLOW_ENABLED:-true}
+      MLFLOW_TRACKING_URI: http://mlflow:5000
       MLFLOW_EXPERIMENT_NAME: ${MLFLOW_EXPERIMENT_NAME:-dani}
-      MLFLOW_HTTP_REQUEST_TIMEOUT: ${MLFLOW_HTTP_REQUEST_TIMEOUT:-2}
-      MLFLOW_HTTP_REQUEST_MAX_RETRIES: ${MLFLOW_HTTP_REQUEST_MAX_RETRIES:-0}
 
     ports:
       - "127.0.0.1:8000:8000"
 
-    healthcheck:
-      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=2)" ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-
     depends_on:
-      - qdrant
+      qdrant:
+        condition: service_started
+      mlflow:
+        condition: service_healthy
 
     restart: unless-stopped
 
-  ingest:
-    build:
-      context: ./backend
-
-    environment:
-      QDRANT_URL: http://qdrant:6333
-      QDRANT_COLLECTION: dani_knowledge
-
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
-
-    volumes:
-      - ./knowledge:/knowledge:ro
-
-    depends_on:
-      - qdrant
-
-    command: [ "python", "-m", "dani_api.rag.ingest" ]
-
-    profiles:
-      - tools
-
-    restart: "no"
-
 volumes:
   qdrant_data:
+  mlflow_data:

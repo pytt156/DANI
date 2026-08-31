@@ -41,8 +41,8 @@ class Settings(BaseSettings):
     mlflow_experiment_name: str = "dani"
     mlflow_enabled: bool = False
 
-    mlflow_http_request_timeout: float = Field(
-        default=2.0,
+    mlflow_http_request_timeout: int = Field(
+        default=2,
         gt=0,
         le=30,
     )

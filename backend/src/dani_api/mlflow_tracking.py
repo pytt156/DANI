@@ -7,10 +7,14 @@ from urllib.parse import urlparse
 
 import mlflow
 import structlog
+from mlflow import openai as mlflow_openai
+from mlflow.entities import LiveSpan, SpanType
+from structlog.contextvars import get_contextvars
 
 from dani_api.config import settings
 
 logger = structlog.get_logger(__name__)
+_openai_autolog_enabled = False
 
 MLFLOW_CONNECT_TIMEOUT_SECONDS = 0.5
 
@@ -19,10 +23,10 @@ def configure_mlflow_client() -> None:
     """Configure MLflow HTTP behavior for best-effort tracking."""
 
     os.environ["MLFLOW_HTTP_REQUEST_TIMEOUT"] = str(
-        settings.mlflow_http_request_timeout
+        int(settings.mlflow_http_request_timeout)
     )
     os.environ["MLFLOW_HTTP_REQUEST_MAX_RETRIES"] = str(
-        settings.mlflow_http_request_max_retries
+        int(settings.mlflow_http_request_max_retries)
     )
 
 
@@ -66,6 +70,28 @@ def mlflow_server_available() -> bool:
         return False
 
 
+def configure_openai_autolog() -> None:
+    """Enable automatic tracing for OpenAI-compatible model calls."""
+
+    global _openai_autolog_enabled
+
+    if _openai_autolog_enabled:
+        return
+
+    try:
+        mlflow_openai.autolog(
+            log_traces=True,
+            silent=True,
+        )
+        _openai_autolog_enabled = True
+
+    except Exception as error:  # noqa: BLE001
+        logger.warning(
+            "mlflow_openai_autolog_failed",
+            error_type=type(error).__name__,
+        )
+
+
 def configure_mlflow() -> bool:
     """Configure MLflow when its tracking server is reachable."""
 
@@ -85,6 +111,8 @@ def configure_mlflow() -> bool:
             error_type=type(error).__name__,
         )
         return False
+
+    configure_openai_autolog()
 
     return True
 
@@ -195,3 +223,61 @@ def log_rag_metrics(
             "mlflow_metrics_log_failed",
             error_type=type(error).__name__,
         )
+
+
+@contextmanager
+def start_rag_trace(
+    *,
+    question: str,
+    access_tier: str,
+    provider: str,
+    model: str,
+    retrieval_limit: int,
+    score_threshold: float | None,
+) -> Generator[LiveSpan | None]:
+    """Create one end-to-end MLflow trace for a DANI request."""
+
+    if not configure_mlflow():
+        yield None
+        return
+
+    context = get_contextvars()
+    request_id = context.get("request_id")
+
+    with mlflow.start_span(
+        name="dani_chat",
+        span_type=SpanType.CHAIN,
+    ) as span:
+        span.set_inputs(
+            {
+                "question": question,
+            }
+        )
+
+        span.set_attribute("access_tier", access_tier)
+        span.set_attribute("provider", provider)
+        span.set_attribute("model", model)
+        span.set_attribute(
+            "embedding_model",
+            settings.openai_embedding_model,
+        )
+        span.set_attribute(
+            "retrieval_limit",
+            retrieval_limit,
+        )
+        span.set_attribute(
+            "score_threshold",
+            score_threshold if score_threshold is not None else "none",
+        )
+
+        mlflow.update_current_trace(
+            client_request_id=(str(request_id) if request_id is not None else None),
+            request_preview=question,
+            tags={
+                "environment": settings.environment,
+                "access_tier": access_tier,
+                "provider": provider,
+            },
+        )
+
+        yield span
