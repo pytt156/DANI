@@ -15,15 +15,14 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy to EC2
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::334419247691:role/GitHubActions-DANI-Deploy
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
           aws-region: eu-north-1
 
       - name: Deploy via SSM
@@ -51,21 +50,41 @@ jobs:
 
           echo "command_id=$COMMAND_ID" >> "$GITHUB_OUTPUT"
 
-          aws ssm wait command-executed \
-            --region eu-north-1 \
-            --command-id "$COMMAND_ID" \
-            --instance-id "i-04c75d24d81397ce9"
+          MAX_ATTEMPTS=60
+          SLEEP_SECONDS=10
+
+          for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
+            STATUS=$(aws ssm get-command-invocation \
+              --region eu-north-1 \
+              --command-id "$COMMAND_ID" \
+              --instance-id "i-04c75d24d81397ce9" \
+              --query "Status" \
+              --output text)
+
+            echo "SSM status: $STATUS ($attempt/$MAX_ATTEMPTS)"
+
+            case "$STATUS" in
+              Success)
+                echo "Deployment completed successfully."
+                exit 0
+                ;;
+              Failed|Cancelled|TimedOut|Cancelling)
+                echo "Deployment failed with SSM status: $STATUS"
+                exit 1
+                ;;
+            esac
+
+            sleep "$SLEEP_SECONDS"
+          done
+
+          echo "Deployment did not finish within $((MAX_ATTEMPTS * SLEEP_SECONDS)) seconds."
+          exit 1
 
       - name: Show deploy result
-        if: ${{ steps.deploy.outputs.command_id != '' }}
+        if: always() && steps.deploy.outputs.command_id != ''
         shell: bash
         run: |
           aws ssm get-command-invocation \
             --region eu-north-1 \
             --command-id "${{ steps.deploy.outputs.command_id }}" \
-            --instance-id "i-04c75d24d81397ce9" \
-            --query '{
-              Status:Status,
-              StandardOutputContent:StandardOutputContent,
-              StandardErrorContent:StandardErrorContent
-            }'
+            --instance-id "i-04c75d24d81397ce9"
