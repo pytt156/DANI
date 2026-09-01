@@ -52,7 +52,9 @@ The system provides:
 
 The frontend is part of my personal React/TypeScript website, while DANI runs as a separate backend service.
 
-<!-- Future image: design/dani-architecture.png -->
+<div align="center">
+  <img src="design/architecture.png" alt="Architecture">
+</div>
 
 ## How It Works
 
@@ -121,7 +123,6 @@ Tracked information includes:
 
 MLflow is treated as a best-effort dependency: if the tracking server is unavailable, DANI can continue answering requests.
 
-<!-- Future image: design/mlflow-screen.png -->
 
 ## Tech Stack
 
@@ -331,7 +332,9 @@ The production stack runs the FastAPI backend alongside Qdrant and MLflow, while
 
 The public interface lives on my portfolio website and communicates with the separately deployed DANI API.
 
-<!-- Future image: design/deployment-screen.png -->
+<div align="center">
+  <img src="design/deploy-screen.png" width="500" alt="Deployment">
+</div>
 
 ## Testing
 
@@ -382,3 +385,17 @@ Current work focuses on improving retrieval quality, expanding the knowledge bas
 The goal is not for DANI to know everything about me.
 
 The goal is for the things it **does** say to be grounded in actual information.
+
+---
+
+<div align="center">
+
+<br>
+<br>
+
+Built, deployed and occasionally over-engineered by **Daniela Algerydh**.
+
+[Portfolio](https://daniela.algerydh.com) · [GitHub](https://github.com/pytt156)
+
+<img src="design/pytt.png" width="300" alt="Pytt">
+</div>
